@@ -87,6 +87,25 @@ export default function Home() {
     setChartTickers(prev => prev.filter(t => t.ticker !== ticker))
   }, [])
 
+  // KS11 1Y return for index tray spread — must be before early return (Hook rules)
+  const ks11Return12 = useMemo(() => {
+    const ks11 = benchmarks?.benchmarks?.KS11
+    const dates = prices?.dates
+    if (!ks11 || !dates || dates.length < 252) return null
+    const startDate = dates[dates.length - 252]
+    const endDate   = dates[dates.length - 1]
+    const keys = Object.keys(ks11).sort()
+    const findVal = (target) => {
+      let last = null
+      for (const k of keys) { if (k <= target) last = ks11[k]; else break }
+      return last
+    }
+    const sv = findVal(startDate)
+    const ev = findVal(endDate)
+    if (!sv || !ev) return null
+    return (ev / sv - 1) * 100
+  }, [benchmarks, prices])
+
   if (!data) return <div style={{ padding: 32, color: COLOR.textMuted }}>데이터 로딩 중…</div>
 
   const meta = ASSET_CLASS_META[activeAC] || {}
@@ -112,26 +131,6 @@ export default function Home() {
   const returnKey = ['m3', 'm6', 'm12'].includes(effectiveSort) ? effectiveSort : null
   const aumLabel  = RETURN_LABELS[effectiveSort] || 'AUM'
   const dirArrow  = sortDir === 'desc' ? '↓' : '↑'
-
-  // KS11 1Y return from benchmarks data (for index tray 벤치 대비)
-  const ks11Return12 = useMemo(() => {
-    const ks11 = benchmarks?.benchmarks?.KS11
-    const dates = prices?.dates
-    if (!ks11 || !dates || dates.length < 252) return null
-    const startDate = dates[dates.length - 252]
-    const endDate   = dates[dates.length - 1]
-    // ffill: find closest available value on or before each date
-    const keys = Object.keys(ks11).sort()
-    const findVal = (target) => {
-      let last = null
-      for (const k of keys) { if (k <= target) last = ks11[k]; else break }
-      return last
-    }
-    const sv = findVal(startDate)
-    const ev = findVal(endDate)
-    if (!sv || !ev) return null
-    return (ev / sv - 1) * 100
-  }, [benchmarks, prices])
 
   const indexBenchDiff = (etf) => {
     if (ks11Return12 == null) return undefined
