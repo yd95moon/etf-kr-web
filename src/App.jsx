@@ -10,6 +10,7 @@ import Watchlist from './pages/Watchlist.jsx'
 export const DataContext = createContext({
   data: null, etfList: [],
   activeAC: 'domestic_equity', setActiveAC: () => {},
+  prices: null, loadingPrices: true,
 })
 export const WatchlistContext = createContext({ watchlist: [], toggleTicker: () => {} })
 
@@ -184,17 +185,19 @@ function Navbar({ onSearchOpen, watchlistCount }) {
   )
 }
 
-// ── SpecBanner ─────────────────────────────────────────────────────────────────
-function SpecBanner({ label }) {
+// ── SpecFooter — 하단 고정, 풀 라벨 1회만 ──────────────────────────────────────
+function SpecFooter({ label }) {
   return (
-    <div style={{
-      background: '#1e1f28',
-      borderBottom: `1px solid ${COLOR.borderSoft}`,
-      padding: '6px 16px', fontSize: 11, color: COLOR.textDim,
-      textAlign: 'center', lineHeight: 1.4,
+    <footer style={{
+      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
+      background: '#0f1117',
+      borderTop: `1px solid ${COLOR.borderSoft}`,
+      padding: '5px 16px',
+      fontSize: 10, color: COLOR.textDim,
+      textAlign: 'center', lineHeight: 1.5,
     }}>
       ⚠️ {label}
-    </div>
+    </footer>
   )
 }
 
@@ -210,6 +213,8 @@ function AppShell() {
     } catch { return [] }
   })
   const [searchOpen, setSearchOpen] = useState(false)
+  const [prices, setPrices] = useState(null)
+  const [loadingPrices, setLoadingPrices] = useState(true)
 
   useEffect(() => {
     fetch('./data/etf_v1.json')
@@ -219,6 +224,11 @@ function AppShell() {
         setEtfList(buildEtfList(d.etfs))
       })
       .catch(err => console.error('ETF data load failed:', err))
+
+    fetch('./data/chart_prices.json')
+      .then(r => r.json())
+      .then(d => { setPrices(d); setLoadingPrices(false) })
+      .catch(() => setLoadingPrices(false))
   }, [])
 
   const toggleTicker = useCallback((ticker) => {
@@ -232,17 +242,17 @@ function AppShell() {
   const specLabel = data?.meta?.spec_label || '확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영'
 
   return (
-    <DataContext.Provider value={{ data, etfList, activeAC, setActiveAC }}>
+    <DataContext.Provider value={{ data, etfList, activeAC, setActiveAC, prices, loadingPrices }}>
       <WatchlistContext.Provider value={{ watchlist, toggleTicker }}>
         <div style={{ minHeight: '100vh', background: COLOR.bg }}>
-          <SpecBanner label={specLabel} />
           <Navbar onSearchOpen={() => setSearchOpen(true)} watchlistCount={watchlist.length} />
-          <main>
+          <main style={{ paddingBottom: 44 }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/watchlist" element={<Watchlist />} />
             </Routes>
           </main>
+          <SpecFooter label={specLabel} />
           {searchOpen && (
             <SearchOverlay etfList={etfList} onClose={() => setSearchOpen(false)} />
           )}

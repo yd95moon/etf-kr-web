@@ -1,11 +1,9 @@
 import React, { useState, useContext } from 'react'
-import { ChevronDown, ChevronUp, Star } from 'lucide-react'
+import { ChevronDown, ChevronUp, Star, ExternalLink } from 'lucide-react'
 import GradeChip from './GradeChip.jsx'
 import { COLOR, SIGNAL_LABELS, GATE_LABELS, GATE_REASON_KO } from '../constants.js'
 import { fmtAum, fmtFee } from '../utils.js'
 import { WatchlistContext } from '../App.jsx'
-
-const COL = '32px 1fr 52px 90px 64px'
 
 const S = {
   row: {
@@ -48,12 +46,6 @@ const S = {
     display: 'flex', gap: 6,
     alignItems: 'flex-start', fontSize: 12, padding: '4px 0',
   },
-  specLabel: {
-    marginTop: 10, fontSize: 11,
-    color: COLOR.textDim, lineHeight: 1.4,
-    borderTop: `1px solid ${COLOR.borderSoft}`,
-    paddingTop: 8,
-  },
 }
 
 function StarBtn({ ticker }) {
@@ -74,15 +66,69 @@ function StarBtn({ ticker }) {
   )
 }
 
-export default function EtfRow({ etf, showWarning = false, dimmed = false, isMobile = false }) {
+function ChartBtn({ onClick, inChart }) {
+  return (
+    <button
+      onClick={onClick}
+      title={inChart ? '차트에서 제거' : '차트에 추가'}
+      style={{
+        padding: '3px 5px', borderRadius: 4, cursor: 'pointer',
+        border: `1px solid ${inChart ? '#5a6a9a' : COLOR.border}`,
+        background: inChart ? '#2a3050' : 'transparent',
+        color: inChart ? COLOR.text : COLOR.textDim,
+        fontSize: 14, fontWeight: 700, lineHeight: 1,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        minWidth: 24,
+      }}
+    >
+      {inChart ? '−' : '+'}
+    </button>
+  )
+}
+
+function NameLink({ ticker, name }) {
+  return (
+    <a
+      href={`https://www.tradingview.com/symbols/KRX-${ticker}/`}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={e => e.stopPropagation()}
+      style={{
+        textDecoration: 'none', color: 'inherit',
+        display: 'inline-flex', alignItems: 'center', gap: 3,
+        overflow: 'hidden',
+      }}
+    >
+      <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+        {name}
+      </span>
+      <ExternalLink size={10} style={{ color: COLOR.textDim, flexShrink: 0 }} />
+    </a>
+  )
+}
+
+export default function EtfRow({
+  etf,
+  showWarning = false,
+  dimmed = false,
+  isMobile = false,
+  onChartToggle,
+  inChart = false,
+}) {
   const [open, setOpen] = useState(false)
   const [showSignals, setShowSignals] = useState(false)
   const [showGates, setShowGates] = useState(false)
+
+  const COL = onChartToggle ? '32px 1fr 52px 90px 64px 36px' : '32px 1fr 52px 90px 64px'
 
   const rowBg = open ? COLOR.bgCardAlt : dimmed ? COLOR.bg : 'transparent'
   const gates = etf.gates || {}
   const signals = etf.signals || {}
   const grade = etf.grade_eligible ? etf.composite_grade : null
+
+  const handleChartClick = onChartToggle
+    ? e => { e.stopPropagation(); onChartToggle(etf) }
+    : null
 
   const panel = open && (
     <div style={S.panel}>
@@ -96,7 +142,7 @@ export default function EtfRow({ etf, showWarning = false, dimmed = false, isMob
         </div>
       )}
 
-      {/* L1: grade + AUM + fee + spec_label */}
+      {/* L1: grade + AUM + fee */}
       <div style={S.l1Row}>
         <GradeChip grade={grade} />
         <span style={{ fontSize: 13, color: COLOR.textMuted }}>
@@ -106,7 +152,6 @@ export default function EtfRow({ etf, showWarning = false, dimmed = false, isMob
           보수 <strong style={{ color: COLOR.text }}>{fmtFee(etf.fee_pct)}</strong>
         </span>
       </div>
-      <div style={{ fontSize: 11, color: COLOR.textDim, lineHeight: 1.4 }}>{etf.spec_label}</div>
 
       {/* 신호 5개 */}
       {etf.grade_eligible && (
@@ -175,8 +220,14 @@ export default function EtfRow({ etf, showWarning = false, dimmed = false, isMob
         </div>
       )}
 
-      {/* 푸터 spec_label */}
-      <div style={S.specLabel}>{etf.spec_label}</div>
+      {/* 패널 푸터: 빠진 항목 안내 1줄 */}
+      <div style={{
+        marginTop: 10, paddingTop: 8,
+        borderTop: `1px solid ${COLOR.borderSoft}`,
+        fontSize: 11, color: COLOR.textDim,
+      }}>
+        분배·환헤지·합성신용 미반영
+      </div>
     </div>
   )
 
@@ -197,12 +248,14 @@ export default function EtfRow({ etf, showWarning = false, dimmed = false, isMob
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
                 <span style={{
-                  flex: 1, fontSize: 14, fontWeight: 600, color: COLOR.text,
-                  overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+                  flex: 1, fontSize: 14, fontWeight: 600, color: COLOR.text, minWidth: 0,
                 }}>
-                  {etf.name}
+                  <NameLink ticker={etf.ticker} name={etf.name} />
                 </span>
                 <GradeChip grade={grade} />
+                {onChartToggle && (
+                  <ChartBtn onClick={handleChartClick} inChart={inChart} />
+                )}
               </div>
               <div style={{ fontSize: 11, color: COLOR.textDim }}>
                 <span style={{ fontFamily: 'monospace' }}>{etf.ticker}</span>
@@ -236,9 +289,9 @@ export default function EtfRow({ etf, showWarning = false, dimmed = false, isMob
           <div style={{ minWidth: 0 }}>
             <div style={{
               fontSize: 13, fontWeight: 600, color: COLOR.text,
-              overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap',
+              overflow: 'hidden',
             }}>
-              {etf.name}
+              <NameLink ticker={etf.ticker} name={etf.name} />
             </div>
             <div style={{ fontSize: 11, color: COLOR.textDim, fontFamily: 'monospace', marginTop: 1 }}>
               {etf.ticker}
@@ -251,6 +304,11 @@ export default function EtfRow({ etf, showWarning = false, dimmed = false, isMob
           <span style={{ fontSize: 12, color: COLOR.textMuted, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
             {fmtFee(etf.fee_pct)}
           </span>
+          {onChartToggle && (
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+              <ChartBtn onClick={handleChartClick} inChart={inChart} />
+            </div>
+          )}
         </div>
       </div>
       {panel}

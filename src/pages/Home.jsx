@@ -1,16 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useCallback } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { DataContext } from '../App.jsx'
 import { ASSET_CLASS_META, COLOR } from '../constants.js'
 import { sortEtfs, getFailReason, useIsMobile } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
+import BenchmarkChart from '../components/BenchmarkChart.jsx'
 
-const COL = '32px 1fr 52px 90px 64px'
+const COL_CHART = '32px 1fr 52px 90px 64px 36px'
 
 function TableHeader() {
   return (
     <div style={{
-      display: 'grid', gridTemplateColumns: COL,
+      display: 'grid', gridTemplateColumns: COL_CHART,
       padding: '6px 12px', gap: 8,
       fontSize: 11, fontWeight: 600,
       color: COLOR.textDim,
@@ -22,21 +23,36 @@ function TableHeader() {
       <span>등급</span>
       <span style={{ textAlign: 'right' }}>AUM</span>
       <span style={{ textAlign: 'right' }}>보수</span>
+      <span></span>
     </div>
   )
 }
 
 export default function Home() {
-  const { data, etfList, activeAC, setActiveAC } = useContext(DataContext)
+  const { data, etfList, activeAC, setActiveAC, prices, loadingPrices } = useContext(DataContext)
   const isMobile = useIsMobile()
   const [sortMode, setSortMode] = useState('grade')
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)
+  const [chartTickers, setChartTickers] = useState([]) // [{ticker, name}]
 
   useEffect(() => {
     setSepOpen(false)
     setFailOpen(false)
+    setChartTickers([])
   }, [activeAC])
+
+  const toggleChart = useCallback((etf) => {
+    setChartTickers(prev =>
+      prev.some(t => t.ticker === etf.ticker)
+        ? prev.filter(t => t.ticker !== etf.ticker)
+        : [...prev, { ticker: etf.ticker, name: etf.name }]
+    )
+  }, [])
+
+  const removeFromChart = useCallback((ticker) => {
+    setChartTickers(prev => prev.filter(t => t.ticker !== ticker))
+  }, [])
 
   if (!data) return <div style={{ padding: 32, color: COLOR.textMuted }}>데이터 로딩 중…</div>
 
@@ -51,12 +67,13 @@ export default function Home() {
 
   const effectiveSort = (!meta.gradeable && sortMode === 'grade') ? 'aum' : sortMode
 
-  // When mainEtfs is empty (e.g. leverage_inverse), show sepEtfs in the main area
   const showSepAsMain = mainEtfs.length === 0 && sepEtfs.length > 0
   const displayMain = sortEtfs(showSepAsMain ? sepEtfs : mainEtfs, effectiveSort)
   const traySep = showSepAsMain ? [] : sortEtfs(sepEtfs, effectiveSort)
 
   const classes = Object.entries(ASSET_CLASS_META).sort((a, b) => a[1].order - b[1].order)
+
+  const chartTickerSet = new Set(chartTickers.map(t => t.ticker))
 
   return (
     <div style={{ maxWidth: 960, margin: '0 auto' }}>
@@ -95,6 +112,15 @@ export default function Home() {
           )
         })}
       </div>
+
+      {/* ── 차트 (벤치마크 + 종목 비교) ── */}
+      <BenchmarkChart
+        activeAC={activeAC}
+        chartTickers={chartTickers}
+        onRemoveTicker={removeFromChart}
+        prices={prices}
+        loadingPrices={loadingPrices}
+      />
 
       <div style={{ padding: '0 0 32px' }}>
 
@@ -171,6 +197,8 @@ export default function Home() {
                   showWarning={isDanger}
                   dimmed={false}
                   isMobile={isMobile}
+                  onChartToggle={toggleChart}
+                  inChart={chartTickerSet.has(etf.ticker)}
                 />
               ))
             )}
@@ -202,7 +230,15 @@ export default function Home() {
                 <>
                   {!isMobile && <TableHeader />}
                   {traySep.map(etf => (
-                    <EtfRow key={etf.ticker} etf={etf} showWarning={false} dimmed isMobile={isMobile} />
+                    <EtfRow
+                      key={etf.ticker}
+                      etf={etf}
+                      showWarning={false}
+                      dimmed
+                      isMobile={isMobile}
+                      onChartToggle={toggleChart}
+                      inChart={chartTickerSet.has(etf.ticker)}
+                    />
                   ))}
                 </>
               )}
