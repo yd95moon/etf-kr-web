@@ -1,22 +1,20 @@
+import { useState, useEffect } from 'react'
 import { ASSET_CLASS_META, GATE_REASON_KO } from './constants.js'
 
-/**
- * Build a flat array of ETF objects from the raw JSON etfs map.
- * Injects asset_class = leverage_inverse for is_leverage|is_inverse ETFs
- * that have been classified as such.
- */
 export function buildEtfList(etfsMap) {
-  return Object.values(etfsMap).map(etf => {
-    // normalise asset_class for leverage/inverse
-    let asset_class = etf.asset_class
-    if (etf.is_leverage || etf.is_inverse) {
-      asset_class = 'leverage_inverse'
-    }
-    return { ...etf, asset_class }
-  })
+  return Object.values(etfsMap).map(etf => ({ ...etf }))
 }
 
-/** Sort ETFs by grade→AUM, AUM, or fee */
+export function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 640)
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 640)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
+  return isMobile
+}
+
 export function sortEtfs(etfs, mode) {
   const gradeOrder = { A: 0, B: 1, C: 2, D: 3, E: 4, null: 5, undefined: 5 }
   const copy = [...etfs]
@@ -35,35 +33,30 @@ export function sortEtfs(etfs, mode) {
   return copy
 }
 
-/** Format AUM in 억원 with commas */
 export function fmtAum(v) {
   if (v == null) return '—'
   return v.toLocaleString('ko-KR', { maximumFractionDigits: 0 }) + '억'
 }
 
-/** Format fee */
 export function fmtFee(v) {
   if (v == null) return '—'
   return v.toFixed(2) + '%'
 }
 
-/** Get first failed gate reason string for a single ETF (for 탈락 display) */
 export function getFailReason(etf) {
   const gates = etf.gates || {}
   for (const [key, val] of Object.entries(gates)) {
-    if (key === 'G5') continue // G5 is separate_track, not a fail
+    if (key === 'G5') continue
     if (val && val.pass === false) {
       return `[${key}] ${GATE_REASON_KO(key, val.reason)}`
     }
   }
-  // check G5 separate track
   if (gates.G5 && gates.G5.separate_track === true) {
     return '[G5] 레버리지·인버스 별도트랙'
   }
   return '사유 미확인'
 }
 
-/** Group an array of ETFs by asset_class, ordered by ASSET_CLASS_META.order */
 export function groupByAssetClass(etfs) {
   const groups = {}
   for (const etf of etfs) {
@@ -78,7 +71,6 @@ export function groupByAssetClass(etfs) {
   })
 }
 
-/** Simple text search: name or ticker contains query (case-insensitive) */
 export function searchEtfs(etfs, query) {
   const q = query.trim().toLowerCase()
   if (!q) return []

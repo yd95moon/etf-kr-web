@@ -4,12 +4,13 @@ import { Search, Star, X } from 'lucide-react'
 import { COLOR, ASSET_CLASS_META } from './constants.js'
 import { buildEtfList, searchEtfs, groupByAssetClass } from './utils.js'
 import GradeChip from './components/GradeChip.jsx'
-import AssetGrid from './pages/AssetGrid.jsx'
-import AssetClass from './pages/AssetClass.jsx'
+import Home from './pages/Home.jsx'
 import Watchlist from './pages/Watchlist.jsx'
 
-// ── Contexts ──────────────────────────────────────────────────────────────────
-export const DataContext = createContext({ data: null, etfList: [] })
+export const DataContext = createContext({
+  data: null, etfList: [],
+  activeAC: 'domestic_equity', setActiveAC: () => {},
+})
 export const WatchlistContext = createContext({ watchlist: [], toggleTicker: () => {} })
 
 const STORAGE_KEY = 'etfkr_watchlist'
@@ -19,6 +20,7 @@ function SearchOverlay({ etfList, onClose }) {
   const [query, setQuery] = useState('')
   const inputRef = useRef(null)
   const navigate = useNavigate()
+  const { setActiveAC } = useContext(DataContext)
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -31,7 +33,8 @@ function SearchOverlay({ etfList, onClose }) {
   const groups = groupByAssetClass(results)
 
   const goto = (ac) => {
-    navigate(`/class/${ac}`)
+    setActiveAC(ac)
+    navigate('/')
     onClose()
   }
 
@@ -49,13 +52,11 @@ function SearchOverlay({ etfList, onClose }) {
         width: '100%', maxWidth: 600,
         background: COLOR.bgCard,
         border: `1px solid ${COLOR.border}`,
-        borderRadius: 12,
-        overflow: 'hidden',
+        borderRadius: 12, overflow: 'hidden',
         margin: '0 16px',
         maxHeight: 'calc(100vh - 120px)',
         display: 'flex', flexDirection: 'column',
       }}>
-        {/* Input */}
         <div style={{
           display: 'flex', alignItems: 'center', gap: 10,
           padding: '12px 16px',
@@ -77,7 +78,6 @@ function SearchOverlay({ etfList, onClose }) {
           </button>
         </div>
 
-        {/* Results */}
         <div style={{ overflowY: 'auto', flex: 1 }}>
           {query.trim() === '' && (
             <div style={{ padding: '24px', textAlign: 'center', color: COLOR.textDim, fontSize: 13 }}>
@@ -94,12 +94,9 @@ function SearchOverlay({ etfList, onClose }) {
             return (
               <div key={ac}>
                 <div style={{
-                  padding: '6px 14px',
-                  fontSize: 11, fontWeight: 700,
-                  color: COLOR.textDim,
-                  background: COLOR.bg,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.05em',
+                  padding: '6px 14px', fontSize: 11, fontWeight: 700,
+                  color: COLOR.textDim, background: COLOR.bg,
+                  textTransform: 'uppercase', letterSpacing: '0.05em',
                 }}>
                   {meta?.label || ac}
                 </div>
@@ -125,9 +122,7 @@ function SearchRow({ etf, onGoto }) {
       style={{
         display: 'grid',
         gridTemplateColumns: '28px 68px 1fr 52px',
-        alignItems: 'center',
-        gap: 8,
-        padding: '8px 14px',
+        alignItems: 'center', gap: 8, padding: '8px 14px',
         cursor: 'pointer',
         borderBottom: `1px solid ${COLOR.borderSoft}`,
       }}
@@ -147,7 +142,7 @@ function SearchRow({ etf, onGoto }) {
   )
 }
 
-// ── Navbar ────────────────────────────────────────────────────────────────────
+// ── Navbar ─────────────────────────────────────────────────────────────────────
 function Navbar({ onSearchOpen, watchlistCount }) {
   return (
     <nav style={{
@@ -155,9 +150,7 @@ function Navbar({ onSearchOpen, watchlistCount }) {
       background: COLOR.bg,
       borderBottom: `1px solid ${COLOR.border}`,
       display: 'flex', alignItems: 'center',
-      padding: '0 16px',
-      height: 52,
-      gap: 8,
+      padding: '0 16px', height: 52, gap: 8,
     }}>
       <Link to="/" style={{ textDecoration: 'none', fontWeight: 700, fontSize: 16, color: COLOR.text, letterSpacing: '-0.01em' }}>
         한국 ETF
@@ -178,11 +171,8 @@ function Navbar({ onSearchOpen, watchlistCount }) {
         to="/watchlist"
         style={{
           display: 'flex', alignItems: 'center', gap: 5,
-          textDecoration: 'none',
-          color: COLOR.textMuted,
-          padding: '5px 10px',
-          borderRadius: 6,
-          fontSize: 13,
+          textDecoration: 'none', color: COLOR.textMuted,
+          padding: '5px 10px', borderRadius: 6, fontSize: 13,
           border: `1px solid ${COLOR.borderSoft}`,
         }}
       >
@@ -200,21 +190,19 @@ function SpecBanner({ label }) {
     <div style={{
       background: '#1e1f28',
       borderBottom: `1px solid ${COLOR.borderSoft}`,
-      padding: '6px 16px',
-      fontSize: 11,
-      color: COLOR.textDim,
-      textAlign: 'center',
-      lineHeight: 1.4,
+      padding: '6px 16px', fontSize: 11, color: COLOR.textDim,
+      textAlign: 'center', lineHeight: 1.4,
     }}>
       ⚠️ {label}
     </div>
   )
 }
 
-// ── AppShell (needs router context) ──────────────────────────────────────────
+// ── AppShell ──────────────────────────────────────────────────────────────────
 function AppShell() {
   const [data, setData] = useState(null)
   const [etfList, setEtfList] = useState([])
+  const [activeAC, setActiveAC] = useState('domestic_equity')
   const [watchlist, setWatchlist] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -244,15 +232,14 @@ function AppShell() {
   const specLabel = data?.meta?.spec_label || '확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영'
 
   return (
-    <DataContext.Provider value={{ data, etfList }}>
+    <DataContext.Provider value={{ data, etfList, activeAC, setActiveAC }}>
       <WatchlistContext.Provider value={{ watchlist, toggleTicker }}>
         <div style={{ minHeight: '100vh', background: COLOR.bg }}>
           <SpecBanner label={specLabel} />
           <Navbar onSearchOpen={() => setSearchOpen(true)} watchlistCount={watchlist.length} />
           <main>
             <Routes>
-              <Route path="/" element={<AssetGrid />} />
-              <Route path="/class/:asset_class" element={<AssetClass />} />
+              <Route path="/" element={<Home />} />
               <Route path="/watchlist" element={<Watchlist />} />
             </Routes>
           </main>

@@ -2,12 +2,15 @@ import React, { useContext } from 'react'
 import { Star } from 'lucide-react'
 import { DataContext, WatchlistContext } from '../App.jsx'
 import { ASSET_CLASS_META, COLOR } from '../constants.js'
-import { buildEtfList, groupByAssetClass } from '../utils.js'
+import { buildEtfList, groupByAssetClass, useIsMobile } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
+
+const COL = '32px 1fr 52px 90px 64px'
 
 export default function Watchlist() {
   const { data } = useContext(DataContext)
   const { watchlist } = useContext(WatchlistContext)
+  const isMobile = useIsMobile()
 
   if (!data) return <div style={{ padding: 32, color: COLOR.textMuted }}>데이터 로딩 중…</div>
 
@@ -39,43 +42,35 @@ export default function Watchlist() {
             marginBottom: 20,
             background: COLOR.bgCard,
             border: `1px solid ${isDanger ? COLOR.danger + '44' : COLOR.border}`,
-            borderRadius: 8,
-            overflow: 'hidden',
+            borderRadius: 8, overflow: 'hidden',
           }}>
-            {/* Group header */}
             <div style={{
               padding: '10px 14px',
               borderBottom: `1px solid ${COLOR.borderSoft}`,
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
             }}>
               <span style={{ fontSize: 13, fontWeight: 700, color: isDanger ? COLOR.danger : COLOR.text }}>
                 {meta?.label || ac}
               </span>
               <span style={{ fontSize: 11, color: COLOR.textDim }}>{etfs.length}종</span>
             </div>
-            {/* Column header */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '32px 72px 1fr 52px 90px 64px',
-              padding: '5px 12px',
-              gap: 8,
-              fontSize: 11,
-              fontWeight: 600,
-              color: COLOR.textDim,
-              borderBottom: `1px solid ${COLOR.borderSoft}`,
-              textTransform: 'uppercase',
-            }}>
-              <span></span>
-              <span>티커</span>
-              <span>이름</span>
-              <span>등급</span>
-              <span style={{ textAlign: 'right' }}>AUM</span>
-              <span style={{ textAlign: 'right' }}>보수</span>
-            </div>
+            {!isMobile && (
+              <div style={{
+                display: 'grid', gridTemplateColumns: COL,
+                padding: '5px 12px', gap: 8,
+                fontSize: 11, fontWeight: 600, color: COLOR.textDim,
+                borderBottom: `1px solid ${COLOR.borderSoft}`,
+                textTransform: 'uppercase',
+              }}>
+                <span></span>
+                <span>종목명</span>
+                <span>등급</span>
+                <span style={{ textAlign: 'right' }}>AUM</span>
+                <span style={{ textAlign: 'right' }}>보수</span>
+              </div>
+            )}
             {etfs.map(etf => (
-              <EtfRow key={etf.ticker} etf={etf} showWarning={isDanger} />
+              <EtfRow key={etf.ticker} etf={etf} showWarning={isDanger} isMobile={isMobile} />
             ))}
           </div>
         )
