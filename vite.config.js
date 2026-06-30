@@ -9,10 +9,12 @@ export default defineConfig({
       name: 'copy-etf-data',
       buildStart() {
         mkdirSync('public/data', { recursive: true })
-        try {
-          cpSync('../data/cohorts/2026-06/etf_v1.json', 'public/data/etf_v1.json')
-        } catch {
-          // CI: data already committed to public/data/
+        const files = [
+          ['../data/cohorts/2026-06/etf_v1.json',      'public/data/etf_v1.json'],
+          ['../data/cohorts/2026-06/benchmarks.json',   'public/data/benchmarks.json'],
+        ]
+        for (const [src, dst] of files) {
+          try { cpSync(src, dst) } catch { /* CI: already committed */ }
         }
       }
     }

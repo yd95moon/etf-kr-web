@@ -12,6 +12,7 @@ export const DataContext = createContext({
   activeAC: 'domestic_equity', setActiveAC: () => {},
   prices: null, loadingPrices: true,
   subClassMap: {}, returnsMap: {},
+  benchmarks: null,
 })
 export const WatchlistContext = createContext({ watchlist: [], toggleTicker: () => {} })
 
@@ -218,6 +219,7 @@ function AppShell() {
   const [loadingPrices, setLoadingPrices] = useState(true)
   const [subClassMap, setSubClassMap] = useState({})
   const [returnsMap, setReturnsMap] = useState({})
+  const [benchmarks, setBenchmarks] = useState(null)
 
   useEffect(() => {
     fetch('./data/etf_v1.json')
@@ -242,6 +244,11 @@ function AppShell() {
       .then(r => r.json())
       .then(d => setReturnsMap(d))
       .catch(() => {})
+
+    fetch('./data/benchmarks.json')
+      .then(r => r.json())
+      .then(d => setBenchmarks(d))
+      .catch(() => {})
   }, [])
 
   const toggleTicker = useCallback((ticker) => {
@@ -255,7 +262,7 @@ function AppShell() {
   const specLabel = data?.meta?.spec_label || '확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영'
 
   return (
-    <DataContext.Provider value={{ data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap, returnsMap }}>
+    <DataContext.Provider value={{ data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap, returnsMap, benchmarks }}>
       <WatchlistContext.Provider value={{ watchlist, toggleTicker }}>
         <div style={{ minHeight: '100vh', background: COLOR.bg }}>
           <Navbar onSearchOpen={() => setSearchOpen(true)} watchlistCount={watchlist.length} />

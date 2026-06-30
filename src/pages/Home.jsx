@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
+import React, { useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { DataContext } from '../App.jsx'
 import { ASSET_CLASS_META, COLOR } from '../constants.js'
 import { sortEtfs, getFailReason, useIsMobile, fmtReturn } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
-import BenchmarkChart, { BENCHMARK_META } from '../components/BenchmarkChart.jsx'
+import BenchmarkChart, { AC_DEFAULT_BENCH } from '../components/BenchmarkChart.jsx'
 
 const COL_CHART = '32px 1fr 52px 90px 64px 36px'
 
@@ -40,21 +40,29 @@ function TableHeader({ aumLabel = 'AUM' }) {
 }
 
 export default function Home() {
-  const { data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap, returnsMap } = useContext(DataContext)
+  const { data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap, returnsMap, benchmarks } = useContext(DataContext)
   const isMobile = useIsMobile()
   const [sortMode, setSortMode] = useState('grade')
   const [sortDir, setSortDir] = useState('desc')
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)
   const [indexOpen, setIndexOpen] = useState(false)
-  const [chartTickers, setChartTickers] = useState([]) // [{ticker, name}]
+  const [chartTickers, setChartTickers] = useState([])
+  const [activeBenches, setActiveBenches] = useState(() => AC_DEFAULT_BENCH['domestic_equity'])
 
   useEffect(() => {
     setSepOpen(false)
     setFailOpen(false)
     setIndexOpen(false)
     setChartTickers([])
+    setActiveBenches(AC_DEFAULT_BENCH[activeAC] ?? [])
   }, [activeAC])
+
+  const toggleBench = useCallback((key) => {
+    setActiveBenches(prev =>
+      prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key]
+    )
+  }, [])
 
   const handleSort = useCallback((mode) => {
     setSortMode(prev => {
@@ -105,12 +113,30 @@ export default function Home() {
   const aumLabel  = RETURN_LABELS[effectiveSort] || 'AUM'
   const dirArrow  = sortDir === 'desc' ? '↓' : '↑'
 
-  const benchTicker    = BENCHMARK_META[activeAC]?.ticker
-  const benchReturn12  = returnsMap?.[benchTicker]?.m12
+  // KS11 1Y return from benchmarks data (for index tray 벤치 대비)
+  const ks11Return12 = useMemo(() => {
+    const ks11 = benchmarks?.benchmarks?.KS11
+    const dates = prices?.dates
+    if (!ks11 || !dates || dates.length < 252) return null
+    const startDate = dates[dates.length - 252]
+    const endDate   = dates[dates.length - 1]
+    // ffill: find closest available value on or before each date
+    const keys = Object.keys(ks11).sort()
+    const findVal = (target) => {
+      let last = null
+      for (const k of keys) { if (k <= target) last = ks11[k]; else break }
+      return last
+    }
+    const sv = findVal(startDate)
+    const ev = findVal(endDate)
+    if (!sv || !ev) return null
+    return (ev / sv - 1) * 100
+  }, [benchmarks, prices])
+
   const indexBenchDiff = (etf) => {
-    if (benchReturn12 == null) return undefined
+    if (ks11Return12 == null) return undefined
     const r = returnsMap?.[etf.ticker]?.m12
-    return r != null ? r - benchReturn12 : undefined
+    return r != null ? r - ks11Return12 : undefined
   }
 
   const classes = Object.entries(ASSET_CLASS_META).sort((a, b) => a[1].order - b[1].order)
@@ -162,6 +188,9 @@ export default function Home() {
         onRemoveTicker={removeFromChart}
         prices={prices}
         loadingPrices={loadingPrices}
+        benchmarks={benchmarks}
+        activeBenches={activeBenches}
+        onToggleBench={toggleBench}
       />
 
       <div style={{ padding: '0 0 32px' }}>
@@ -278,9 +307,9 @@ export default function Home() {
                     borderBottom: `1px solid #93c5fd22`,
                   }}>
                     같은 지수를 추종해 등급 비교 의미가 작음. 벤치 추적·보수 중심으로 보세요.
-                    {benchTicker && ' (우측: 1Y 벤치 대비)'}
+                    {ks11Return12 != null && ' (우측: 1Y 코스피 대비)'}
                   </div>
-                  {!isMobile && <TableHeader aumLabel={benchTicker ? '1Y벤치대비' : 'AUM'} />}
+                  {!isMobile && <TableHeader aumLabel={ks11Return12 != null ? '1Y코스피대비' : 'AUM'} />}
                   {displayIndex.map(etf => (
                     <EtfRow
                       key={etf.ticker}
