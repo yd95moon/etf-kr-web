@@ -231,8 +231,11 @@ export default function Home() {
           borderBottom: `1px solid ${COLOR.borderSoft}`,
         }}>
           <span>forward n=1 · 측정 전 · 첫 채점 2026-09-26</span>
+          {data?.meta?.generated_at && (
+            <span>데이터 기준: {data.meta.generated_at.slice(0, 10)}</span>
+          )}
           {meta.gradeable && (
-            <span>등급은 같은 자산군 안에서의 상대 위치(백분위 5분위)입니다. 미래수익 보장 아님.</span>
+            <span>등급(A~E) — 같은 자산군 내 최근 추세·과열도·이동평균 거리·52주 위치·변동성 5개 지표 동일비중 합산 상대 순위. 수익 예측 아님.</span>
           )}
         </div>
 
