@@ -66,23 +66,35 @@ function StarBtn({ ticker }) {
   )
 }
 
-function ChartBtn({ onClick, inChart }) {
+function ChartBtn({ onClick, inChart, enabled = true }) {
   return (
     <button
       onClick={onClick}
-      title={inChart ? '차트에서 제거' : '차트에 추가'}
+      title={!enabled ? '가격 데이터 없음' : inChart ? '차트에서 제거' : '차트에 추가'}
       style={{
-        padding: '3px 5px', borderRadius: 4, cursor: 'pointer',
+        padding: '3px 5px', borderRadius: 4,
+        cursor: enabled ? 'pointer' : 'not-allowed',
         border: `1px solid ${inChart ? '#5a6a9a' : COLOR.border}`,
         background: inChart ? '#2a3050' : 'transparent',
         color: inChart ? COLOR.text : COLOR.textDim,
         fontSize: 14, fontWeight: 700, lineHeight: 1,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
-        minWidth: 24,
+        minWidth: 24, opacity: enabled ? 1 : 0.3,
       }}
     >
       {inChart ? '−' : '+'}
     </button>
+  )
+}
+
+function PassiveTag() {
+  return (
+    <span style={{
+      fontSize: 10, padding: '1px 5px', borderRadius: 3,
+      background: '#1e3a5f33', color: '#93c5fd',
+      border: '1px solid #93c5fd33',
+      fontWeight: 500, flexShrink: 0, whiteSpace: 'nowrap',
+    }}>지수추종</span>
   )
 }
 
@@ -114,6 +126,8 @@ export default function EtfRow({
   isMobile = false,
   onChartToggle,
   inChart = false,
+  isPassive = false,
+  chartEnabled = true,
 }) {
   const [open, setOpen] = useState(false)
   const [showSignals, setShowSignals] = useState(false)
@@ -127,7 +141,7 @@ export default function EtfRow({
   const grade = etf.grade_eligible ? etf.composite_grade : null
 
   const handleChartClick = onChartToggle
-    ? e => { e.stopPropagation(); onChartToggle(etf) }
+    ? e => { e.stopPropagation(); if (chartEnabled) onChartToggle(etf) }
     : null
 
   const panel = open && (
@@ -139,6 +153,16 @@ export default function EtfRow({
           borderRadius: 6, fontSize: 12, color: COLOR.danger,
         }}>
           ⚠️ 레버리지·인버스 상품: 장기보유 부적합. 일일 목표 추적으로 장기 복리 손실 발생 가능.
+        </div>
+      )}
+
+      {isPassive && etf.grade_eligible && (
+        <div style={{
+          marginBottom: 8, padding: '5px 8px',
+          background: '#1e3a5f22', borderRadius: 5, fontSize: 11,
+          color: '#93c5fd',
+        }}>
+          지수추종 ETF는 등급(추세신호)보다 지수 추적·보수가 핵심입니다.
         </div>
       )}
 
@@ -252,9 +276,10 @@ export default function EtfRow({
                 }}>
                   <NameLink ticker={etf.ticker} name={etf.name} />
                 </span>
+                {isPassive && <PassiveTag />}
                 <GradeChip grade={grade} />
                 {onChartToggle && (
-                  <ChartBtn onClick={handleChartClick} inChart={inChart} />
+                  <ChartBtn onClick={handleChartClick} inChart={inChart} enabled={chartEnabled} />
                 )}
               </div>
               <div style={{ fontSize: 11, color: COLOR.textDim }}>
@@ -289,9 +314,10 @@ export default function EtfRow({
           <div style={{ minWidth: 0 }}>
             <div style={{
               fontSize: 13, fontWeight: 600, color: COLOR.text,
-              overflow: 'hidden',
+              display: 'flex', alignItems: 'center', gap: 5, overflow: 'hidden',
             }}>
               <NameLink ticker={etf.ticker} name={etf.name} />
+              {isPassive && <PassiveTag />}
             </div>
             <div style={{ fontSize: 11, color: COLOR.textDim, fontFamily: 'monospace', marginTop: 1 }}>
               {etf.ticker}
@@ -306,7 +332,7 @@ export default function EtfRow({
           </span>
           {onChartToggle && (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <ChartBtn onClick={handleChartClick} inChart={inChart} />
+              <ChartBtn onClick={handleChartClick} inChart={inChart} enabled={chartEnabled} />
             </div>
           )}
         </div>

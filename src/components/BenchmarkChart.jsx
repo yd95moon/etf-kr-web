@@ -76,8 +76,8 @@ export default function BenchmarkChart({
   const hasBench = !!bench
   const hasAnything = hasBench || chartTickers.length > 0
 
-  const { chartData, allLines, xInterval } = useMemo(() => {
-    if (!prices || !hasAnything) return { chartData: [], allLines: [], xInterval: 21 }
+  const { chartData, allLines, xInterval, lastReturnMap, benchLast } = useMemo(() => {
+    if (!prices || !hasAnything) return { chartData: [], allLines: [], xInterval: 21, lastReturnMap: {}, benchLast: null }
 
     const nDays  = PERIODS.find(p => p.key === period)?.days ?? 252
     const startIdx = Math.max(0, prices.dates.length - nDays)
@@ -100,6 +100,17 @@ export default function BenchmarkChart({
       )
     }
 
+    const lastReturnMap = {}
+    for (const { key } of lines) {
+      const r = returns[key]
+      if (r) {
+        for (let i = r.length - 1; i >= 0; i--) {
+          if (r[i] != null) { lastReturnMap[key] = r[i]; break }
+        }
+      }
+    }
+    const benchLast = bench ? (lastReturnMap[bench.ticker] ?? null) : null
+
     const xInt = { '5y': 63, '3y': 42, '1y': 21, '3m': 10 }[period] ?? 21
 
     const data = slicedDates.map((date, i) => {
@@ -110,7 +121,7 @@ export default function BenchmarkChart({
       return row
     })
 
-    return { chartData: data, allLines: lines, xInterval: xInt }
+    return { chartData: data, allLines: lines, xInterval: xInt, lastReturnMap, benchLast }
   }, [prices, period, activeAC, chartTickers, bench, hasAnything])
 
   // Non-gradeable with no overlay → minimal notice
@@ -147,6 +158,9 @@ export default function BenchmarkChart({
 
         {chartTickers.map((etf, i) => {
           const c = CHART_PALETTE[i % CHART_PALETTE.length]
+          const spread = (hasBench && benchLast != null && lastReturnMap[etf.ticker] != null)
+            ? lastReturnMap[etf.ticker] - benchLast
+            : null
           return (
             <span
               key={etf.ticker}
@@ -159,6 +173,11 @@ export default function BenchmarkChart({
               <span style={{ maxWidth: 100, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {etf.name}
               </span>
+              {spread != null && (
+                <span style={{ fontVariantNumeric: 'tabular-nums', opacity: 0.9, flexShrink: 0 }}>
+                  {spread >= 0 ? '+' : ''}{spread.toFixed(1)}%p
+                </span>
+              )}
               <button
                 onClick={() => onRemoveTicker(etf.ticker)}
                 style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', display: 'flex', padding: 0 }}

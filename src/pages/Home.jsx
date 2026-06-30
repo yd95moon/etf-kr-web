@@ -29,7 +29,7 @@ function TableHeader() {
 }
 
 export default function Home() {
-  const { data, etfList, activeAC, setActiveAC, prices, loadingPrices } = useContext(DataContext)
+  const { data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap } = useContext(DataContext)
   const isMobile = useIsMobile()
   const [sortMode, setSortMode] = useState('grade')
   const [sepOpen, setSepOpen] = useState(false)
@@ -199,6 +199,8 @@ export default function Home() {
                   isMobile={isMobile}
                   onChartToggle={toggleChart}
                   inChart={chartTickerSet.has(etf.ticker)}
+                  isPassive={subClassMap?.[etf.ticker] === 'index'}
+                  chartEnabled={!!prices?.tickers?.[etf.ticker]}
                 />
               ))
             )}
@@ -238,6 +240,8 @@ export default function Home() {
                       isMobile={isMobile}
                       onChartToggle={toggleChart}
                       inChart={chartTickerSet.has(etf.ticker)}
+                      isPassive={subClassMap?.[etf.ticker] === 'index'}
+                      chartEnabled={!!prices?.tickers?.[etf.ticker]}
                     />
                   ))}
                 </>

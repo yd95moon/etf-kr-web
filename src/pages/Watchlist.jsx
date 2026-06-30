@@ -8,7 +8,7 @@ import EtfRow from '../components/EtfRow.jsx'
 const COL = '32px 1fr 52px 90px 64px'
 
 export default function Watchlist() {
-  const { data } = useContext(DataContext)
+  const { data, subClassMap } = useContext(DataContext)
   const { watchlist } = useContext(WatchlistContext)
   const isMobile = useIsMobile()
 
@@ -70,7 +70,8 @@ export default function Watchlist() {
               </div>
             )}
             {etfs.map(etf => (
-              <EtfRow key={etf.ticker} etf={etf} showWarning={isDanger} isMobile={isMobile} />
+              <EtfRow key={etf.ticker} etf={etf} showWarning={isDanger} isMobile={isMobile}
+                isPassive={subClassMap?.[etf.ticker] === 'index'} />
             ))}
           </div>
         )
