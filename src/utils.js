@@ -15,22 +15,43 @@ export function useIsMobile() {
   return isMobile
 }
 
-export function sortEtfs(etfs, mode) {
-  const gradeOrder = { A: 0, B: 1, C: 2, D: 3, E: 4, null: 5, undefined: 5 }
+export function sortEtfs(etfs, mode, dir = 'desc', returnsMap = null) {
+  const gradeOrder = { A: 0, B: 1, C: 2, D: 3, E: 4 }
   const copy = [...etfs]
   if (mode === 'grade') {
     copy.sort((a, b) => {
       const ga = gradeOrder[a.composite_grade] ?? 5
       const gb = gradeOrder[b.composite_grade] ?? 5
-      if (ga !== gb) return ga - gb
+      const sign = dir === 'asc' ? -1 : 1
+      if (ga !== gb) return sign * (ga - gb)
       return (b.aum_억원 ?? 0) - (a.aum_억원 ?? 0)
     })
   } else if (mode === 'aum') {
-    copy.sort((a, b) => (b.aum_억원 ?? 0) - (a.aum_억원 ?? 0))
+    copy.sort((a, b) => dir === 'asc'
+      ? (a.aum_억원 ?? 0) - (b.aum_억원 ?? 0)
+      : (b.aum_억원 ?? 0) - (a.aum_억원 ?? 0)
+    )
   } else if (mode === 'fee') {
-    copy.sort((a, b) => (a.fee_pct ?? 999) - (b.fee_pct ?? 999))
+    copy.sort((a, b) => dir === 'desc'
+      ? (b.fee_pct ?? 0) - (a.fee_pct ?? 0)
+      : (a.fee_pct ?? 999) - (b.fee_pct ?? 999)
+    )
+  } else if (['m3', 'm6', 'm12'].includes(mode)) {
+    copy.sort((a, b) => {
+      const ra = returnsMap?.[a.ticker]?.[mode] ?? null
+      const rb = returnsMap?.[b.ticker]?.[mode] ?? null
+      if (ra === null && rb === null) return 0
+      if (ra === null) return 1
+      if (rb === null) return -1
+      return dir === 'asc' ? ra - rb : rb - ra
+    })
   }
   return copy
+}
+
+export function fmtReturn(v) {
+  if (v == null || isNaN(v)) return '—'
+  return (v >= 0 ? '+' : '') + v.toFixed(1) + '%'
 }
 
 export function fmtAum(v) {

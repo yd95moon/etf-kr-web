@@ -2,13 +2,24 @@ import React, { useContext, useState, useEffect, useCallback } from 'react'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { DataContext } from '../App.jsx'
 import { ASSET_CLASS_META, COLOR } from '../constants.js'
-import { sortEtfs, getFailReason, useIsMobile } from '../utils.js'
+import { sortEtfs, getFailReason, useIsMobile, fmtReturn } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
-import BenchmarkChart from '../components/BenchmarkChart.jsx'
+import BenchmarkChart, { BENCHMARK_META } from '../components/BenchmarkChart.jsx'
 
 const COL_CHART = '32px 1fr 52px 90px 64px 36px'
 
-function TableHeader() {
+const SORT_OPTS = [
+  { key: 'grade', label: '등급' },
+  { key: 'aum',   label: 'AUM' },
+  { key: 'fee',   label: '보수' },
+  { key: 'm3',    label: '3M' },
+  { key: 'm6',    label: '6M' },
+  { key: 'm12',   label: '1Y' },
+]
+
+const RETURN_LABELS = { m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률' }
+
+function TableHeader({ aumLabel = 'AUM' }) {
   return (
     <div style={{
       display: 'grid', gridTemplateColumns: COL_CHART,
@@ -21,7 +32,7 @@ function TableHeader() {
       <span></span>
       <span>종목명</span>
       <span>등급</span>
-      <span style={{ textAlign: 'right' }}>AUM</span>
+      <span style={{ textAlign: 'right' }}>{aumLabel}</span>
       <span style={{ textAlign: 'right' }}>보수</span>
       <span></span>
     </div>
@@ -29,18 +40,32 @@ function TableHeader() {
 }
 
 export default function Home() {
-  const { data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap } = useContext(DataContext)
+  const { data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap, returnsMap } = useContext(DataContext)
   const isMobile = useIsMobile()
   const [sortMode, setSortMode] = useState('grade')
+  const [sortDir, setSortDir] = useState('desc')
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)
+  const [indexOpen, setIndexOpen] = useState(false)
   const [chartTickers, setChartTickers] = useState([]) // [{ticker, name}]
 
   useEffect(() => {
     setSepOpen(false)
     setFailOpen(false)
+    setIndexOpen(false)
     setChartTickers([])
   }, [activeAC])
+
+  const handleSort = useCallback((mode) => {
+    setSortMode(prev => {
+      if (prev === mode) {
+        setSortDir(d => d === 'desc' ? 'asc' : 'desc')
+        return mode
+      }
+      setSortDir(mode === 'fee' ? 'asc' : 'desc')
+      return mode
+    })
+  }, [])
 
   const toggleChart = useCallback((etf) => {
     setChartTickers(prev =>
@@ -61,15 +86,32 @@ export default function Home() {
   const isGray = meta.tone === 'gray'
 
   const classEtfs = etfList.filter(e => e.asset_class === activeAC)
-  const mainEtfs  = classEtfs.filter(e => e.final_class === '메인')
-  const sepEtfs   = classEtfs.filter(e => e.final_class === '별도_트랙')
-  const failEtfs  = classEtfs.filter(e => e.final_class === '탈락')
+  const allMainEtfs = classEtfs.filter(e => e.final_class === '메인')
+  const sepEtfs     = classEtfs.filter(e => e.final_class === '별도_트랙')
+  const failEtfs    = classEtfs.filter(e => e.final_class === '탈락')
+
+  const isIndexETF = (e) => activeAC === 'domestic_equity' && subClassMap?.[e.ticker] === 'index'
+  const mainEtfs      = allMainEtfs.filter(e => !isIndexETF(e))
+  const mainIndexEtfs = allMainEtfs.filter(e => isIndexETF(e))
 
   const effectiveSort = (!meta.gradeable && sortMode === 'grade') ? 'aum' : sortMode
 
   const showSepAsMain = mainEtfs.length === 0 && sepEtfs.length > 0
-  const displayMain = sortEtfs(showSepAsMain ? sepEtfs : mainEtfs, effectiveSort)
-  const traySep = showSepAsMain ? [] : sortEtfs(sepEtfs, effectiveSort)
+  const displayMain  = sortEtfs(showSepAsMain ? sepEtfs : mainEtfs, effectiveSort, sortDir, returnsMap)
+  const traySep      = showSepAsMain ? [] : sortEtfs(sepEtfs, effectiveSort, sortDir, returnsMap)
+  const displayIndex = sortEtfs(mainIndexEtfs, 'aum', 'desc', returnsMap)
+
+  const returnKey = ['m3', 'm6', 'm12'].includes(effectiveSort) ? effectiveSort : null
+  const aumLabel  = RETURN_LABELS[effectiveSort] || 'AUM'
+  const dirArrow  = sortDir === 'desc' ? '↓' : '↑'
+
+  const benchTicker    = BENCHMARK_META[activeAC]?.ticker
+  const benchReturn12  = returnsMap?.[benchTicker]?.m12
+  const indexBenchDiff = (etf) => {
+    if (benchReturn12 == null) return undefined
+    const r = returnsMap?.[etf.ticker]?.m12
+    return r != null ? r - benchReturn12 : undefined
+  }
 
   const classes = Object.entries(ASSET_CLASS_META).sort((a, b) => a[1].order - b[1].order)
 
@@ -153,18 +195,17 @@ export default function Home() {
         </div>
 
         {/* ── 정렬 버튼 ── */}
-        <div style={{ display: 'flex', gap: 8, padding: '10px 16px 12px' }}>
-          {['grade', 'aum', 'fee'].map(mode => {
-            const labels = { grade: '등급', aum: 'AUM', fee: '보수' }
-            const disabled = mode === 'grade' && !meta.gradeable
-            const active = effectiveSort === mode
+        <div style={{ display: 'flex', gap: 6, padding: '10px 16px 12px', flexWrap: 'wrap' }}>
+          {SORT_OPTS.map(({ key, label }) => {
+            const disabled = key === 'grade' && !meta.gradeable
+            const active = effectiveSort === key
             return (
               <button
-                key={mode}
+                key={key}
                 disabled={disabled}
-                onClick={() => setSortMode(mode)}
+                onClick={() => handleSort(key)}
                 style={{
-                  padding: '5px 14px', borderRadius: 6,
+                  padding: '5px 12px', borderRadius: 6,
                   border: `1px solid ${active ? '#5a6a9a' : COLOR.border}`,
                   background: active ? '#2a3050' : COLOR.bgCard,
                   color: disabled ? COLOR.textDim : active ? COLOR.text : COLOR.textMuted,
@@ -172,7 +213,7 @@ export default function Home() {
                   fontSize: 12, fontWeight: active ? 600 : 400,
                   opacity: disabled ? 0.4 : 1,
                 }}
-              >{labels[mode]}</button>
+              >{label}{active ? ` ${dirArrow}` : ''}</button>
             )
           })}
         </div>
@@ -184,7 +225,7 @@ export default function Home() {
             border: `1px solid ${isDanger ? COLOR.danger + '44' : COLOR.border}`,
             borderRadius: 8, overflow: 'hidden',
           }}>
-            {!isMobile && <TableHeader />}
+            {!isMobile && <TableHeader aumLabel={aumLabel} />}
             {displayMain.length === 0 ? (
               <div style={{ padding: '24px 16px', textAlign: 'center', color: COLOR.textDim }}>
                 메인 종목 없음
@@ -201,11 +242,65 @@ export default function Home() {
                   inChart={chartTickerSet.has(etf.ticker)}
                   isPassive={subClassMap?.[etf.ticker] === 'index'}
                   chartEnabled={!!prices?.tickers?.[etf.ticker]}
+                  returnVal={returnKey ? returnsMap?.[etf.ticker]?.[returnKey] : undefined}
                 />
               ))
             )}
           </div>
         </div>
+
+        {/* ── 지수추종 트레이 (국내주식형만) ── */}
+        {displayIndex.length > 0 && (
+          <div style={{ padding: '0 16px', marginBottom: 12 }}>
+            <div style={{
+              background: '#1e2a38',
+              border: `1px solid #93c5fd33`,
+              borderRadius: 8, overflow: 'hidden',
+            }}>
+              <button
+                onClick={() => setIndexOpen(o => !o)}
+                style={{
+                  width: '100%', display: 'flex', alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '10px 14px', background: 'none', border: 'none',
+                  cursor: 'pointer', color: '#93c5fd',
+                  fontSize: 13, fontWeight: 600,
+                }}
+              >
+                <span>지수추종 ETF {displayIndex.length}종</span>
+                {indexOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+              </button>
+              {indexOpen && (
+                <>
+                  <div style={{
+                    padding: '6px 14px 8px',
+                    fontSize: 11, color: '#93c5fd99',
+                    borderBottom: `1px solid #93c5fd22`,
+                  }}>
+                    같은 지수를 추종해 등급 비교 의미가 작음. 벤치 추적·보수 중심으로 보세요.
+                    {benchTicker && ' (우측: 1Y 벤치 대비)'}
+                  </div>
+                  {!isMobile && <TableHeader aumLabel={benchTicker ? '1Y벤치대비' : 'AUM'} />}
+                  {displayIndex.map(etf => (
+                    <EtfRow
+                      key={etf.ticker}
+                      etf={etf}
+                      showWarning={false}
+                      dimmed
+                      isMobile={isMobile}
+                      onChartToggle={toggleChart}
+                      inChart={chartTickerSet.has(etf.ticker)}
+                      isPassive
+                      chartEnabled={!!prices?.tickers?.[etf.ticker]}
+                      returnVal={indexBenchDiff(etf)}
+                      indexTray
+                    />
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* ── 별도트랙 트레이 ── */}
         {traySep.length > 0 && (
@@ -230,7 +325,7 @@ export default function Home() {
               </button>
               {sepOpen && (
                 <>
-                  {!isMobile && <TableHeader />}
+                  {!isMobile && <TableHeader aumLabel={aumLabel} />}
                   {traySep.map(etf => (
                     <EtfRow
                       key={etf.ticker}
@@ -242,6 +337,7 @@ export default function Home() {
                       inChart={chartTickerSet.has(etf.ticker)}
                       isPassive={subClassMap?.[etf.ticker] === 'index'}
                       chartEnabled={!!prices?.tickers?.[etf.ticker]}
+                      returnVal={returnKey ? returnsMap?.[etf.ticker]?.[returnKey] : undefined}
                     />
                   ))}
                 </>

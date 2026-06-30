@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { ChevronDown, ChevronUp, Star, ExternalLink } from 'lucide-react'
 import GradeChip from './GradeChip.jsx'
 import { COLOR, SIGNAL_LABELS, GATE_LABELS, GATE_REASON_KO } from '../constants.js'
-import { fmtAum, fmtFee } from '../utils.js'
+import { fmtAum, fmtFee, fmtReturn } from '../utils.js'
 import { WatchlistContext } from '../App.jsx'
 
 const S = {
@@ -128,6 +128,8 @@ export default function EtfRow({
   inChart = false,
   isPassive = false,
   chartEnabled = true,
+  returnVal,
+  indexTray = false,
 }) {
   const [open, setOpen] = useState(false)
   const [showSignals, setShowSignals] = useState(false)
@@ -139,6 +141,10 @@ export default function EtfRow({
   const gates = etf.gates || {}
   const signals = etf.signals || {}
   const grade = etf.grade_eligible ? etf.composite_grade : null
+
+  const hasReturn = returnVal !== undefined && returnVal !== null
+  const rightDisplay = hasReturn ? fmtReturn(returnVal) : fmtAum(etf.aum_억원)
+  const rightColor = hasReturn ? (returnVal >= 0 ? '#86efac' : COLOR.danger) : COLOR.textMuted
 
   const handleChartClick = onChartToggle
     ? e => { e.stopPropagation(); if (chartEnabled) onChartToggle(etf) }
@@ -277,7 +283,7 @@ export default function EtfRow({
                   <NameLink ticker={etf.ticker} name={etf.name} />
                 </span>
                 {isPassive && <PassiveTag />}
-                <GradeChip grade={grade} />
+                {!indexTray && <GradeChip grade={grade} />}
                 {onChartToggle && (
                   <ChartBtn onClick={handleChartClick} inChart={inChart} enabled={chartEnabled} />
                 )}
@@ -285,7 +291,7 @@ export default function EtfRow({
               <div style={{ fontSize: 11, color: COLOR.textDim }}>
                 <span style={{ fontFamily: 'monospace' }}>{etf.ticker}</span>
                 <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
-                <span>{fmtAum(etf.aum_억원)}</span>
+                <span style={{ color: hasReturn ? rightColor : undefined }}>{rightDisplay}</span>
                 <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
                 <span>{fmtFee(etf.fee_pct)}</span>
               </div>
@@ -323,9 +329,9 @@ export default function EtfRow({
               {etf.ticker}
             </div>
           </div>
-          <span><GradeChip grade={grade} /></span>
-          <span style={{ fontSize: 12, color: COLOR.textMuted, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
-            {fmtAum(etf.aum_억원)}
+          <span>{indexTray ? <PassiveTag /> : <GradeChip grade={grade} />}</span>
+          <span style={{ fontSize: 12, color: rightColor, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
+            {rightDisplay}
           </span>
           <span style={{ fontSize: 12, color: COLOR.textMuted, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
             {fmtFee(etf.fee_pct)}
