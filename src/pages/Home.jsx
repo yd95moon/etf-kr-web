@@ -9,12 +9,12 @@ import BenchmarkChart, { AC_DEFAULT_BENCH } from '../components/BenchmarkChart.j
 const COL_CHART = '32px 1fr 52px 90px 64px 36px'
 
 const SORT_OPTS = [
-  { key: 'grade', label: '등급' },
-  { key: 'aum',   label: 'AUM' },
-  { key: 'fee',   label: '보수' },
   { key: 'm3',    label: '3M' },
   { key: 'm6',    label: '6M' },
   { key: 'm12',   label: '1Y' },
+  { key: 'aum',   label: 'AUM' },
+  { key: 'fee',   label: '보수' },
+  { key: 'grade', label: '등급' },
 ]
 
 const RETURN_LABELS = { m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률' }
@@ -224,10 +224,11 @@ export default function Home() {
         </div>
 
         {/* ── 정렬 버튼 ── */}
-        <div style={{ display: 'flex', gap: 6, padding: '10px 16px 12px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 6, padding: '10px 16px 6px', flexWrap: 'wrap' }}>
           {SORT_OPTS.map(({ key, label }) => {
             const disabled = key === 'grade' && !meta.gradeable
             const active = effectiveSort === key
+            const isGradeBtn = key === 'grade'
             return (
               <button
                 key={key}
@@ -235,17 +236,39 @@ export default function Home() {
                 onClick={() => handleSort(key)}
                 style={{
                   padding: '5px 12px', borderRadius: 6,
-                  border: `1px solid ${active ? '#5a6a9a' : COLOR.border}`,
-                  background: active ? '#2a3050' : COLOR.bgCard,
-                  color: disabled ? COLOR.textDim : active ? COLOR.text : COLOR.textMuted,
+                  border: active
+                    ? `1px solid ${isGradeBtn ? '#6b5a7a' : '#5a6a9a'}`
+                    : `1px ${isGradeBtn ? 'dashed' : 'solid'} ${isGradeBtn ? '#4a3d5a' : COLOR.border}`,
+                  background: active ? (isGradeBtn ? '#2a2035' : '#2a3050') : COLOR.bgCard,
+                  color: disabled ? COLOR.textDim : active ? (isGradeBtn ? '#c4a8d8' : COLOR.text) : (isGradeBtn ? '#7a6a8a' : COLOR.textMuted),
                   cursor: disabled ? 'not-allowed' : 'pointer',
                   fontSize: 12, fontWeight: active ? 600 : 400,
                   opacity: disabled ? 0.4 : 1,
                 }}
-              >{label}{active ? ` ${dirArrow}` : ''}</button>
+              >
+                {isGradeBtn ? (
+                  <span>등급 <span style={{ fontSize: 10, opacity: 0.75 }}>검증중</span></span>
+                ) : label}
+                {active ? ` ${dirArrow}` : ''}
+              </button>
             )
           })}
         </div>
+
+        {/* ── 등급 정렬 시 검증 안내 ── */}
+        {effectiveSort === 'grade' && meta.gradeable && (
+          <div style={{
+            margin: '0 16px 10px',
+            padding: '7px 12px',
+            background: '#1e1a28',
+            border: '1px dashed #6b5a7a',
+            borderRadius: 6,
+            fontSize: 11, color: '#a090b8',
+            lineHeight: 1.5,
+          }}>
+            등급은 forward 검증 중입니다 (n=1, 첫 채점 2026-09-26). 24개월 후 유효성 미달 시 폐기 예정.
+          </div>
+        )}
 
         {/* ── 메인 테이블 ── */}
         <div style={{ padding: '0 16px', marginBottom: 12 }}>
