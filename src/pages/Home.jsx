@@ -42,7 +42,8 @@ function TableHeader({ aumLabel = 'AUM' }) {
 export default function Home() {
   const { data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap, returnsMap, benchmarks } = useContext(DataContext)
   const isMobile = useIsMobile()
-  const [sortMode, setSortMode] = useState('grade')
+  // 기본 정렬: 3M 수익률. 등급은 forward n=1·측정 전이라 기본 노출 부적절 (검증 완료 후 grade로 복귀 여지)
+  const [sortMode, setSortMode] = useState('m3')
   const [sortDir, setSortDir] = useState('desc')
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)

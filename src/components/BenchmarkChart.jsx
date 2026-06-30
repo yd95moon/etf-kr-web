@@ -142,8 +142,8 @@ export default function BenchmarkChart({
 
   const hasAnything = activeBenches.length > 0 || chartTickers.length > 0
 
-  const { chartData, etfLines, benchLines, xInterval, lastReturnMap, benchLastMap } = useMemo(() => {
-    const empty = { chartData: [], etfLines: [], benchLines: [], xInterval: 21, lastReturnMap: {}, benchLastMap: {} }
+  const { chartData, etfLines, benchLines, xTicks, lastReturnMap, benchLastMap } = useMemo(() => {
+    const empty = { chartData: [], etfLines: [], benchLines: [], xTicks: [], lastReturnMap: {}, benchLastMap: {} }
     if (!prices || !hasAnything) return empty
 
     const nDays    = PERIODS.find(p => p.key === period)?.days ?? 252
@@ -207,8 +207,6 @@ export default function BenchmarkChart({
       if (last != null) benchLastMap[bln.benchKey] = last
     }
 
-    const xInt = { '5y': 63, '3y': 42, '1y': 21, '3m': 10 }[period] ?? 21
-
     const data = slicedDates.map((date, i) => {
       const row = { date: fmtDateLabel(date) }
       for (const { key } of etfLns) {
@@ -220,7 +218,19 @@ export default function BenchmarkChart({
       return row
     })
 
-    return { chartData: data, etfLines: etfLns, benchLines: benchLns, xInterval: xInt, lastReturnMap, benchLastMap }
+    // Pick evenly-spaced tick values so X labels never overlap regardless of period or screen width
+    const MAX_TICKS = 6
+    const xTicks = []
+    if (data.length > 0) {
+      const n = Math.min(MAX_TICKS, data.length)
+      for (let i = 0; i < n; i++) {
+        const idx = Math.round(i * (data.length - 1) / Math.max(n - 1, 1))
+        const d = data[Math.min(idx, data.length - 1)].date
+        if (!xTicks.includes(d)) xTicks.push(d)
+      }
+    }
+
+    return { chartData: data, etfLines: etfLns, benchLines: benchLns, xTicks, lastReturnMap, benchLastMap }
   }, [prices, benchmarks, period, chartTickers, activeBenches, hasAnything])
 
   // Reference bench for spread: AC primary if active, else first active bench
@@ -301,8 +311,10 @@ export default function BenchmarkChart({
               <LineChart data={chartData} margin={{ top: 4, right: 8, bottom: 0, left: 0 }}>
                 <XAxis
                   dataKey="date"
+                  ticks={xTicks}
+                  tickFormatter={d => period === '5y' ? '20' + d.slice(0, 2) : d}
                   tick={{ fontSize: 10, fill: COLOR.textDim }}
-                  interval={xInterval - 1}
+                  interval={0}
                   axisLine={false} tickLine={false}
                 />
                 <YAxis
