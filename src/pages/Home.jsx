@@ -8,6 +8,15 @@ import BenchmarkChart, { AC_DEFAULT_BENCH } from '../components/BenchmarkChart.j
 
 const COL_CHART = '32px 1fr 52px 90px 64px 36px'
 
+function getPrimaryGate(etf) {
+  const gates = etf.gates || {}
+  for (const [key, val] of Object.entries(gates)) {
+    if (key === 'G5') continue
+    if (val && val.pass === false) return key
+  }
+  return 'other'
+}
+
 const SORT_OPTS = [
   { key: 'm3',    label: '3M' },
   { key: 'm6',    label: '6M' },
@@ -117,6 +126,10 @@ export default function Home() {
   const allMainEtfs = classEtfs.filter(e => e.final_class === '메인')
   const sepEtfs     = classEtfs.filter(e => e.final_class === '별도_트랙')
   const failEtfs    = classEtfs.filter(e => e.final_class === '탈락')
+  const failG6    = failEtfs.filter(e => getPrimaryGate(e) === 'G6')
+  const failG1    = failEtfs.filter(e => getPrimaryGate(e) === 'G1')
+  const failData  = failEtfs.filter(e => ['G2', 'G3'].includes(getPrimaryGate(e)))
+  const failOther = failEtfs.filter(e => !['G6', 'G1', 'G2', 'G3'].includes(getPrimaryGate(e)))
 
   const isIndexETF = (e) => activeAC === 'domestic_equity' && subClassMap?.[e.ticker] === 'index'
   const mainEtfs      = allMainEtfs.filter(e => !isIndexETF(e))
@@ -398,7 +411,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* ── 탈락 트레이 ── */}
+        {/* ── 메인 제외 트레이 ── */}
         {failEtfs.length > 0 && (
           <div style={{ padding: '0 16px', marginBottom: 12 }}>
             <div style={{
@@ -413,10 +426,16 @@ export default function Home() {
                   justifyContent: 'space-between',
                   padding: '10px 14px', background: 'none', border: 'none',
                   cursor: 'pointer', color: COLOR.textDim,
-                  fontSize: 13, fontWeight: 600,
+                  fontSize: 13, fontWeight: 600, gap: 8,
                 }}
               >
-                <span>탈락 {failEtfs.length}종</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                  <span>메인 제외 {failEtfs.length}종</span>
+                  {failG6.length > 0 && <span style={{ fontSize: 11, fontWeight: 400 }}>보수초과 {failG6.length}</span>}
+                  {failG1.length > 0 && <span style={{ fontSize: 11, fontWeight: 400 }}>AUM미달 {failG1.length}</span>}
+                  {failData.length > 0 && <span style={{ fontSize: 11, fontWeight: 400 }}>데이터부족 {failData.length}</span>}
+                  {failOther.length > 0 && <span style={{ fontSize: 11, fontWeight: 400 }}>기타 {failOther.length}</span>}
+                </span>
                 {failOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
               </button>
               {failOpen && (
@@ -430,19 +449,37 @@ export default function Home() {
                   }}>
                     <span>티커</span>
                     <span>이름</span>
-                    <span>탈락 사유</span>
+                    <span>제외 사유</span>
                   </div>
-                  {failEtfs.map(etf => (
-                    <div key={etf.ticker} style={{
-                      display: 'grid', gridTemplateColumns: '72px 1fr 1fr',
-                      padding: '7px 12px', gap: 8, fontSize: 12,
-                      borderBottom: `1px solid ${COLOR.borderSoft}`,
-                      alignItems: 'center',
-                    }}>
-                      <span style={{ fontFamily: 'monospace', color: COLOR.textDim }}>{etf.ticker}</span>
-                      <span style={{ color: COLOR.textMuted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{etf.name}</span>
-                      <span style={{ color: COLOR.textDim, fontSize: 11 }}>{getFailReason(etf)}</span>
-                    </div>
+                  {[
+                    { label: '보수 중앙값 초과', etfs: failG6 },
+                    { label: 'AUM 미달',       etfs: failG1 },
+                    { label: '데이터 부족',    etfs: failData },
+                    { label: '기타',           etfs: failOther },
+                  ].filter(g => g.etfs.length > 0).map(group => (
+                    <React.Fragment key={group.label}>
+                      <div style={{
+                        padding: '4px 12px',
+                        fontSize: 10, fontWeight: 600, color: COLOR.textDim,
+                        background: '#1a1c24',
+                        borderBottom: `1px solid ${COLOR.borderSoft}`,
+                        letterSpacing: '0.04em', textTransform: 'uppercase',
+                      }}>
+                        {group.label} {group.etfs.length}종
+                      </div>
+                      {group.etfs.map(etf => (
+                        <div key={etf.ticker} style={{
+                          display: 'grid', gridTemplateColumns: '72px 1fr 1fr',
+                          padding: '7px 12px', gap: 8, fontSize: 12,
+                          borderBottom: `1px solid ${COLOR.borderSoft}`,
+                          alignItems: 'center',
+                        }}>
+                          <span style={{ fontFamily: 'monospace', color: COLOR.textDim }}>{etf.ticker}</span>
+                          <span style={{ color: COLOR.textMuted, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{etf.name}</span>
+                          <span style={{ color: COLOR.textDim, fontSize: 11 }}>{getFailReason(etf)}</span>
+                        </div>
+                      ))}
+                    </React.Fragment>
                   ))}
                 </div>
               )}

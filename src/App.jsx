@@ -187,14 +187,13 @@ function Navbar({ onSearchOpen, watchlistCount }) {
   )
 }
 
-// ── SpecFooter — 하단 고정, 풀 라벨 1회만 ──────────────────────────────────────
+// ── SpecFooter — 페이지 맨 끝, 스크롤 끝에서만 보임 ──────────────────────────────
 function SpecFooter({ label }) {
   return (
     <footer style={{
-      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
       background: '#0f1117',
       borderTop: `1px solid ${COLOR.borderSoft}`,
-      padding: '5px 16px',
+      padding: '8px 16px',
       fontSize: 10, color: COLOR.textDim,
       textAlign: 'center', lineHeight: 1.5,
     }}>
@@ -266,7 +265,7 @@ function AppShell() {
       <WatchlistContext.Provider value={{ watchlist, toggleTicker }}>
         <div style={{ minHeight: '100vh', background: COLOR.bg }}>
           <Navbar onSearchOpen={() => setSearchOpen(true)} watchlistCount={watchlist.length} />
-          <main style={{ paddingBottom: 44 }}>
+          <main>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/watchlist" element={<Watchlist />} />
