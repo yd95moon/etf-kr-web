@@ -58,10 +58,21 @@ function fmtPct(v) {
   return (v >= 0 ? '+' : '') + v.toFixed(1) + '%'
 }
 
-function fmtDateLabel(dateStr) {
-  const y = dateStr.slice(2, 4)
+// Tooltip: full human-readable date, e.g. "2026-04-01" -> "2026.4.1"
+function fmtTooltipDate(dateStr) {
+  const y = dateStr.slice(0, 4)
   const m = parseInt(dateStr.slice(5, 7), 10)
-  return `${y}.${m}`
+  const d = parseInt(dateStr.slice(8, 10), 10)
+  return `${y}.${m}.${d}`
+}
+
+// X axis tick: month-level for short periods, year-level for long ones.
+// Year boundaries (first tick or January) get a "YY년" prefix so the axis stays orientable.
+function fmtAxisTick(dateStr, period, index) {
+  const y = dateStr.slice(0, 4)
+  const m = parseInt(dateStr.slice(5, 7), 10)
+  if (period === '3y' || period === '5y') return y
+  return (index === 0 || m === 1) ? `${y.slice(2)}년 ${m}월` : `${m}월`
 }
 
 // Align external benchmark {date: close} to ETF dates array using ffill
@@ -83,7 +94,7 @@ function CustomTooltip({ active, payload, label }) {
       background: COLOR.bgCard, border: `1px solid ${COLOR.border}`,
       borderRadius: 6, padding: '8px 12px', fontSize: 12, minWidth: 160,
     }}>
-      <div style={{ color: COLOR.textDim, marginBottom: 4, fontSize: 11 }}>{label}</div>
+      <div style={{ color: COLOR.textDim, marginBottom: 4, fontSize: 11 }}>{fmtTooltipDate(label)}</div>
       {payload.map(entry => (
         <div key={entry.dataKey} style={{ display: 'flex', justifyContent: 'space-between', gap: 12 }}>
           <span style={{
@@ -208,7 +219,7 @@ export default function BenchmarkChart({
     }
 
     const data = slicedDates.map((date, i) => {
-      const row = { date: fmtDateLabel(date) }
+      const row = { date }
       for (const { key } of etfLns) {
         if (etfReturns[key]) row[key] = etfReturns[key][i]
       }
@@ -312,7 +323,7 @@ export default function BenchmarkChart({
                 <XAxis
                   dataKey="date"
                   ticks={xTicks}
-                  tickFormatter={d => period === '5y' ? '20' + d.slice(0, 2) : d}
+                  tickFormatter={(d, i) => fmtAxisTick(d, period, i)}
                   tick={{ fontSize: 10, fill: COLOR.textDim }}
                   interval={0}
                   axisLine={false} tickLine={false}
