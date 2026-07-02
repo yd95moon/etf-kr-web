@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-07-02T01:29:56.085261",
+    "generated_at": "2026-07-02T11:43:48.654677",
     "cohort": "live",
     "spec_label": "확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영",
     "grade_eligible_classes": [
@@ -9,10 +9,10 @@
       "overseas_equity"
     ],
     "summary": {
-      "total": 622,
+      "total": 624,
       "메인_등급유효": 230,
       "별도트랙": 62,
-      "탈락": 272,
+      "탈락": 274,
       "메인_지표만": 58
     }
   },
@@ -19833,6 +19833,50 @@
       "grade_note": null,
       "spec_label": "확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영"
     },
+    "472840": {
+      "ticker": "472840",
+      "name": "IBK 200",
+      "asset_class": "domestic_equity_index",
+      "price": 135520.0,
+      "nav": 136721.0,
+      "aum_억원": 508.0,
+      "is_leverage": false,
+      "is_inverse": false,
+      "is_hedge": false,
+      "final_class": "탈락",
+      "gates": {
+        "G1": {
+          "pass": true,
+          "reason": null
+        },
+        "G2": {
+          "pass": true,
+          "reason": null
+        },
+        "G3": {
+          "pass": true,
+          "reason": null
+        },
+        "G4": {
+          "pass": true,
+          "reason": null
+        },
+        "G5": {
+          "separate_track": false
+        },
+        "G6": {
+          "pass": null,
+          "reason": "fee_missing"
+        }
+      },
+      "fee_pct": null,
+      "fee_status": null,
+      "grade_eligible": false,
+      "composite_grade": null,
+      "signals": null,
+      "grade_note": null,
+      "spec_label": "확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영"
+    },
     "401170": {
       "ticker": "401170",
       "name": "RISE 메타버스",
@@ -20770,6 +20814,50 @@
           "grade": "C"
         }
       },
+      "grade_note": null,
+      "spec_label": "확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영"
+    },
+    "473490": {
+      "ticker": "473490",
+      "name": "KIWOOM 글로벌AI반도체",
+      "asset_class": "overseas_equity",
+      "price": 35490.0,
+      "nav": 36327.0,
+      "aum_억원": 444.0,
+      "is_leverage": false,
+      "is_inverse": false,
+      "is_hedge": false,
+      "final_class": "탈락",
+      "gates": {
+        "G1": {
+          "pass": true,
+          "reason": null
+        },
+        "G2": {
+          "pass": true,
+          "reason": null
+        },
+        "G3": {
+          "pass": true,
+          "reason": null
+        },
+        "G4": {
+          "pass": true,
+          "reason": null
+        },
+        "G5": {
+          "separate_track": false
+        },
+        "G6": {
+          "pass": null,
+          "reason": "fee_missing"
+        }
+      },
+      "fee_pct": null,
+      "fee_status": null,
+      "grade_eligible": false,
+      "composite_grade": null,
+      "signals": null,
       "grade_note": null,
       "spec_label": "확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영"
     },
