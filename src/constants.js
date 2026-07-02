@@ -20,13 +20,14 @@ export const GRADE_COLOR = {
 }
 
 export const ASSET_CLASS_META = {
-  domestic_equity:  { label: '국내주식형',       order: 0, gradeable: true,  tone: 'normal' },
-  overseas_equity:  { label: '해외주식형',       order: 1, gradeable: true,  tone: 'normal' },
-  bond:             { label: '채권형',           order: 2, gradeable: true,  tone: 'normal' },
-  other:            { label: '기타',             order: 3, gradeable: false, tone: 'gray'   },
-  commodity:        { label: '원자재',           order: 4, gradeable: false, tone: 'gray'   },
-  realestate:       { label: '부동산',           order: 5, gradeable: false, tone: 'gray'   },
-  leverage_inverse: { label: '레버리지·인버스', order: 6, gradeable: false, tone: 'danger' },
+  domestic_equity:       { label: '국내주식형',         order: 0, gradeable: true,  tone: 'normal' },
+  domestic_equity_index: { label: '국내주식-지수추종', order: 1, gradeable: false, tone: 'gray'   },
+  overseas_equity:       { label: '해외주식형',         order: 2, gradeable: true,  tone: 'normal' },
+  bond:                  { label: '채권형',             order: 3, gradeable: true,  tone: 'normal' },
+  other:                 { label: '기타',               order: 4, gradeable: false, tone: 'gray'   },
+  commodity:             { label: '원자재',             order: 5, gradeable: false, tone: 'gray'   },
+  realestate:            { label: '부동산',             order: 6, gradeable: false, tone: 'gray'   },
+  leverage_inverse:      { label: '레버리지·인버스',   order: 7, gradeable: false, tone: 'danger' },
 }
 
 export const SIGNAL_LABELS = {
