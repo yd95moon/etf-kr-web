@@ -21,24 +21,26 @@ const BENCH_ORDER = ['KS11', 'KQ11', 'IXIC', 'US500', 'DJI', 'GOLD', 'BTC_KRW']
 
 // Default ON benches per asset class (reset on AC toggle)
 export const AC_DEFAULT_BENCH = {
-  domestic_equity:  ['KS11'],
-  overseas_equity:  ['IXIC', 'US500'],
-  commodity:        ['GOLD'],
-  bond:             [],
-  realestate:       [],
-  other:            [],
-  leverage_inverse: [],
+  domestic_equity:       ['KS11'],
+  domestic_equity_index: ['KS11'],
+  overseas_equity:       ['IXIC', 'US500'],
+  commodity:             ['GOLD'],
+  bond:                  [],
+  realestate:            [],
+  other:                 [],
+  leverage_inverse:      [],
 }
 
 // Primary bench for ETF overlay spread calc
 export const AC_PRIMARY_BENCH = {
-  domestic_equity:  'KS11',
-  overseas_equity:  'US500',
-  commodity:        'GOLD',
-  bond:             null,
-  realestate:       null,
-  other:            null,
-  leverage_inverse: null,
+  domestic_equity:       'KS11',
+  domestic_equity_index: 'KS11',
+  overseas_equity:       'US500',
+  commodity:             'GOLD',
+  bond:                  null,
+  realestate:            null,
+  other:                 null,
+  leverage_inverse:      null,
 }
 
 const PERIODS = [
