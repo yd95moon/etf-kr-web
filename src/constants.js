@@ -31,11 +31,11 @@ export const ASSET_CLASS_META = {
 }
 
 export const SIGNAL_LABELS = {
-  T1: '모멘텀',
-  T2: '변동성',
-  T3: '추세 일관성',
-  T4: '낙폭 회복',
-  T5: '거래량 활성도',
+  T1: '모멘텀 (12-1개월)',
+  T2: 'RSI (14일)',
+  T3: '200일 이격도',
+  T4: '52주 가격 위치',
+  T5: '변동성 역수 (60일)',
 }
 
 export const GATE_LABELS = {
