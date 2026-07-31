@@ -155,8 +155,8 @@ export default function BenchmarkChart({
 
   const hasAnything = activeBenches.length > 0 || chartTickers.length > 0
 
-  const { chartData, etfLines, benchLines, xTicks, lastReturnMap, benchLastMap } = useMemo(() => {
-    const empty = { chartData: [], etfLines: [], benchLines: [], xTicks: [], lastReturnMap: {}, benchLastMap: {} }
+  const { chartData, etfLines, benchLines, xTicks, lastReturnMap, benchLastMap, lateStart } = useMemo(() => {
+    const empty = { chartData: [], etfLines: [], benchLines: [], xTicks: [], lastReturnMap: {}, benchLastMap: {}, lateStart: [] }
     if (!prices || !hasAnything) return empty
 
     const nDays    = PERIODS.find(p => p.key === period)?.days ?? 252
@@ -178,15 +178,25 @@ export default function BenchmarkChart({
       }))
 
     // ETF cumulative returns
+    // 구간 시작일에 값이 없다고 종목을 통째로 빼면 신규 상장 ETF가 아예 안 그려진다.
+    // 벤치마크와 똑같이 "구간 안에서 처음 값이 있는 날"을 기준으로 삼아
+    // 상장일부터 선이 시작되게 한다.
     const etfReturns = {}
-    for (const { key } of etfLns) {
+    const lateStart = []
+    for (const { key, label } of etfLns) {
       const closes = prices.tickers[key]
       if (!closes) continue
-      const base = closes[startIdx]
+      const sliced = closes.slice(startIdx)
+      const firstIdx = sliced.findIndex(v => v != null)
+      if (firstIdx < 0) continue
+      const base = sliced[firstIdx]
       if (!base) continue
-      etfReturns[key] = closes.slice(startIdx).map(c =>
+      etfReturns[key] = sliced.map(c =>
         c != null ? +((c / base - 1) * 100).toFixed(2) : null
       )
+      if (firstIdx > 0) {
+        lateStart.push({ label, date: slicedDates[firstIdx] })
+      }
     }
 
     // Benchmark cumulative returns (ffill to ETF dates)
@@ -243,7 +253,7 @@ export default function BenchmarkChart({
       }
     }
 
-    return { chartData: data, etfLines: etfLns, benchLines: benchLns, xTicks, lastReturnMap, benchLastMap }
+    return { chartData: data, etfLines: etfLns, benchLines: benchLns, xTicks, lastReturnMap, benchLastMap, lateStart }
   }, [prices, benchmarks, period, chartTickers, activeBenches, hasAnything])
 
   // Reference bench for spread: AC primary if active, else first active bench
@@ -358,6 +368,13 @@ export default function BenchmarkChart({
             </ResponsiveContainer>
           )}
 
+          {lateStart.length > 0 && (
+            <div style={{ fontSize: 10, color: COLOR.textDim, marginTop: 3, lineHeight: 1.5 }}>
+              {lateStart.map(x => x.label + '(' + x.date + ')').join(', ')} 는
+              이 구간 중간부터 자료가 있어 그 시점을 0%로 잡고 그렸습니다.
+              시작점이 달라 같은 기간 비교가 아닙니다.
+            </div>
+          )}
           <div style={{ fontSize: 10, color: COLOR.textDim, marginTop: 2, textAlign: 'right' }}>
             누적수익률(과거 실적), 미래수익 보장 아님.
           </div>
