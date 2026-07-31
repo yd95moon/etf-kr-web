@@ -23,24 +23,24 @@ export const GRADE_COLOR = {
 // 등급은 이 단위 안에서만 매긴다. 성격이 다른 상품을 한 줄에 세우지 않기 위함.
 export const PEER_META = {
   kr_index: {
-    label: '국내주식 · 대표지수', short: '대표지수', order: 0, gradeable: false,
+    label: '국내주식 · 대표지수', short: '대표지수', order: 5, gradeable: false,
     note: '같은 지수를 따라가는 상품이라 우열을 매기지 않습니다. 보수·규모·괴리율로 비교하세요.',
   },
   kr_select: {
-    label: '국내주식 · 섹터·테마·전략', short: '섹터·테마·전략', order: 1, gradeable: true,
+    label: '국내주식 · 섹터·테마·전략', short: '섹터·테마·전략', order: 0, gradeable: true,
   },
   us_equity: {
-    label: '미국주식', short: '미국주식', order: 2, gradeable: true,
+    label: '미국주식', short: '미국주식', order: 1, gradeable: true,
   },
   overseas_equity: {
-    label: '해외주식 (미국 외)', short: '해외주식', order: 3, gradeable: true,
+    label: '해외주식 (미국 외)', short: '해외주식', order: 2, gradeable: true,
   },
   overseas_hedged: {
-    label: '해외주식 · 환율 방어형', short: '환율 방어형', order: 4, gradeable: true,
+    label: '해외주식 · 환율 방어형', short: '환율 방어형', order: 3, gradeable: true,
     note: '환율이 오르든 내리든 영향을 줄이도록 만든 상품입니다. 환율로 인한 이익도 함께 줄어듭니다.',
   },
   bond: {
-    label: '채권', short: '채권', order: 5, gradeable: true,
+    label: '채권', short: '채권', order: 4, gradeable: true,
     note: '채권은 변동성 지표를 등급 계산에서 뺐습니다. 만기 길이를 되풀이 재는 중복 지표이기 때문입니다.',
   },
   cash: {

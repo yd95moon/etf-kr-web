@@ -30,6 +30,9 @@ const SORT_OPTS = [
 
 const RETURN_LABELS = { m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률' }
 
+// [전체] 볼 때 평가군마다 먼저 보여줄 종목 수
+const PREVIEW_N = 8
+
 const AXIS_LABEL = {
   style: STYLE_LABELS,
   market: MARKET_LABELS,
@@ -107,6 +110,9 @@ export default function Home() {
   const [sortDir, setSortDir] = useState('desc')
   const [chip, setChip] = useState('__all__')
   const [axisOverride, setAxisOverride] = useState(null)
+  // [전체] 에서는 평가군마다 앞부분만 보여준다. 안 그러면 첫 묶음이 화면을 다 잡아먹어
+  // 아래 묶음이 있는지조차 보이지 않는다.
+  const [expanded, setExpanded] = useState({})
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)
   const [chartTickers, setChartTickers] = useState([])
@@ -118,6 +124,7 @@ export default function Home() {
   useEffect(() => {
     setChip('__all__')
     setAxisOverride(null)
+    setExpanded({})
     setSepOpen(false)
     setFailOpen(false)
     setChartTickers([])
@@ -294,7 +301,7 @@ export default function Home() {
               .map(([k, l, n]) => (
                 <button
                   key={k}
-                  onClick={() => setChip(k)}
+                  onClick={() => { setChip(k); setExpanded({}) }}
                   style={{
                     whiteSpace: 'nowrap', padding: '5px 10px', borderRadius: 6,
                     border: `1px solid ${chip === k ? COLOR.border : COLOR.borderSoft}`,
@@ -401,7 +408,21 @@ export default function Home() {
                 borderRadius: 8, overflow: 'hidden',
               }}>
                 {!isMobile && <TableHeader aumLabel={aumLabel} />}
-                {rows.map(etf => <EtfRow {...rowProps(etf, false, pg === 'kr_index')} />)}
+                {(chip === '__all__' && !expanded[pg] ? rows.slice(0, PREVIEW_N) : rows)
+                  .map(etf => <EtfRow {...rowProps(etf, false, pg === 'kr_index')} />)}
+                {chip === '__all__' && !expanded[pg] && rows.length > PREVIEW_N && (
+                  <button
+                    onClick={() => setExpanded(p => ({ ...p, [pg]: true }))}
+                    style={{
+                      width: '100%', padding: '10px 0', border: 'none',
+                      borderTop: `1px solid ${COLOR.borderSoft}`,
+                      background: COLOR.bgCardAlt, color: COLOR.textMuted,
+                      fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
+                    }}
+                  >
+                    나머지 {rows.length - PREVIEW_N}종 더 보기
+                  </button>
+                )}
               </div>
             </div>
           )
