@@ -82,7 +82,7 @@ export const STYLE_LABELS = {
 
 export const MARKET_LABELS = {
   kr: '국내', us: '미국', cn: '중국', jp: '일본', in: '인도',
-  eu: '유럽', global: '글로벌', vn: '베트남',
+  eu: '유럽', global: '글로벌', vn: '베트남', etc_mkt: '기타 국가',
 }
 
 export const ASSET_TYPE_LABELS = {

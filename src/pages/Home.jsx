@@ -200,7 +200,7 @@ export default function Home() {
     { label: '기타',        etfs: failEtfs.filter(e => !['G1', 'G2'].includes(getPrimaryGate(e))) },
   ].filter(g => g.etfs.length > 0)
 
-  const rowProps = (etf, dimmed = false) => ({
+  const rowProps = (etf, dimmed = false, hidePassive = false) => ({
     key: etf.ticker,
     etf,
     showWarning: false,
@@ -208,7 +208,7 @@ export default function Home() {
     isMobile,
     onChartToggle: toggleChart,
     inChart: chartTickerSet.has(etf.ticker),
-    isPassive: etf.style === 'broad_index',
+    isPassive: !hidePassive && etf.style === 'broad_index',
     chartEnabled: !!prices?.tickers?.[etf.ticker],
     returnVal: returnKey ? returnsMap?.[etf.ticker]?.[returnKey] : undefined,
   })
@@ -401,7 +401,7 @@ export default function Home() {
                 borderRadius: 8, overflow: 'hidden',
               }}>
                 {!isMobile && <TableHeader aumLabel={aumLabel} />}
-                {rows.map(etf => <EtfRow {...rowProps(etf)} />)}
+                {rows.map(etf => <EtfRow {...rowProps(etf, false, pg === 'kr_index')} />)}
               </div>
             </div>
           )
