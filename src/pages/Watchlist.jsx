@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { Star } from 'lucide-react'
 import { DataContext, WatchlistContext } from '../App.jsx'
-import { ASSET_CLASS_META, COLOR } from '../constants.js'
-import { buildEtfList, groupByAssetClass, useIsMobile } from '../utils.js'
+import { PEER_META, COLOR } from '../constants.js'
+import { buildEtfList, groupByPeer, useIsMobile } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
 
 const COL = '32px 1fr 52px 90px 64px'
 
 export default function Watchlist() {
-  const { data, subClassMap } = useContext(DataContext)
+  const { data } = useContext(DataContext)
   const { watchlist } = useContext(WatchlistContext)
   const isMobile = useIsMobile()
 
@@ -26,7 +26,7 @@ export default function Watchlist() {
 
   const allEtfs = buildEtfList(data.etfs)
   const watchEtfs = allEtfs.filter(e => watchlist.includes(e.ticker))
-  const groups = groupByAssetClass(watchEtfs)
+  const groups = groupByPeer(watchEtfs)
 
   return (
     <div style={{ maxWidth: 960, margin: '0 auto', padding: '16px' }}>
@@ -35,7 +35,7 @@ export default function Watchlist() {
         관심 ETF ({watchlist.length}종)
       </h1>
       {groups.map(([ac, etfs]) => {
-        const meta = ASSET_CLASS_META[ac]
+        const meta = PEER_META[ac]
         const isDanger = meta?.tone === 'danger'
         return (
           <div key={ac} style={{
@@ -71,7 +71,7 @@ export default function Watchlist() {
             )}
             {etfs.map(etf => (
               <EtfRow key={etf.ticker} etf={etf} showWarning={isDanger} isMobile={isMobile}
-                isPassive={subClassMap?.[etf.ticker] === 'index'} />
+                isPassive={etf.style === 'broad_index'} />
             ))}
           </div>
         )

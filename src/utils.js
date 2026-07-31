@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ASSET_CLASS_META, GATE_REASON_KO } from './constants.js'
+import { ASSET_CLASS_META, PEER_META, TABS, GATE_REASON_KO } from './constants.js'
 
 export function buildEtfList(etfsMap) {
   return Object.values(etfsMap).map(etf => ({ ...etf }))
@@ -73,7 +73,7 @@ export function getFailReason(etf) {
     }
   }
   if (gates.G5 && gates.G5.separate_track === true) {
-    return '[G5] 레버리지·인버스 별도트랙'
+    return '[G5] 레버리지·커버드콜로 분리'
   }
   return '사유 미확인'
 }
@@ -99,4 +99,25 @@ export function searchEtfs(etfs, query) {
     e.ticker.toLowerCase().includes(q) ||
     (e.name && e.name.toLowerCase().includes(q))
   )
+}
+
+// 평가군 단위 묶음. 등급을 매기는 비교 단위가 곧 화면의 묶음이 되도록 맞춘다.
+export function groupByPeer(etfs) {
+  const groups = {}
+  for (const etf of etfs) {
+    const pg = etf.peer_group || 'etc'
+    if (!groups[pg]) groups[pg] = []
+    groups[pg].push(etf)
+  }
+  return Object.entries(groups).sort(([a], [b]) =>
+    (PEER_META[a]?.order ?? 99) - (PEER_META[b]?.order ?? 99)
+  )
+}
+
+// 검색 결과에서 해당 종목이 있는 탭으로 보내기 위한 매핑
+export function peerToTab(peer) {
+  if (peer === 'kr_index' || peer === 'kr_select') return 'kr'
+  if (peer === 'us_equity' || peer === 'overseas_equity' || peer === 'overseas_hedged') return 'ovs'
+  if (peer === 'bond' || peer === 'cash') return 'bond'
+  return TABS.some(t => t.key === 'alt') ? 'alt' : 'kr'
 }

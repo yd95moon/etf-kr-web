@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react'
 import { HashRouter, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { Search, Star, X } from 'lucide-react'
-import { COLOR, ASSET_CLASS_META } from './constants.js'
-import { buildEtfList, searchEtfs, groupByAssetClass } from './utils.js'
+import { COLOR, PEER_META, TABS } from './constants.js'
+import { buildEtfList, searchEtfs, groupByPeer, peerToTab } from './utils.js'
 import GradeChip from './components/GradeChip.jsx'
 import Home from './pages/Home.jsx'
 import Watchlist from './pages/Watchlist.jsx'
 
 export const DataContext = createContext({
   data: null, etfList: [],
-  activeAC: 'domestic_equity', setActiveAC: () => {},
+  activeTab: 'kr', setActiveTab: () => {},
   prices: null, loadingPrices: true,
   subClassMap: {}, returnsMap: {},
   benchmarks: null,
@@ -23,7 +23,7 @@ function SearchOverlay({ etfList, onClose }) {
   const [query, setQuery] = useState('')
   const inputRef = useRef(null)
   const navigate = useNavigate()
-  const { setActiveAC } = useContext(DataContext)
+  const { setActiveTab } = useContext(DataContext)
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -33,10 +33,10 @@ function SearchOverlay({ etfList, onClose }) {
   }, [onClose])
 
   const results = searchEtfs(etfList, query)
-  const groups = groupByAssetClass(results)
+  const groups = groupByPeer(results)
 
-  const goto = (ac) => {
-    setActiveAC(ac)
+  const goto = (peer) => {
+    setActiveTab(peerToTab(peer))
     navigate('/')
     onClose()
   }
@@ -93,7 +93,7 @@ function SearchOverlay({ etfList, onClose }) {
             </div>
           )}
           {groups.map(([ac, etfs]) => {
-            const meta = ASSET_CLASS_META[ac]
+            const meta = PEER_META[ac]
             return (
               <div key={ac}>
                 <div style={{
@@ -104,7 +104,7 @@ function SearchOverlay({ etfList, onClose }) {
                   {meta?.label || ac}
                 </div>
                 {etfs.map(etf => (
-                  <SearchRow key={etf.ticker} etf={etf} onGoto={() => goto(etf.asset_class)} />
+                  <SearchRow key={etf.ticker} etf={etf} onGoto={() => goto(etf.peer_group)} />
                 ))}
               </div>
             )
@@ -206,7 +206,7 @@ function SpecFooter({ label }) {
 function AppShell() {
   const [data, setData] = useState(null)
   const [etfList, setEtfList] = useState([])
-  const [activeAC, setActiveAC] = useState('domestic_equity')
+  const [activeTab, setActiveTab] = useState('kr')
   const [watchlist, setWatchlist] = useState(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
@@ -261,7 +261,7 @@ function AppShell() {
   const specLabel = data?.meta?.spec_label || '확률적 가설·미래보장X·forward n=1 측정전·24개월후 d<0.3시 폐기·분배/환헤지/합성신용 미반영'
 
   return (
-    <DataContext.Provider value={{ data, etfList, activeAC, setActiveAC, prices, loadingPrices, subClassMap, returnsMap, benchmarks }}>
+    <DataContext.Provider value={{ data, etfList, activeTab, setActiveTab, prices, loadingPrices, subClassMap, returnsMap, benchmarks }}>
       <WatchlistContext.Provider value={{ watchlist, toggleTicker }}>
         <div style={{ minHeight: '100vh', background: COLOR.bg }}>
           <Navbar onSearchOpen={() => setSearchOpen(true)} watchlistCount={watchlist.length} />

@@ -87,6 +87,42 @@ function ChartBtn({ onClick, inChart, enabled = true }) {
   )
 }
 
+function Tag({ text, fg, bg, bd, title }) {
+  return (
+    <span title={title} style={{
+      fontSize: 10, padding: '1px 5px', borderRadius: 3,
+      background: bg, color: fg, border: `1px solid ${bd}`,
+      fontWeight: 500, flexShrink: 0, whiteSpace: 'nowrap',
+    }}>{text}</span>
+  )
+}
+
+// 종목 한 줄에 붙는 표시들. 등급이 없는 이유나 계좌 가능 여부처럼
+// 실제 선택에 영향을 주는 것만 붙인다.
+function Badges({ etf }) {
+  const out = []
+  if (etf.is_hedge) {
+    out.push(<Tag key="h" text="환방어" fg="#fbbf24" bg="#3a352033" bd="#fbbf2433"
+      title="환율이 오르든 내리든 영향을 줄이도록 만든 상품입니다" />)
+  }
+  if (etf.is_new) {
+    out.push(<Tag key="n" text="신규" fg="#86efac" bg="#1e3a2f33" bd="#86efac33"
+      title={`상장 후 관측 ${etf.obs_days ?? '-'} 거래일. 1년 미만이라 등급을 매기지 않습니다`} />)
+  }
+  if (etf.pension_eligible === false) {
+    out.push(<Tag key="p" text="연금불가" fg="#fb923c" bg="#3a2a2033" bd="#fb923c33"
+      title="연금저축·IRP 계좌에서는 담을 수 없습니다 (ISA는 가능)" />)
+  }
+  if (etf.disparity_pct != null && Math.abs(etf.disparity_pct) >= 1) {
+    const v = etf.disparity_pct
+    out.push(<Tag key="d" text={`괴리 ${v > 0 ? '+' : ''}${v.toFixed(1)}%`}
+      fg="#f87171" bg="#3a202033" bd="#f8717133"
+      title="시장 가격이 순자산가치에서 벗어난 정도입니다. 클수록 불리하게 체결될 수 있습니다" />)
+  }
+  if (!out.length) return null
+  return <>{out}</>
+}
+
 function PassiveTag() {
   return (
     <span style={{
@@ -283,6 +319,7 @@ export default function EtfRow({
                   <NameLink ticker={etf.ticker} name={etf.name} />
                 </span>
                 {isPassive && <PassiveTag />}
+                <Badges etf={etf} />
                 {!indexTray && <GradeChip grade={grade} />}
                 {onChartToggle && (
                   <ChartBtn onClick={handleChartClick} inChart={inChart} enabled={chartEnabled} />
@@ -324,6 +361,7 @@ export default function EtfRow({
             }}>
               <NameLink ticker={etf.ticker} name={etf.name} />
               {isPassive && <PassiveTag />}
+                <Badges etf={etf} />
             </div>
             <div style={{ fontSize: 11, color: COLOR.textDim, fontFamily: 'monospace', marginTop: 1 }}>
               {etf.ticker}
