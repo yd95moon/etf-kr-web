@@ -71,9 +71,9 @@ export const TABS = [
     match: e => e.asset_type === 'bond' || e.asset_type === 'cash' },
   { key: 'alt',  label: '대체·기타', axis: 'style',  bench: 'other',
     match: e => ['mixed', 'commodity', 'realestate', 'currency'].includes(e.asset_type) },
-  { key: 'income', label: '월배당·인컴', axis: 'market', bench: 'domestic_equity', special: true,
+  { key: 'income', label: '월배당·인컴', axis: 'market', bench: 'income', special: true,
     match: e => e.peer_group === 'income' },
-  { key: 'lev',  label: '레버리지·인버스', axis: 'market', bench: 'domestic_equity', special: true,
+  { key: 'lev',  label: '레버리지·인버스', axis: 'market', bench: 'derivative', special: true,
     match: e => e.peer_group === 'derivative' },
   { key: 'new',  label: '신규 상장', axis: 'asset_type', bench: 'domestic_equity', isNew: true,
     match: () => true },
@@ -90,6 +90,48 @@ export const ROW_COLS = (showDist = false, hasChart = true) => {
 
 // 분배금에 붙는 세금. 일반 계좌 기준.
 export const DIST_TAX_RATE = 0.154
+
+// ── 운용사 ────────────────────────────────────────────────────────────────────
+// ETF 이름 첫 낱말이 곧 브랜드다. 브랜드로 운용사 이름을 찾는다.
+//
+// detail 이 있는 두 곳만 그 ETF 상품 페이지로 바로 간다. 실제로 열어 확인했다.
+//   TIGER  ksdFund=국제표준코드(ISIN). 티커에서 계산된다. 확인: 102110, 360750, 458760
+//   SOL    주소에 티커가 그대로 들어간다. 확인: soletf.com/ko/fund/etf/{티커}
+//
+// 나머지 운용사는 내부 코드를 써서 티커만으로 상품 페이지를 만들 수 없다.
+// (삼성 id=2ETF69, KB /finderDetail/44A9, 한화 n=006273, NH /fund/A7499D2757FC46EF)
+// 운용사 홈으로 보내봐야 거기서 또 검색해야 하므로 링크를 걸지 않는다.
+// 이름만 글자로 보여주고, 자료 찾기는 검색 버튼이 맡는다.
+//
+// 확신이 없는 브랜드(FOCUS, UNICORN, HK)는 넣지 않았다. 틀린 운용사 이름을
+// 보여주느니 안 보여주는 게 낫다. 검색 버튼은 어차피 전 종목에 붙는다.
+export const BRAND_ISSUER = {
+  TIGER:  { issuer: '미래에셋자산운용', needsIsin: true,
+            detail: isin => `https://investments.miraeasset.com/tigeretf/ko/product/search/detail/index.do?ksdFund=${isin}` },
+  SOL:    { issuer: '신한자산운용',
+            detail: (_, t) => `https://www.soletf.com/ko/fund/etf/${t}` },
+  KODEX:      { issuer: '삼성자산운용' },
+  RISE:       { issuer: 'KB자산운용' },
+  ACE:        { issuer: '한국투자신탁운용' },
+  PLUS:       { issuer: '한화자산운용' },
+  KIWOOM:     { issuer: '키움투자자산운용' },
+  HANARO:     { issuer: 'NH아문디자산운용' },
+  '1Q':       { issuer: '하나자산운용' },
+  KoAct:      { issuer: '삼성액티브자산운용' },
+  TIME:       { issuer: '타임폴리오자산운용' },
+  WON:        { issuer: '우리자산운용' },
+  '에셋플러스': { issuer: '에셋플러스자산운용' },
+  '마이티':     { issuer: 'DB자산운용' },
+  '파워':       { issuer: '교보악사자산운용' },
+  IBK:        { issuer: 'IBK자산운용' },
+  BNK:        { issuer: 'BNK자산운용' },
+  TREX:       { issuer: '유리자산운용' },
+  MIDAS:      { issuer: '마이다스에셋자산운용' },
+  DAISHIN343: { issuer: '대신자산운용' },
+  TRUSTON:    { issuer: '트러스톤자산운용' },
+  '아이엠에셋': { issuer: '아이엠에셋자산운용' },
+  KCGI:       { issuer: 'KCGI자산운용' },
+}
 
 export const STYLE_LABELS = {
   broad_index: '대표지수', large_core: '대형·우량', sector: '섹터', theme: '테마',

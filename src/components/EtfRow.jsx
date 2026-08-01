@@ -1,8 +1,12 @@
 import React, { useState, useContext } from 'react'
-import { ChevronDown, ChevronUp, Star, ExternalLink } from 'lucide-react'
+import { ChevronDown, ChevronUp, Star, ExternalLink, Search } from 'lucide-react'
 import GradeChip from './GradeChip.jsx'
-import { COLOR, SIGNAL_LABELS, GATE_LABELS, GATE_REASON_KO, ROW_COLS } from '../constants.js'
-import { fmtAum, fmtFee, fmtReturn, fmtDist } from '../utils.js'
+import {
+  COLOR, SIGNAL_LABELS, GATE_LABELS, GATE_REASON_KO, ROW_COLS, BRAND_ISSUER,
+} from '../constants.js'
+import {
+  fmtAum, fmtFee, fmtReturn, fmtDist, naverUrl, searchUrl, issuerLink,
+} from '../utils.js'
 import { WatchlistContext } from '../App.jsx'
 
 const S = {
@@ -137,7 +141,8 @@ function PassiveTag() {
 function NameLink({ ticker, name }) {
   return (
     <a
-      href={`https://www.tradingview.com/symbols/KRX-${ticker}/`}
+      href={naverUrl(ticker)}
+      title="네이버 금융에서 이 종목 보기 (순자산가치·구성종목·분배금)"
       target="_blank"
       rel="noopener noreferrer"
       onClick={e => e.stopPropagation()}
@@ -184,6 +189,7 @@ export default function EtfRow({
   const signals = etf.signals || {}
   const grade = etf.grade_eligible ? etf.composite_grade : null
 
+  const issuer = issuerLink(etf, BRAND_ISSUER)
   const hasReturn = returnVal !== undefined && returnVal !== null
   const rightDisplay = hasReturn ? fmtReturn(returnVal) : fmtAum(etf.aum_억원)
   const rightColor = hasReturn ? (returnVal >= 0 ? '#86efac' : COLOR.danger) : COLOR.textMuted
@@ -223,6 +229,47 @@ export default function EtfRow({
         <span style={{ fontSize: 13, color: COLOR.textMuted }}>
           보수 <strong style={{ color: COLOR.text }}>{fmtFee(etf.fee_pct)}</strong>
         </span>
+        {/* 운용사. 상품 페이지 주소를 확실히 아는 곳만 링크가 된다.
+            나머지는 눌러도 헛걸음이라 글자로만 둔다. */}
+        {issuer && (
+          issuer.url ? (
+            <a
+              href={issuer.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={e => e.stopPropagation()}
+              title={`${issuer.issuer}의 이 ETF 상품 페이지로 갑니다`}
+              style={{
+                fontSize: 12, color: '#93c5fd', textDecoration: 'none',
+                display: 'inline-flex', alignItems: 'center', gap: 3,
+                border: '1px solid #93c5fd44', borderRadius: 5, padding: '2px 7px',
+              }}
+            >
+              {issuer.issuer}
+              <ExternalLink size={10} style={{ flexShrink: 0 }} />
+            </a>
+          ) : (
+            <span style={{ fontSize: 12, color: COLOR.textMuted }}>{issuer.issuer}</span>
+          )
+        )}
+
+        {/* 운용사 공시, 투자설명서, 뉴스는 우리가 갖고 있지 않다. 검색으로 넘긴다.
+            전 종목 동일하게 붙는다. */}
+        <a
+          href={searchUrl(etf.name)}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={e => e.stopPropagation()}
+          title="구글에서 이 ETF 자료 찾기 (운용사 공시, 투자설명서, 뉴스)"
+          style={{
+            fontSize: 12, color: COLOR.textMuted, textDecoration: 'none',
+            display: 'inline-flex', alignItems: 'center', gap: 3,
+            border: `1px solid ${COLOR.border}`, borderRadius: 5, padding: '2px 7px',
+          }}
+        >
+          <Search size={11} style={{ flexShrink: 0 }} />
+          구글 검색
+        </a>
       </div>
 
       {/* 신호 5개 */}

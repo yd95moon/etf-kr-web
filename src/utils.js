@@ -81,6 +81,55 @@ export function fmtDist(v) {
   return v.toFixed(2) + '%'
 }
 
+// ── 종목 바깥 링크 ────────────────────────────────────────────────────────────
+
+// 한국 종목의 국제표준코드(ISIN). "KR7" + 티커 + "00" + 검증숫자 로 만든다.
+// 미래에셋 TIGER 사이트가 이 값으로 상품 페이지를 연다.
+// 검증: 102110 -> KR7102110004, 360750 -> KR7360750004 (실제로 열어 확인)
+export function krIsin(ticker) {
+  const base = 'KR7' + ticker + '00'
+  let num = ''
+  for (const c of base) {
+    num += /[A-Z]/.test(c) ? String(c.charCodeAt(0) - 55) : c
+  }
+  let sum = 0
+  const rev = num.split('').reverse()
+  for (let i = 0; i < rev.length; i++) {
+    let d = parseInt(rev[i], 10)
+    if (i % 2 === 0) d *= 2
+    sum += d > 9 ? Math.floor(d / 10) + (d % 10) : d
+  }
+  return base + String((10 - (sum % 10)) % 10)
+}
+
+// 종목명 클릭 시 갈 곳. 티커만 있으면 전 종목이 되고 손볼 일이 없다.
+// 순자산가치, 구성종목, 분배금 이력, 괴리율이 한 화면에 있다.
+export function naverUrl(ticker) {
+  return `https://m.stock.naver.com/domestic/stock/${ticker}/total`
+}
+
+// 운용사 공시, 투자설명서, 뉴스처럼 우리가 갖고 있지 않은 자료를 찾을 때.
+// 전 종목 동일하게 동작하고, 결과가 0건인 빈 화면이 뜰 일이 없다.
+export function searchUrl(name) {
+  return `https://www.google.com/search?q=${encodeURIComponent(name + ' ETF')}`
+}
+
+// ETF 이름 첫 낱말이 브랜드다. 브랜드로 운용사와 링크를 찾는다.
+// detail 이 있는 브랜드만 그 ETF 페이지로 바로 가고, 나머지는 운용사 사이트로 간다.
+export function issuerLink(etf, BRAND_ISSUER) {
+  const brand = (etf.name || '').split(' ')[0]
+  const m = BRAND_ISSUER[brand]
+  if (!m) return null
+  // 숫자가 아닌 글자가 섞인 새 티커는 ISIN 규칙을 확인하지 못했다.
+  // 확인 못 한 주소를 만들어 보내느니 링크 없이 이름만 보여준다.
+  const plainTicker = /^\d{6}$/.test(etf.ticker)
+  const canDetail = !!m.detail && (!m.needsIsin || plainTicker)
+  return {
+    issuer: m.issuer,
+    url: canDetail ? m.detail(krIsin(etf.ticker), etf.ticker) : null,
+  }
+}
+
 export function getFailReason(etf) {
   const gates = etf.gates || {}
   for (const [key, val] of Object.entries(gates)) {

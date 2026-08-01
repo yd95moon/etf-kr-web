@@ -20,15 +20,22 @@ export const EXTERNAL_BENCH_META = {
 const BENCH_ORDER = ['KS11', 'KQ11', 'IXIC', 'US500', 'DJI', 'GOLD', 'BTC_KRW']
 
 // Default ON benches per asset class (reset on AC toggle)
+// 탭을 열었을 때 기본으로 켜 둘 비교선.
+// 채권·현금과 대체·기타는 딱 맞는 지수가 없어 비어 있었는데, 아무 선도 없으면
+// 그래프 자체가 안 뜬다. 금을 기본으로 둔다. 금은 주식과 다르게 움직이는
+// 자산이라 "이 묶음이 시장과 따로 노는가"를 보는 기준선 역할은 한다.
+// 딱 맞는 지수라는 뜻은 아니다.
 export const AC_DEFAULT_BENCH = {
   domestic_equity:       ['KS11'],
   domestic_equity_index: ['KS11'],
   overseas_equity:       ['IXIC', 'US500'],
   commodity:             ['GOLD'],
-  bond:                  [],
-  realestate:            [],
-  other:                 [],
-  leverage_inverse:      [],
+  bond:                  ['GOLD'],
+  realestate:            ['GOLD'],
+  other:                 ['GOLD'],
+  income:                ['US500', 'KS11'],
+  derivative:            ['KS11'],
+  leverage_inverse:      ['KS11'],
 }
 
 // Primary bench for ETF overlay spread calc
@@ -37,9 +44,13 @@ export const AC_PRIMARY_BENCH = {
   domestic_equity_index: 'KS11',
   overseas_equity:       'US500',
   commodity:             'GOLD',
+  // 아래 넷은 기준선을 켜 두되 '초과수익' 계산에는 쓰지 않는다.
+  // 금 대비 채권의 초과수익 같은 숫자는 뜻이 없기 때문이다.
   bond:                  null,
   realestate:            null,
   other:                 null,
+  income:                null,
+  derivative:            null,
   leverage_inverse:      null,
 }
 
