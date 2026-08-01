@@ -27,7 +27,7 @@ export const PEER_META = {
     note: '같은 지수를 따라가는 상품이라 우열을 매기지 않습니다. 보수·규모·괴리율로 비교하세요.',
   },
   kr_select: {
-    label: '국내주식 · 섹터·테마·전략', short: '섹터·테마·전략', order: 0, gradeable: true,
+    label: '국내주식 · 업종·전략', short: '업종·전략', order: 0, gradeable: true,
   },
   us_equity: {
     label: '미국주식', short: '미국주식', order: 1, gradeable: true,
@@ -41,11 +41,11 @@ export const PEER_META = {
   },
   bond: {
     label: '채권', short: '채권', order: 4, gradeable: true,
-    note: '채권은 변동성 지표를 등급 계산에서 뺐습니다. 만기 길이를 되풀이 재는 중복 지표이기 때문입니다.',
+    note: '채권은 변동성 지표를 등급 계산에서 뺐습니다. 만기 길이를 되풀이 재는 중복 지표이기 때문입니다. 참고로 30년 국고채는 값이 연 12~18% 폭으로 흔들립니다. 만기가 길수록 주식만큼 움직입니다.',
   },
   cash: {
     label: '파킹형 (현금성)', short: '파킹형', order: 6, gradeable: false,
-    note: '현금을 잠시 두는 용도라 우열을 매기지 않습니다. 금리와 보수만 보세요.',
+    note: '현금을 잠시 두는 용도라 우열을 매기지 않습니다. 다만 달러·엔화 파킹형은 환율이 그대로 손익이 됩니다. 실제로 이 10종의 값이 1년간 연 9~10% 폭으로 흔들렸습니다. 원화 파킹형(0.1~0.3%)의 30배가 넘습니다.',
   },
   income: {
     label: '월배당·인컴형', short: '월배당·인컴', order: 7, gradeable: true,
@@ -134,13 +134,27 @@ export const BRAND_ISSUER = {
   KCGI:       { issuer: 'KCGI자산운용' },
 }
 
+// 성격·업종 이름. 예전에는 '섹터'와 '테마'로 나눴는데 기준이 없어서
+// 같은 반도체 ETF가 어디는 섹터, 어디는 테마로 갈렸다. 업종 이름으로 바꿨다.
 export const STYLE_LABELS = {
-  broad_index: '대표지수', large_core: '대형·우량', sector: '섹터', theme: '테마',
-  dividend: '배당·인컴', factor: '팩터·스타일', esg: 'ESG·기후', group: '그룹주',
+  broad_index: '대표지수', large_core: '대형·우량', factor: '팩터·전략',
+  dividend: '배당주', esg: 'ESG·기후', group: '그룹주',
   covered_call: '커버드콜', lev_inv: '레버리지·인버스',
-  parking: '파킹형', govt_short: '국고채 단기', govt_mid: '국고채 중기',
+  // 업종
+  ind_semi: '반도체', ind_battery: '2차전지', ind_bio: '바이오·헬스케어',
+  ind_ai: 'AI·로봇·소프트웨어', ind_defense: '방산·우주항공',
+  ind_ship: '조선·기계·산업재', ind_finance: '금융', ind_auto: '자동차',
+  ind_energy: '에너지·화학·소재', ind_internet: '인터넷·게임·콘텐츠',
+  ind_telecom: '통신·네트워크', ind_consumer: '소비재·유통',
+  ind_construct: '건설·부동산', ind_it: 'IT·전자', ind_kculture: 'K-컬처',
+  ind_etc: '복합·기타',
+  // 채권·현금
+  parking: '파킹형 (원화)', parking_fx: '파킹형 (환노출)',
+  govt_short: '국고채 단기', govt_mid: '국고채 중기',
   govt_long: '국고채 장기', credit: '종합·회사채',
   mixed: '자산배분·혼합', commodity: '원자재', reit: '리츠·인프라', currency: '통화',
+  // 예전 값. 데이터가 남아 있을 때를 대비해 남겨둔다.
+  sector: '업종', theme: '테마',
 }
 
 export const MARKET_LABELS = {

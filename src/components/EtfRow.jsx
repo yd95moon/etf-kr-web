@@ -117,6 +117,18 @@ function Badges({ etf }) {
     out.push(<Tag key="p" text="연금불가" fg="#fb923c" bg="#3a2a2033" bd="#fb923c33"
       title="연금저축·IRP 계좌에서는 담을 수 없습니다 (ISA는 가능)" />)
   }
+  // 배당주는 "현금으로 주는지, 안에서 다시 굴리는지"가 성격을 가른다.
+  // 이름만으로는 구분이 안 되므로 실제 분배 지급 기록으로 판정한다.
+  if (etf.style === 'dividend') {
+    const d = etf.dist?.m12
+    if (d && d.pays > 0) {
+      out.push(<Tag key="dv" text={`배당 연 ${d.annual_pct}%`} fg="#86efac" bg="#1e3a2f33" bd="#86efac33"
+        title={`최근 12개월 ${d.pays}회 지급. 현금으로 받는 배당이라 일반 계좌에서는 15.4% 세금이 붙습니다`} />)
+    } else if (d) {
+      out.push(<Tag key="dv" text="재투자형" fg="#93c5fd" bg="#1e3a5f33" bd="#93c5fd33"
+        title="분배금을 주지 않고 안에서 다시 굴립니다. 받을 때 내는 세금이 없는 대신 현금은 안 나옵니다" />)
+    }
+  }
   if (etf.disparity_pct != null && Math.abs(etf.disparity_pct) >= 1) {
     const v = etf.disparity_pct
     out.push(<Tag key="d" text={`괴리 ${v > 0 ? '+' : ''}${v.toFixed(1)}%`}
