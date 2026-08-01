@@ -52,6 +52,8 @@ export const AC_PRIMARY_BENCH = {
   income:                null,
   derivative:            null,
   leverage_inverse:      null,
+  // 관심 페이지는 성격이 뒤섞인 목록이라 기준선 하나로 초과수익을 재지 않는다.
+  watchlist:             null,
 }
 
 const PERIODS = [
