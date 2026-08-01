@@ -145,6 +145,9 @@ function NameLink({ ticker, name }) {
         textDecoration: 'none', color: 'inherit',
         display: 'inline-flex', alignItems: 'center', gap: 3,
         overflow: 'hidden',
+        // 이름이 길어도 옆 배지를 밀어내지 않게 한다.
+        // minWidth 를 0 으로 두지 않으면 글자 길이만큼 자리를 차지해 배지를 덮는다.
+        minWidth: 0, flexShrink: 1, maxWidth: '100%',
       }}
     >
       <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
@@ -314,7 +317,8 @@ export default function EtfRow({
             <div style={{ flex: 1, minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 3 }}>
                 <span style={{
-                  flex: 1, fontSize: 14, fontWeight: 600, color: COLOR.text, minWidth: 0,
+                  flex: 1, fontSize: 14, fontWeight: 600, color: COLOR.text,
+                  minWidth: 0, overflow: 'hidden', display: 'flex',
                 }}>
                   <NameLink ticker={etf.ticker} name={etf.name} />
                 </span>
@@ -360,8 +364,10 @@ export default function EtfRow({
               display: 'flex', alignItems: 'center', gap: 5, overflow: 'hidden',
             }}>
               <NameLink ticker={etf.ticker} name={etf.name} />
-              {isPassive && <PassiveTag />}
+              <span style={{ display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0 }}>
+                {isPassive && <PassiveTag />}
                 <Badges etf={etf} />
+              </span>
             </div>
             <div style={{ fontSize: 11, color: COLOR.textDim, fontFamily: 'monospace', marginTop: 1 }}>
               {etf.ticker}
