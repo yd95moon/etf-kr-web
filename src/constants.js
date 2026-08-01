@@ -146,7 +146,7 @@ export const STYLE_LABELS = {
   ind_ship: '조선·기계·산업재', ind_finance: '금융', ind_auto: '자동차',
   ind_energy: '에너지·화학·소재', ind_internet: '인터넷·게임·콘텐츠',
   ind_telecom: '통신·네트워크', ind_consumer: '소비재·유통',
-  ind_construct: '건설·부동산', ind_it: 'IT·전자', ind_kculture: 'K-컬처',
+  ind_construct: '건설·부동산', ind_it: 'IT·테크', ind_kculture: 'K-컬처',
   ind_etc: '복합·기타',
   // 채권·현금
   parking: '파킹형 (원화)', parking_fx: '파킹형 (환노출)',

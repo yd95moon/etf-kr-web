@@ -120,7 +120,9 @@ export default function Home() {
   const [expanded, setExpanded] = useState({})
   // 묶음마다 앞 8종만 보이는 게 기본이다. 그런데 [전체]에서 239종 중 24종만
   // 보이니 "종목이 빠졌다"고 읽힌다. 한 번에 다 펴는 스위치를 둔다.
-  const [showAll, setShowAll] = useState(false)
+  // 기본을 '전부 보기'로 둔다. 앞 8종만 보여주면 아래 묶음의 1위 종목조차
+  // 화면에 없어서 "빠졌다"고 읽힌다. 길어지는 건 접기 스위치로 해결한다.
+  const [showAll, setShowAll] = useState(true)
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)
   const [chartTickers, setChartTickers] = useState([])
@@ -133,7 +135,7 @@ export default function Home() {
     setChip('__all__')
     setAxisOverride(null)
     setExpanded({})
-    setShowAll(false)
+    setShowAll(true)
     setSepOpen(false)
     setFailOpen(false)
     setChartTickers([])
@@ -250,9 +252,14 @@ export default function Home() {
       }}>
         {TABS.map(t => {
           const active = t.key === activeTab
+          // 뱃지는 그 탭의 [전체] 칩과 같은 수여야 한다.
+          // 전에는 자기 탭이 따로 있는 커버드콜과 기준 미달 종목까지 세어서
+          // 해외주식이 273 이라고 해놓고 목록에는 239 만 나왔다.
           const n = t.isNew
             ? etfList.filter(e => e.final_class === '신규').length
-            : etfList.filter(e => e.final_class !== '신규' && t.match(e)).length
+            : etfList.filter(e =>
+                e.final_class === '메인' && t.match(e) &&
+                (t.special || !OWN_TAB_PEERS.includes(e.peer_group))).length
           return (
             <button
               key={t.key}
@@ -378,6 +385,37 @@ export default function Home() {
           })}
         </div>
 
+        {/* ── 묶음 바로가기 ──
+            [전체]는 한 줄 목록이 아니라 묶음이 여러 개 쌓인 화면이다.
+            그래서 둘째 묶음의 1위 종목이 100줄 아래에 있는 일이 생긴다.
+            묶음 이름을 눌러 바로 내려갈 수 있게 한다. */}
+        {peerKeys.length > 1 && (
+          <div style={{
+            display: 'flex', gap: 5, overflowX: 'auto',
+            padding: '4px 16px 2px', scrollbarWidth: 'none',
+          }}>
+            <span style={{ fontSize: 11, color: COLOR.textDim, alignSelf: 'center',
+                           flexShrink: 0, marginRight: 2 }}>바로가기</span>
+            {peerKeys.map(pg => (
+              <button
+                key={pg}
+                onClick={() => {
+                  const el = document.getElementById(`peer-${pg}`)
+                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }}
+                style={{
+                  whiteSpace: 'nowrap', flexShrink: 0,
+                  padding: '4px 9px', borderRadius: 6, fontFamily: 'inherit',
+                  border: `1px solid ${COLOR.borderSoft}`, background: COLOR.bgCard,
+                  color: COLOR.textMuted, fontSize: 11, cursor: 'pointer',
+                }}
+              >
+                {(PEER_META[pg]?.short || pg)} {peerBuckets[pg].length}
+              </button>
+            ))}
+          </div>
+        )}
+
         {/* ── 묶음마다 앞부분만 볼지, 전부 볼지 ── */}
         {chip === '__all__' && peerKeys.some(k => peerBuckets[k].length > PREVIEW_N) && (
           <div style={{ padding: '0 16px 4px' }}>
@@ -392,7 +430,7 @@ export default function Home() {
               }}
             >
               {showAll
-                ? `전부 보는 중 · ${listed.length}종`
+                ? `${listed.length}종 전부 보는 중 · 눌러서 묶음마다 ${PREVIEW_N}종만 보기`
                 : `묶음마다 ${PREVIEW_N}종만 보는 중 · 눌러서 ${listed.length}종 전부 보기`}
             </button>
           </div>
@@ -412,7 +450,10 @@ export default function Home() {
           // 앞부분만 보여줄지 여부. 칩을 고르면 그 묶음은 전부 보여준다.
           const truncated = chip === '__all__' && !showAll && !expanded[pg] && rows.length > PREVIEW_N
           return (
-            <div key={pg} style={{ padding: '0 16px', marginBottom: 14 }}>
+            <div key={pg} id={`peer-${pg}`} style={{
+              // 상단 고정 머리말에 묶음 제목이 가리지 않게 여백을 준다
+              padding: '0 16px', marginBottom: 14, scrollMarginTop: 64,
+            }}>
               <div style={{
                 display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
                 gap: 8, margin: '10px 2px 6px',
