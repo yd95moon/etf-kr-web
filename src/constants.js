@@ -48,8 +48,8 @@ export const PEER_META = {
     note: '현금을 잠시 두는 용도라 우열을 매기지 않습니다. 금리와 보수만 보세요.',
   },
   income: {
-    label: '월배당·인컴형', short: '월배당·인컴', order: 7, gradeable: false,
-    note: '분배금으로 수익을 돌려주는 구조라 가격만 보면 성과를 알 수 없습니다. 아직 분배금 자료를 모으지 않아 등급을 매기지 않습니다.',
+    label: '월배당·인컴형', short: '월배당·인컴', order: 7, gradeable: true,
+    note: '수익률에는 분배금이 이미 들어 있습니다. 월분배는 그 수익 중 현금으로 나온 몫이며, 일반 계좌에서는 여기에 15.4% 세금이 붙습니다. ISA·연금 계좌면 부담을 줄일 수 있습니다.',
   },
   etc: {
     label: '기타', short: '기타', order: 8, gradeable: false,
@@ -81,6 +81,15 @@ export const TABS = [
 
 // 자기 전용 탭이 있는 평가군. 다른 탭에 중복으로 끼지 않게 걸러낸다.
 export const OWN_TAB_PEERS = ['income', 'derivative']
+
+// 표 칸 나누기. 머리글과 각 줄이 같은 값을 써야 어긋나지 않는다.
+export const ROW_COLS = (showDist = false, hasChart = true) => {
+  if (showDist) return hasChart ? '28px 1fr 44px 74px 60px 56px 34px' : '28px 1fr 44px 74px 60px 56px'
+  return hasChart ? '32px 1fr 52px 90px 64px 36px' : '32px 1fr 52px 90px 64px'
+}
+
+// 분배금에 붙는 세금. 일반 계좌 기준.
+export const DIST_TAX_RATE = 0.154
 
 export const STYLE_LABELS = {
   broad_index: '대표지수', large_core: '대형·우량', sector: '섹터', theme: '테마',

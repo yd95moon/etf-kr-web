@@ -15,7 +15,7 @@ export function useIsMobile() {
   return isMobile
 }
 
-export function sortEtfs(etfs, mode, dir = 'desc', returnsMap = null) {
+export function sortEtfs(etfs, mode, dir = 'desc', returnsMap = null, distPeriod = 'm12') {
   const gradeOrder = { A: 0, B: 1, C: 2, D: 3, E: 4 }
   const copy = [...etfs]
   if (mode === 'grade') {
@@ -36,6 +36,16 @@ export function sortEtfs(etfs, mode, dir = 'desc', returnsMap = null) {
       ? (b.fee_pct ?? 0) - (a.fee_pct ?? 0)
       : (a.fee_pct ?? 999) - (b.fee_pct ?? 999)
     )
+  } else if (mode === 'dist') {
+    // 월평균 분배율. 자료가 없는 종목은 항상 뒤로 보낸다.
+    copy.sort((a, b) => {
+      const ra = a.dist?.[distPeriod]?.monthly_pct ?? null
+      const rb = b.dist?.[distPeriod]?.monthly_pct ?? null
+      if (ra === null && rb === null) return 0
+      if (ra === null) return 1
+      if (rb === null) return -1
+      return dir === 'asc' ? ra - rb : rb - ra
+    })
   } else if (['m3', 'm6', 'm12', 'm36', 'm60'].includes(mode)) {
     copy.sort((a, b) => {
       const ra = returnsMap?.[a.ticker]?.[mode] ?? null
@@ -61,6 +71,13 @@ export function fmtAum(v) {
 
 export function fmtFee(v) {
   if (v == null) return '—'
+  return v.toFixed(2) + '%'
+}
+
+// 월평균 분배율. 0 은 '안 나눠줌'이라는 뜻이라 — 와 구분해서 보여준다.
+export function fmtDist(v) {
+  if (v == null || isNaN(v)) return '—'
+  if (v === 0) return '0%'
   return v.toFixed(2) + '%'
 }
 

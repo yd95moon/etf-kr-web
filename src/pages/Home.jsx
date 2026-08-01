@@ -3,12 +3,12 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 import { DataContext } from '../App.jsx'
 import {
   COLOR, PEER_META, TABS, OWN_TAB_PEERS, STYLE_LABELS, MARKET_LABELS, ASSET_TYPE_LABELS,
+  ROW_COLS,
 } from '../constants.js'
 import { sortEtfs, getFailReason, useIsMobile } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
 import BenchmarkChart, { AC_DEFAULT_BENCH } from '../components/BenchmarkChart.jsx'
 
-const COL_CHART = '32px 1fr 52px 90px 64px 36px'
 
 function getPrimaryGate(etf) {
   const gates = etf.gates || {}
@@ -25,6 +25,7 @@ const SORT_OPTS = [
   { key: 'm12',   label: '1Y' },
   { key: 'm36',   label: '3Y' },
   { key: 'm60',   label: '5Y' },
+  { key: 'dist',  label: '월분배' },
   { key: 'aum',   label: 'AUM' },
   { key: 'fee',   label: '보수' },
   { key: 'grade', label: '등급' },
@@ -42,10 +43,10 @@ const AXIS_LABEL = {
   asset_type: ASSET_TYPE_LABELS,
 }
 
-function TableHeader({ aumLabel = 'AUM' }) {
+function TableHeader({ aumLabel = 'AUM', showDist = false }) {
   return (
     <div style={{
-      display: 'grid', gridTemplateColumns: COL_CHART,
+      display: 'grid', gridTemplateColumns: ROW_COLS(showDist, true),
       padding: '6px 12px', gap: 8,
       fontSize: 11, fontWeight: 600,
       color: COLOR.textDim,
@@ -56,6 +57,7 @@ function TableHeader({ aumLabel = 'AUM' }) {
       <span>종목명</span>
       <span>등급</span>
       <span style={{ textAlign: 'right' }}>{aumLabel}</span>
+      {showDist && <span style={{ textAlign: 'right' }}>월분배</span>}
       <span style={{ textAlign: 'right' }}>보수</span>
       <span></span>
     </div>
@@ -201,6 +203,11 @@ export default function Home() {
   const anyGradeable = peerKeys.some(k => PEER_META[k]?.gradeable)
   const effectiveSort = (!anyGradeable && sortMode === 'grade') ? 'aum' : sortMode
   const returnKey = ['m3', 'm6', 'm12', 'm36', 'm60'].includes(effectiveSort) ? effectiveSort : null
+  // 월분배는 수익률과 같은 기간 버튼을 쓴다. 기간이 아닌 정렬(AUM/보수/등급/월분배)일
+  // 때는 1년을 기본으로 둔다.
+  const periodKey = returnKey || 'm12'
+  // 분배가 성격을 좌우하는 곳에서만 칸을 하나 더 낸다. 전 종목에 붙이면 표가 좁아진다.
+  const showDist = tab.key === 'income' || effectiveSort === 'dist'
   const aumLabel = RETURN_LABELS[effectiveSort] || 'AUM'
   const dirArrow = sortDir === 'desc' ? '↓' : '↑'
   const chartTickerSet = new Set(chartTickers.map(t => t.ticker))
@@ -222,6 +229,9 @@ export default function Home() {
     isPassive: !hidePassive && etf.style === 'broad_index',
     chartEnabled: !!prices?.tickers?.[etf.ticker],
     returnVal: returnKey ? returnsMap?.[etf.ticker]?.[returnKey] : undefined,
+    showDist,
+    distVal: etf.dist?.[periodKey]?.monthly_pct,
+    distInfo: etf.dist?.[periodKey],
   })
 
   return (
@@ -373,7 +383,7 @@ export default function Home() {
 
         {peerKeys.map(pg => {
           const meta = PEER_META[pg] || { label: pg, gradeable: false }
-          const rows = sortEtfs(peerBuckets[pg], effectiveSort, sortDir, returnsMap)
+          const rows = sortEtfs(peerBuckets[pg], effectiveSort, sortDir, returnsMap, periodKey)
           const isNewSection = tab.isNew
           return (
             <div key={pg} style={{ padding: '0 16px', marginBottom: 14 }}>
@@ -395,7 +405,9 @@ export default function Home() {
                 <div style={{ fontSize: 11, color: COLOR.textDim }}>{rows.length}종</div>
               </div>
 
-              {(isNewSection || !meta.gradeable) && (
+              {/* 안내문은 등급 유무와 상관없이 있으면 보여준다. 등급이 붙었다고
+                  그 평가군의 성질(환율 방어, 세금, 듀레이션)이 사라지는 게 아니다. */}
+              {(isNewSection || meta.note) && (
                 <div style={{
                   fontSize: 11, color: COLOR.textDim, lineHeight: 1.5,
                   background: COLOR.bgCard, border: `1px dashed ${COLOR.borderSoft}`,
@@ -411,7 +423,7 @@ export default function Home() {
                 background: COLOR.bgCard, border: `1px solid ${COLOR.border}`,
                 borderRadius: 8, overflow: 'hidden',
               }}>
-                {!isMobile && <TableHeader aumLabel={aumLabel} />}
+                {!isMobile && <TableHeader aumLabel={aumLabel} showDist={showDist} />}
                 {(chip === '__all__' && !expanded[pg] ? rows.slice(0, PREVIEW_N) : rows)
                   .map(etf => <EtfRow {...rowProps(etf, false, pg === 'kr_index')} />)}
                 {chip === '__all__' && !expanded[pg] && rows.length > PREVIEW_N && (
@@ -440,10 +452,10 @@ export default function Home() {
             tone="danger"
             open={sepOpen}
             onToggle={() => setSepOpen(o => !o)}
-            note="하루 단위 목표를 좇는 구조라 오래 들고 있으면 손실이 쌓일 수 있습니다. 커버드콜은 분배금이 반영되지 않아 가격만으로는 성과를 알 수 없습니다. 등급을 매기지 않습니다."
+            note="하루 단위 목표를 좇는 구조라 오래 들고 있으면 손실이 쌓일 수 있습니다. 등급을 매기지 않습니다."
           >
-            {!isMobile && <TableHeader aumLabel={aumLabel} />}
-            {sortEtfs(sepEtfs, effectiveSort, sortDir, returnsMap).map(etf => (
+            {!isMobile && <TableHeader aumLabel={aumLabel} showDist={showDist} />}
+            {sortEtfs(sepEtfs, effectiveSort, sortDir, returnsMap, periodKey).map(etf => (
               <EtfRow {...rowProps(etf, true)} />
             ))}
           </Tray>

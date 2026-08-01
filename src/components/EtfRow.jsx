@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { ChevronDown, ChevronUp, Star, ExternalLink } from 'lucide-react'
 import GradeChip from './GradeChip.jsx'
-import { COLOR, SIGNAL_LABELS, GATE_LABELS, GATE_REASON_KO } from '../constants.js'
-import { fmtAum, fmtFee, fmtReturn } from '../utils.js'
+import { COLOR, SIGNAL_LABELS, GATE_LABELS, GATE_REASON_KO, ROW_COLS } from '../constants.js'
+import { fmtAum, fmtFee, fmtReturn, fmtDist } from '../utils.js'
 import { WatchlistContext } from '../App.jsx'
 
 const S = {
@@ -168,13 +168,16 @@ export default function EtfRow({
   isPassive = false,
   chartEnabled = true,
   returnVal,
+  distVal,
+  distInfo,
+  showDist = false,
   indexTray = false,
 }) {
   const [open, setOpen] = useState(false)
   const [showSignals, setShowSignals] = useState(false)
   const [showGates, setShowGates] = useState(false)
 
-  const COL = onChartToggle ? '32px 1fr 52px 90px 64px 36px' : '32px 1fr 52px 90px 64px'
+  const COL = ROW_COLS(showDist, !!onChartToggle)
 
   const rowBg = open ? COLOR.bgCardAlt : dimmed ? COLOR.bg : 'transparent'
   const gates = etf.gates || {}
@@ -293,9 +296,17 @@ export default function EtfRow({
       <div style={{
         marginTop: 10, paddingTop: 8,
         borderTop: `1px solid ${COLOR.borderSoft}`,
-        fontSize: 11, color: COLOR.textDim,
+        fontSize: 11, color: COLOR.textDim, lineHeight: 1.55,
       }}>
-        분배·환헤지·합성신용 미반영
+        {distInfo && distInfo.pays > 0 ? (
+          <>
+            최근 {distInfo.months}개월 중 {distInfo.pays}회 지급 · 연 환산 {distInfo.annual_pct}%
+            <br />
+            수익률에는 분배금이 이미 들어 있습니다. 일반 계좌라면 분배금에 15.4% 세금이
+            붙어 연 {distInfo.tax_drag_pct}%p 만큼 손에 덜 남습니다.
+            {!distInfo.covered && ' · 상장 기간이 짧아 이 구간을 다 채우지 못했습니다'}
+          </>
+        ) : '환헤지·합성신용 미반영'}
       </div>
     </div>
   )
@@ -333,6 +344,14 @@ export default function EtfRow({
                 <span style={{ fontFamily: 'monospace' }}>{etf.ticker}</span>
                 <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
                 <span style={{ color: hasReturn ? rightColor : undefined }}>{rightDisplay}</span>
+                {showDist && (
+                  <>
+                    <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
+                    <span style={{ color: distVal ? '#93c5fd' : undefined }}>
+                      월 {fmtDist(distVal)}
+                    </span>
+                  </>
+                )}
                 <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
                 <span>{fmtFee(etf.fee_pct)}</span>
               </div>
@@ -377,6 +396,14 @@ export default function EtfRow({
           <span style={{ fontSize: 12, color: rightColor, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
             {rightDisplay}
           </span>
+          {showDist && (
+            <span style={{
+              fontSize: 12, textAlign: 'right', fontVariantNumeric: 'tabular-nums',
+              color: distVal ? '#93c5fd' : COLOR.textDim,
+            }}>
+              {fmtDist(distVal)}
+            </span>
+          )}
           <span style={{ fontSize: 12, color: COLOR.textMuted, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
             {fmtFee(etf.fee_pct)}
           </span>
