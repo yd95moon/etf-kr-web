@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect, useCallback, useMemo } from 're
 import { ChevronDown, ChevronUp } from 'lucide-react'
 import { DataContext } from '../App.jsx'
 import {
-  COLOR, PEER_META, TABS, STYLE_LABELS, MARKET_LABELS, ASSET_TYPE_LABELS,
+  COLOR, PEER_META, TABS, OWN_TAB_PEERS, STYLE_LABELS, MARKET_LABELS, ASSET_TYPE_LABELS,
 } from '../constants.js'
 import { sortEtfs, getFailReason, useIsMobile } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
@@ -23,12 +23,15 @@ const SORT_OPTS = [
   { key: 'm3',    label: '3M' },
   { key: 'm6',    label: '6M' },
   { key: 'm12',   label: '1Y' },
+  { key: 'm36',   label: '3Y' },
+  { key: 'm60',   label: '5Y' },
   { key: 'aum',   label: 'AUM' },
   { key: 'fee',   label: '보수' },
   { key: 'grade', label: '등급' },
 ]
 
-const RETURN_LABELS = { m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률' }
+const RETURN_LABELS = { m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률',
+                        m36: '3Y수익률', m60: '5Y수익률' }
 
 // [전체] 볼 때 평가군마다 먼저 보여줄 종목 수
 const PREVIEW_N = 8
@@ -160,9 +163,10 @@ export default function Home() {
   // 탭에 속하는 종목. '신규 상장' 탭은 다른 탭에서 빼서 여기로만 모은다.
   const inTab = useMemo(() => {
     if (!etfList.length) return []
-    return tab.isNew
-      ? etfList.filter(e => e.final_class === '신규')
-      : etfList.filter(e => e.final_class !== '신규' && tab.match(e))
+    if (tab.isNew) return etfList.filter(e => e.final_class === '신규')
+    return etfList.filter(e =>
+      e.final_class !== '신규' && tab.match(e) &&
+      (tab.special || !OWN_TAB_PEERS.includes(e.peer_group)))
   }, [etfList, tab])
 
   if (!data) return <div style={{ padding: 32, color: COLOR.textMuted }}>데이터 로딩 중…</div>
@@ -196,7 +200,7 @@ export default function Home() {
 
   const anyGradeable = peerKeys.some(k => PEER_META[k]?.gradeable)
   const effectiveSort = (!anyGradeable && sortMode === 'grade') ? 'aum' : sortMode
-  const returnKey = ['m3', 'm6', 'm12'].includes(effectiveSort) ? effectiveSort : null
+  const returnKey = ['m3', 'm6', 'm12', 'm36', 'm60'].includes(effectiveSort) ? effectiveSort : null
   const aumLabel = RETURN_LABELS[effectiveSort] || 'AUM'
   const dirArrow = sortDir === 'desc' ? '↓' : '↑'
   const chartTickerSet = new Set(chartTickers.map(t => t.ticker))

@@ -36,7 +36,7 @@ export function sortEtfs(etfs, mode, dir = 'desc', returnsMap = null) {
       ? (b.fee_pct ?? 0) - (a.fee_pct ?? 0)
       : (a.fee_pct ?? 999) - (b.fee_pct ?? 999)
     )
-  } else if (['m3', 'm6', 'm12'].includes(mode)) {
+  } else if (['m3', 'm6', 'm12', 'm36', 'm60'].includes(mode)) {
     copy.sort((a, b) => {
       const ra = returnsMap?.[a.ticker]?.[mode] ?? null
       const rb = returnsMap?.[b.ticker]?.[mode] ?? null

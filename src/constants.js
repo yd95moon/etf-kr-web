@@ -47,12 +47,16 @@ export const PEER_META = {
     label: '파킹형 (현금성)', short: '파킹형', order: 6, gradeable: false,
     note: '현금을 잠시 두는 용도라 우열을 매기지 않습니다. 금리와 보수만 보세요.',
   },
+  income: {
+    label: '월배당·인컴형', short: '월배당·인컴', order: 7, gradeable: false,
+    note: '분배금으로 수익을 돌려주는 구조라 가격만 보면 성과를 알 수 없습니다. 아직 분배금 자료를 모으지 않아 등급을 매기지 않습니다.',
+  },
   etc: {
-    label: '기타', short: '기타', order: 7, gradeable: false,
+    label: '기타', short: '기타', order: 8, gradeable: false,
     note: '비교 대상이 부족하거나 성격이 달라 등급 없이 지표만 표시합니다.',
   },
   derivative: {
-    label: '레버리지·커버드콜', short: '레버리지', order: 8, gradeable: false, tone: 'danger',
+    label: '레버리지·인버스', short: '레버리지', order: 9, gradeable: false, tone: 'danger',
     note: '하루 단위 목표를 좇는 구조라 오래 들고 있으면 손실이 쌓일 수 있습니다. 등급을 매기지 않습니다.',
   },
 }
@@ -67,9 +71,16 @@ export const TABS = [
     match: e => e.asset_type === 'bond' || e.asset_type === 'cash' },
   { key: 'alt',  label: '대체·기타', axis: 'style',  bench: 'other',
     match: e => ['mixed', 'commodity', 'realestate', 'currency'].includes(e.asset_type) },
+  { key: 'income', label: '월배당·인컴', axis: 'market', bench: 'domestic_equity', special: true,
+    match: e => e.peer_group === 'income' },
+  { key: 'lev',  label: '레버리지·인버스', axis: 'market', bench: 'domestic_equity', special: true,
+    match: e => e.peer_group === 'derivative' },
   { key: 'new',  label: '신규 상장', axis: 'asset_type', bench: 'domestic_equity', isNew: true,
     match: () => true },
 ]
+
+// 자기 전용 탭이 있는 평가군. 다른 탭에 중복으로 끼지 않게 걸러낸다.
+export const OWN_TAB_PEERS = ['income', 'derivative']
 
 export const STYLE_LABELS = {
   broad_index: '대표지수', large_core: '대형·우량', sector: '섹터', theme: '테마',
@@ -96,7 +107,7 @@ export const ASSET_TYPE_LABELS = {
 export const FINAL_CLASS_LABELS = {
   '메인': '일반',
   '신규': '신규 상장',
-  '별도_트랙': '레버리지·커버드콜',
+  '별도_트랙': '별도 관리',
   '탈락': '기준 미달',
 }
 
