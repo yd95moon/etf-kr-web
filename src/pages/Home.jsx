@@ -118,6 +118,9 @@ export default function Home() {
   // [전체] 에서는 평가군마다 앞부분만 보여준다. 안 그러면 첫 묶음이 화면을 다 잡아먹어
   // 아래 묶음이 있는지조차 보이지 않는다.
   const [expanded, setExpanded] = useState({})
+  // 묶음마다 앞 8종만 보이는 게 기본이다. 그런데 [전체]에서 239종 중 24종만
+  // 보이니 "종목이 빠졌다"고 읽힌다. 한 번에 다 펴는 스위치를 둔다.
+  const [showAll, setShowAll] = useState(false)
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)
   const [chartTickers, setChartTickers] = useState([])
@@ -130,6 +133,7 @@ export default function Home() {
     setChip('__all__')
     setAxisOverride(null)
     setExpanded({})
+    setShowAll(false)
     setSepOpen(false)
     setFailOpen(false)
     setChartTickers([])
@@ -374,6 +378,26 @@ export default function Home() {
           })}
         </div>
 
+        {/* ── 묶음마다 앞부분만 볼지, 전부 볼지 ── */}
+        {chip === '__all__' && peerKeys.some(k => peerBuckets[k].length > PREVIEW_N) && (
+          <div style={{ padding: '0 16px 4px' }}>
+            <button
+              onClick={() => { setShowAll(v => !v); setExpanded({}) }}
+              style={{
+                padding: '4px 10px', borderRadius: 6, fontFamily: 'inherit',
+                border: `1px solid ${showAll ? '#5a6a9a' : COLOR.borderSoft}`,
+                background: showAll ? '#2a3050' : 'transparent',
+                color: showAll ? COLOR.text : COLOR.textMuted,
+                fontSize: 11, cursor: 'pointer',
+              }}
+            >
+              {showAll
+                ? `전부 보는 중 · ${listed.length}종`
+                : `묶음마다 ${PREVIEW_N}종만 보는 중 · 눌러서 ${listed.length}종 전부 보기`}
+            </button>
+          </div>
+        )}
+
         {/* ── 평가군별 섹션 ── */}
         {peerKeys.length === 0 && (
           <div style={{ padding: '28px 16px', textAlign: 'center', color: COLOR.textDim, fontSize: 13 }}>
@@ -385,6 +409,8 @@ export default function Home() {
           const meta = PEER_META[pg] || { label: pg, gradeable: false }
           const rows = sortEtfs(peerBuckets[pg], effectiveSort, sortDir, returnsMap, periodKey)
           const isNewSection = tab.isNew
+          // 앞부분만 보여줄지 여부. 칩을 고르면 그 묶음은 전부 보여준다.
+          const truncated = chip === '__all__' && !showAll && !expanded[pg] && rows.length > PREVIEW_N
           return (
             <div key={pg} style={{ padding: '0 16px', marginBottom: 14 }}>
               <div style={{
@@ -402,7 +428,9 @@ export default function Home() {
                     {isNewSection ? '등급 없음' : meta.gradeable ? '등급 있음' : '등급 없음'}
                   </span>
                 </div>
-                <div style={{ fontSize: 11, color: COLOR.textDim }}>{rows.length}종</div>
+                <div style={{ fontSize: 11, color: COLOR.textDim }}>
+                  {truncated ? `${PREVIEW_N} / ${rows.length}종` : `${rows.length}종`}
+                </div>
               </div>
 
               {/* 안내문은 등급 유무와 상관없이 있으면 보여준다. 등급이 붙었다고
@@ -424,9 +452,9 @@ export default function Home() {
                 borderRadius: 8, overflow: 'hidden',
               }}>
                 {!isMobile && <TableHeader aumLabel={aumLabel} showDist={showDist} />}
-                {(chip === '__all__' && !expanded[pg] ? rows.slice(0, PREVIEW_N) : rows)
+                {(truncated ? rows.slice(0, PREVIEW_N) : rows)
                   .map(etf => <EtfRow {...rowProps(etf, false, pg === 'kr_index')} />)}
-                {chip === '__all__' && !expanded[pg] && rows.length > PREVIEW_N && (
+                {truncated && (
                   <button
                     onClick={() => setExpanded(p => ({ ...p, [pg]: true }))}
                     style={{
@@ -436,7 +464,7 @@ export default function Home() {
                       fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
                     }}
                   >
-                    나머지 {rows.length - PREVIEW_N}종 더 보기
+                    {meta.short || meta.label} {rows.length}종 전부 보기
                   </button>
                 )}
               </div>

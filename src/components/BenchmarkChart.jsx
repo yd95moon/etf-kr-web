@@ -127,7 +127,12 @@ function CustomTooltip({ active, payload, label }) {
 
 function BenchToggles({ activeBenches, onToggle }) {
   return (
-    <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 6 }}>
+    // 줄바꿈을 막고 넘치면 옆으로 밀어 본다.
+    // 줄이 바뀌면 비트코인 하나만 둘째 줄에 떨어져 차트가 아래로 밀린다.
+    <div style={{
+      display: 'flex', gap: 4, flexWrap: 'nowrap', marginBottom: 6,
+      overflowX: 'auto', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch',
+    }}>
       {BENCH_ORDER.map(key => {
         const meta = EXTERNAL_BENCH_META[key]
         const active = activeBenches.includes(key)
@@ -137,6 +142,7 @@ function BenchToggles({ activeBenches, onToggle }) {
             onClick={() => onToggle(key)}
             style={{
               padding: '2px 8px', borderRadius: 10, fontSize: 11, cursor: 'pointer',
+              flexShrink: 0, whiteSpace: 'nowrap', fontFamily: 'inherit',
               border: `1px solid ${active ? meta.color + 'bb' : COLOR.borderSoft}`,
               background: active ? meta.color + '22' : 'transparent',
               color: active ? meta.color : COLOR.textDim,

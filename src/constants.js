@@ -62,19 +62,20 @@ export const PEER_META = {
 }
 
 // ── 상단 탭 ───────────────────────────────────────────────────────────────────
+// 순서는 문오너 지정: 국내 -> 해외 -> 레버리지 -> 월배당 -> 채권 -> 대체 -> 신규
 export const TABS = [
   { key: 'kr',   label: '국내주식',  axis: 'style',  bench: 'domestic_equity',
     match: e => e.asset_type === 'equity' && e.market === 'kr' },
   { key: 'ovs',  label: '해외주식',  axis: 'market', bench: 'overseas_equity', axisSwitch: true,
     match: e => e.asset_type === 'equity' && e.market !== 'kr' },
+  { key: 'lev',  label: '레버리지·인버스', axis: 'market', bench: 'derivative', special: true,
+    match: e => e.peer_group === 'derivative' },
+  { key: 'income', label: '월배당·인컴', axis: 'market', bench: 'income', special: true,
+    match: e => e.peer_group === 'income' },
   { key: 'bond', label: '채권·현금', axis: 'style',  bench: 'bond',
     match: e => e.asset_type === 'bond' || e.asset_type === 'cash' },
   { key: 'alt',  label: '대체·기타', axis: 'style',  bench: 'other',
     match: e => ['mixed', 'commodity', 'realestate', 'currency'].includes(e.asset_type) },
-  { key: 'income', label: '월배당·인컴', axis: 'market', bench: 'income', special: true,
-    match: e => e.peer_group === 'income' },
-  { key: 'lev',  label: '레버리지·인버스', axis: 'market', bench: 'derivative', special: true,
-    match: e => e.peer_group === 'derivative' },
   { key: 'new',  label: '신규 상장', axis: 'asset_type', bench: 'domestic_equity', isNew: true,
     match: () => true },
 ]
