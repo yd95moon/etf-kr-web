@@ -188,6 +188,7 @@ export default function EtfRow({
   distVal,
   distInfo,
   showDist = false,
+  peerLabel,
   indexTray = false,
 }) {
   const [open, setOpen] = useState(false)
@@ -401,6 +402,12 @@ export default function EtfRow({
               </div>
               <div style={{ fontSize: 11, color: COLOR.textDim }}>
                 <span style={{ fontFamily: 'monospace' }}>{etf.ticker}</span>
+                {peerLabel && (
+                  <>
+                    <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
+                    <span title="등급은 이 묶음 안에서만 매긴 순위입니다">{peerLabel}</span>
+                  </>
+                )}
                 <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
                 <span style={{ color: hasReturn ? rightColor : undefined }}>{rightDisplay}</span>
                 {showDist && (
@@ -447,8 +454,11 @@ export default function EtfRow({
                 <Badges etf={etf} />
               </span>
             </div>
-            <div style={{ fontSize: 11, color: COLOR.textDim, fontFamily: 'monospace', marginTop: 1 }}>
-              {etf.ticker}
+            <div style={{ fontSize: 11, color: COLOR.textDim, marginTop: 1 }}>
+              <span style={{ fontFamily: 'monospace' }}>{etf.ticker}</span>
+              {peerLabel && (
+                <span title="등급은 이 묶음 안에서만 매긴 순위입니다"> · {peerLabel}</span>
+              )}
             </div>
           </div>
           <span>{indexTray ? <PassiveTag /> : <GradeChip grade={grade} />}</span>

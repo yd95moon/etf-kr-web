@@ -34,13 +34,18 @@ const SORT_OPTS = [
 const RETURN_LABELS = { m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률',
                         m36: '3Y수익률', m60: '5Y수익률' }
 
-// [전체] 볼 때 평가군마다 먼저 보여줄 종목 수
-const PREVIEW_N = 8
-
 const AXIS_LABEL = {
   style: STYLE_LABELS,
   market: MARKET_LABELS,
   asset_type: ASSET_TYPE_LABELS,
+}
+
+const S = {
+  noteBox: {
+    fontSize: 11, color: COLOR.textDim, lineHeight: 1.5,
+    background: COLOR.bgCard, border: `1px dashed ${COLOR.borderSoft}`,
+    borderRadius: 7, padding: '7px 10px', margin: '8px 0 7px',
+  },
 }
 
 function TableHeader({ aumLabel = 'AUM', showDist = false }) {
@@ -115,14 +120,6 @@ export default function Home() {
   const [sortDir, setSortDir] = useState('desc')
   const [chip, setChip] = useState('__all__')
   const [axisOverride, setAxisOverride] = useState(null)
-  // [전체] 에서는 평가군마다 앞부분만 보여준다. 안 그러면 첫 묶음이 화면을 다 잡아먹어
-  // 아래 묶음이 있는지조차 보이지 않는다.
-  const [expanded, setExpanded] = useState({})
-  // 묶음마다 앞 8종만 보이는 게 기본이다. 그런데 [전체]에서 239종 중 24종만
-  // 보이니 "종목이 빠졌다"고 읽힌다. 한 번에 다 펴는 스위치를 둔다.
-  // 기본을 '전부 보기'로 둔다. 앞 8종만 보여주면 아래 묶음의 1위 종목조차
-  // 화면에 없어서 "빠졌다"고 읽힌다. 길어지는 건 접기 스위치로 해결한다.
-  const [showAll, setShowAll] = useState(true)
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)
   const [chartTickers, setChartTickers] = useState([])
@@ -134,8 +131,6 @@ export default function Home() {
   useEffect(() => {
     setChip('__all__')
     setAxisOverride(null)
-    setExpanded({})
-    setShowAll(true)
     setSepOpen(false)
     setFailOpen(false)
     setChartTickers([])
@@ -217,6 +212,13 @@ export default function Home() {
   const aumLabel = RETURN_LABELS[effectiveSort] || 'AUM'
   const dirArrow = sortDir === 'desc' ? '↓' : '↑'
   const chartTickerSet = new Set(chartTickers.map(t => t.ticker))
+
+  // 한 줄 목록. 묶음이 섞여 있어도 고른 기준 하나로 줄을 세운다.
+  const rows = sortEtfs(filtered, effectiveSort, sortDir, returnsMap, periodKey)
+  // 지금 목록에 들어 있는 묶음들의 주의사항만 모은다.
+  const notes = peerKeys
+    .filter(pg => PEER_META[pg]?.note)
+    .map(pg => [pg, PEER_META[pg].note])
 
   const failGroups = [
     { label: '순자산 미달', etfs: failEtfs.filter(e => getPrimaryGate(e) === 'G1') },
@@ -385,133 +387,58 @@ export default function Home() {
           })}
         </div>
 
-        {/* ── 묶음 바로가기 ──
-            [전체]는 한 줄 목록이 아니라 묶음이 여러 개 쌓인 화면이다.
-            그래서 둘째 묶음의 1위 종목이 100줄 아래에 있는 일이 생긴다.
-            묶음 이름을 눌러 바로 내려갈 수 있게 한다. */}
-        {peerKeys.length > 1 && (
-          <div style={{
-            display: 'flex', gap: 5, overflowX: 'auto',
-            padding: '4px 16px 2px', scrollbarWidth: 'none',
-          }}>
-            <span style={{ fontSize: 11, color: COLOR.textDim, alignSelf: 'center',
-                           flexShrink: 0, marginRight: 2 }}>바로가기</span>
-            {peerKeys.map(pg => (
-              <button
-                key={pg}
-                onClick={() => {
-                  const el = document.getElementById(`peer-${pg}`)
-                  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                }}
-                style={{
-                  whiteSpace: 'nowrap', flexShrink: 0,
-                  padding: '4px 9px', borderRadius: 6, fontFamily: 'inherit',
-                  border: `1px solid ${COLOR.borderSoft}`, background: COLOR.bgCard,
-                  color: COLOR.textMuted, fontSize: 11, cursor: 'pointer',
-                }}
-              >
-                {(PEER_META[pg]?.short || pg)} {peerBuckets[pg].length}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* ── 묶음마다 앞부분만 볼지, 전부 볼지 ── */}
-        {chip === '__all__' && peerKeys.some(k => peerBuckets[k].length > PREVIEW_N) && (
-          <div style={{ padding: '0 16px 4px' }}>
-            <button
-              onClick={() => { setShowAll(v => !v); setExpanded({}) }}
-              style={{
-                padding: '4px 10px', borderRadius: 6, fontFamily: 'inherit',
-                border: `1px solid ${showAll ? '#5a6a9a' : COLOR.borderSoft}`,
-                background: showAll ? '#2a3050' : 'transparent',
-                color: showAll ? COLOR.text : COLOR.textMuted,
-                fontSize: 11, cursor: 'pointer',
-              }}
-            >
-              {showAll
-                ? `${listed.length}종 전부 보는 중 · 눌러서 묶음마다 ${PREVIEW_N}종만 보기`
-                : `묶음마다 ${PREVIEW_N}종만 보는 중 · 눌러서 ${listed.length}종 전부 보기`}
-            </button>
-          </div>
-        )}
-
-        {/* ── 평가군별 섹션 ── */}
-        {peerKeys.length === 0 && (
+        {/* ── 목록 ──
+            [전체]는 말 그대로 전부다. 묶음별로 화면을 쪼개면 둘째 묶음의 1위가
+            100줄 아래로 내려가서, 사용자 입장에서는 그냥 없는 종목이 된다.
+            그래서 묶음으로 나누지 않고 한 줄 목록으로 세운다.
+            등급은 여전히 같은 묶음 안에서만 매긴 값이라, 어느 묶음인지는
+            종목마다 작은 글씨로 붙여 둔다. */}
+        {rows.length === 0 && (
           <div style={{ padding: '28px 16px', textAlign: 'center', color: COLOR.textDim, fontSize: 13 }}>
             해당 조건에 맞는 종목이 없습니다
           </div>
         )}
 
-        {peerKeys.map(pg => {
-          const meta = PEER_META[pg] || { label: pg, gradeable: false }
-          const rows = sortEtfs(peerBuckets[pg], effectiveSort, sortDir, returnsMap, periodKey)
-          const isNewSection = tab.isNew
-          // 앞부분만 보여줄지 여부. 칩을 고르면 그 묶음은 전부 보여준다.
-          const truncated = chip === '__all__' && !showAll && !expanded[pg] && rows.length > PREVIEW_N
-          return (
-            <div key={pg} id={`peer-${pg}`} style={{
-              // 상단 고정 머리말에 묶음 제목이 가리지 않게 여백을 준다
-              padding: '0 16px', marginBottom: 14, scrollMarginTop: 64,
+        {rows.length > 0 && (
+          <div style={{ padding: '0 16px', marginBottom: 14 }}>
+            {/* 지금 목록에 섞여 있는 묶음들의 주의사항. 등급이 붙었다고
+                그 묶음의 성질(환율 방어, 세금, 만기)이 사라지는 게 아니다. */}
+            {tab.isNew ? (
+              <div style={S.noteBox}>
+                상장한 지 1년이 안 돼 등급을 매기지 않습니다. 계산된 지표만 보여줍니다.
+              </div>
+            ) : notes.length > 0 && (
+              <div style={S.noteBox}>
+                {notes.map(([pg, note], i) => (
+                  <div key={pg} style={{ marginTop: i ? 5 : 0 }}>
+                    <strong style={{ color: COLOR.textMuted }}>{PEER_META[pg].short}</strong> · {note}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div style={{
+              display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
+              gap: 8, margin: '2px 2px 6px',
             }}>
-              <div style={{
-                display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
-                gap: 8, margin: '10px 2px 6px',
-              }}>
-                <div style={{ fontSize: 13, fontWeight: 680, color: COLOR.text }}>
-                  {meta.label}
-                  <span style={{
-                    marginLeft: 6, fontSize: 9.5, padding: '2px 6px', borderRadius: 4,
-                    border: `1px ${meta.gradeable && !isNewSection ? 'solid' : 'dashed'} ${COLOR.borderSoft}`,
-                    color: meta.gradeable && !isNewSection ? COLOR.textMuted : COLOR.textDim,
-                    fontWeight: 500, verticalAlign: 1,
-                  }}>
-                    {isNewSection ? '등급 없음' : meta.gradeable ? '등급 있음' : '등급 없음'}
-                  </span>
-                </div>
-                <div style={{ fontSize: 11, color: COLOR.textDim }}>
-                  {truncated ? `${PREVIEW_N} / ${rows.length}종` : `${rows.length}종`}
-                </div>
+              <div style={{ fontSize: 13, fontWeight: 680, color: COLOR.text }}>
+                {chip === '__all__' ? '전체' : labelOf(chip)}
               </div>
-
-              {/* 안내문은 등급 유무와 상관없이 있으면 보여준다. 등급이 붙었다고
-                  그 평가군의 성질(환율 방어, 세금, 듀레이션)이 사라지는 게 아니다. */}
-              {(isNewSection || meta.note) && (
-                <div style={{
-                  fontSize: 11, color: COLOR.textDim, lineHeight: 1.5,
-                  background: COLOR.bgCard, border: `1px dashed ${COLOR.borderSoft}`,
-                  borderRadius: 7, padding: '7px 10px', marginBottom: 7,
-                }}>
-                  {isNewSection
-                    ? '상장한 지 1년이 안 돼 등급을 매기지 않습니다. 계산된 지표만 보여줍니다.'
-                    : meta.note}
-                </div>
-              )}
-
-              <div style={{
-                background: COLOR.bgCard, border: `1px solid ${COLOR.border}`,
-                borderRadius: 8, overflow: 'hidden',
-              }}>
-                {!isMobile && <TableHeader aumLabel={aumLabel} showDist={showDist} />}
-                {(truncated ? rows.slice(0, PREVIEW_N) : rows)
-                  .map(etf => <EtfRow {...rowProps(etf, false, pg === 'kr_index')} />)}
-                {truncated && (
-                  <button
-                    onClick={() => setExpanded(p => ({ ...p, [pg]: true }))}
-                    style={{
-                      width: '100%', padding: '10px 0', border: 'none',
-                      borderTop: `1px solid ${COLOR.borderSoft}`,
-                      background: COLOR.bgCardAlt, color: COLOR.textMuted,
-                      fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit',
-                    }}
-                  >
-                    {meta.short || meta.label} {rows.length}종 전부 보기
-                  </button>
-                )}
-              </div>
+              <div style={{ fontSize: 11, color: COLOR.textDim }}>{rows.length}종</div>
             </div>
-          )
-        })}
+
+            <div style={{
+              background: COLOR.bgCard, border: `1px solid ${COLOR.border}`,
+              borderRadius: 8, overflow: 'hidden',
+            }}>
+              {!isMobile && <TableHeader aumLabel={aumLabel} showDist={showDist} />}
+              {rows.map(etf => (
+                <EtfRow {...rowProps(etf, false, etf.peer_group === 'kr_index')}
+                  peerLabel={peerKeys.length > 1 ? (PEER_META[etf.peer_group]?.short) : null} />
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* ── 레버리지·커버드콜 ── */}
         {sepEtfs.length > 0 && (
