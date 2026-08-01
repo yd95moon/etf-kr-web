@@ -92,6 +92,13 @@ export default function Watchlist() {
     setActiveBenches(prev => prev.includes(key) ? prev.filter(k => k !== key) : [...prev, key])
   }, [])
 
+  // 행의 [+/−]로 하나씩 켜고 끈다. 차트 칩의 X와 같은 목록(hidden)을 뒤집어 쓴다.
+  const toggleChart = useCallback((etf) => {
+    setHidden(prev => prev.includes(etf.ticker)
+      ? prev.filter(t => t !== etf.ticker)
+      : [...prev, etf.ticker])
+  }, [])
+
   const handleSort = useCallback((mode) => {
     setSortMode(prev => {
       if (prev === mode) { setSortDir(d => (d === 'desc' ? 'asc' : 'desc')); return mode }
@@ -280,7 +287,7 @@ export default function Watchlist() {
         }}>
           {!isMobile && (
             <div style={{
-              display: 'grid', gridTemplateColumns: ROW_COLS(showDist, false),
+              display: 'grid', gridTemplateColumns: ROW_COLS(showDist, true),
               padding: '6px 12px', gap: 8,
               fontSize: 11, fontWeight: 600, color: COLOR.textDim,
               borderBottom: `1px solid ${COLOR.border}`,
@@ -292,6 +299,7 @@ export default function Watchlist() {
               <span style={{ textAlign: 'right' }}>{RETURN_LABELS[sortMode] || 'AUM'}</span>
               {showDist && <span style={{ textAlign: 'right' }}>월분배</span>}
               <span style={{ textAlign: 'right' }}>보수</span>
+              <span></span>
             </div>
           )}
           {rows.map(etf => (
@@ -306,6 +314,9 @@ export default function Watchlist() {
               distVal={etf.dist?.[periodKey]?.monthly_pct}
               distInfo={etf.dist?.[periodKey]}
               peerLabel={peers.length > 1 ? PEER_META[etf.peer_group]?.short : null}
+              onChartToggle={toggleChart}
+              inChart={!hidden.includes(etf.ticker)}
+              chartEnabled={!!prices?.tickers?.[etf.ticker]}
             />
           ))}
         </div>
