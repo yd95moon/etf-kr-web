@@ -5,14 +5,12 @@ import { PEER_META, COLOR, ROW_COLS } from '../constants.js'
 import { buildEtfList, sortEtfs, useIsMobile, fmtFee } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
 import BenchmarkChart from '../components/BenchmarkChart.jsx'
+import SortBar, { PERIOD_KEYS as RETURN_KEYS } from '../components/SortBar.jsx'
 
 // 관심 페이지는 "고르는" 곳이 아니라 "고른 것끼리 재보는" 곳이다.
 // 그래서 처음부터 시장 기준선 세 개를 켜 둔다.
 // 코스피(국내) · 나스닥(해외 성장) · 금(주식과 다르게 움직이는 것).
 const DEFAULT_BENCH = ['KS11', 'IXIC', 'GOLD']
-
-// 수익률 정렬로 인정되는 키. utils.js sortEtfs 의 목록과 반드시 같아야 한다.
-const RETURN_KEYS = ['w1', 'm1', 'm3', 'm6', 'm12', 'm36', 'm60']
 
 const SORT_OPTS = [
   { key: 'w1',   label: '1주' },
@@ -151,7 +149,6 @@ export default function Watchlist() {
   const periodKey = returnKey || 'm12'
   const showDist = sortMode === 'dist' || watchEtfs.some(e => e.peer_group === 'income')
   const rows = sortEtfs(watchEtfs, sortMode, sortDir, returnsMap, periodKey)
-  const dirArrow = sortDir === 'desc' ? '↓' : '↑'
   const peers = [...new Set(watchEtfs.map(e => e.peer_group))]
 
   const chartTickers = watchEtfs
@@ -264,36 +261,14 @@ export default function Watchlist() {
       )}
 
       {/* ── 정렬 ── */}
-      <div style={{ display: 'flex', gap: 6, padding: '12px 16px 6px', flexWrap: 'wrap' }}>
-        {SORT_OPTS.map(({ key, label }) => {
-          const active = sortMode === key
-          const btn = (
-            <button
-              key={key}
-              onClick={() => handleSort(key)}
-              style={{
-                padding: '5px 12px', borderRadius: 6, fontFamily: 'inherit',
-                border: `1px solid ${active ? '#5a6a9a' : COLOR.border}`,
-                background: active ? '#2a3050' : COLOR.bgCard,
-                color: active ? COLOR.text : COLOR.textMuted,
-                fontSize: 12, fontWeight: active ? 600 : 400, cursor: 'pointer',
-              }}
-            >
-              {label}{active ? ` ${dirArrow}` : ''}
-            </button>
-          )
-          // 좁은 화면에서는 기간(1주~5년)과 성격(월분배·AUM·보수)을 줄로 나눈다.
-          if (isMobile && key === 'dist') {
-            return (
-              <React.Fragment key={key}>
-                <div style={{ flexBasis: '100%', height: 0 }} />
-                {btn}
-              </React.Fragment>
-            )
-          }
-          return btn
-        })}
-      </div>
+      <SortBar
+        opts={SORT_OPTS}
+        active={sortMode}
+        dir={sortDir}
+        onSort={handleSort}
+        isMobile={isMobile}
+        padding="12px 16px 6px"
+      />
 
       {/* ── 한 줄 목록 ── */}
       <div style={{ padding: '0 16px 32px' }}>

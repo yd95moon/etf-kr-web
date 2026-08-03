@@ -8,6 +8,7 @@ import {
 import { sortEtfs, getFailReason, useIsMobile } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
 import BenchmarkChart, { AC_DEFAULT_BENCH } from '../components/BenchmarkChart.jsx'
+import SortBar, { PERIOD_KEYS as RETURN_KEYS } from '../components/SortBar.jsx'
 
 
 function getPrimaryGate(etf) {
@@ -36,9 +37,6 @@ const SORT_OPTS = [
 const RETURN_LABELS = { w1: '1주수익률', m1: '1개월수익률',
                         m3: '3개월수익률', m6: '6개월수익률', m12: '1년수익률',
                         m36: '3년수익률', m60: '5년수익률' }
-
-// 수익률 정렬로 인정되는 키. sortEtfs 의 목록과 반드시 같아야 한다.
-const RETURN_KEYS = ['w1', 'm1', 'm3', 'm6', 'm12', 'm36', 'm60']
 
 const AXIS_LABEL = {
   style: STYLE_LABELS,
@@ -216,7 +214,6 @@ export default function Home() {
   // 분배가 성격을 좌우하는 곳에서만 칸을 하나 더 낸다. 전 종목에 붙이면 표가 좁아진다.
   const showDist = tab.key === 'income' || effectiveSort === 'dist'
   const aumLabel = RETURN_LABELS[effectiveSort] || 'AUM'
-  const dirArrow = sortDir === 'desc' ? '↓' : '↑'
   const chartTickerSet = new Set(chartTickers.map(t => t.ticker))
 
   // 한 줄 목록. 묶음이 섞여 있어도 고른 기준 하나로 줄을 세운다.
@@ -360,49 +357,15 @@ export default function Home() {
         </div>
 
         {/* ── 정렬 ── */}
-        <div style={{ display: 'flex', gap: 6, padding: '10px 16px 6px', flexWrap: 'wrap' }}>
-          {SORT_OPTS.map(({ key, label }) => {
-            const disabled = key === 'grade' && !anyGradeable
-            const active = effectiveSort === key
-            const isGradeBtn = key === 'grade'
-            const btn = (
-              <button
-                key={key}
-                disabled={disabled}
-                onClick={() => handleSort(key)}
-                style={{
-                  padding: '5px 12px', borderRadius: 6, fontFamily: 'inherit',
-                  border: active
-                    ? `1px solid ${isGradeBtn ? '#6b5a7a' : '#5a6a9a'}`
-                    : `1px ${isGradeBtn ? 'dashed' : 'solid'} ${isGradeBtn ? '#4a3d5a' : COLOR.border}`,
-                  background: active ? (isGradeBtn ? '#2a2035' : '#2a3050') : COLOR.bgCard,
-                  color: disabled ? COLOR.textDim
-                    : active ? (isGradeBtn ? '#c4a8d8' : COLOR.text)
-                    : (isGradeBtn ? '#7a6a8a' : COLOR.textMuted),
-                  cursor: disabled ? 'not-allowed' : 'pointer',
-                  fontSize: 12, fontWeight: active ? 600 : 400,
-                  opacity: disabled ? 0.4 : 1,
-                }}
-              >
-                {isGradeBtn
-                  ? <span>등급 <span style={{ fontSize: 10, opacity: 0.75 }}>검증중</span></span>
-                  : label}
-                {active ? ` ${dirArrow}` : ''}
-              </button>
-            )
-            // 좁은 화면에서는 기간(1주~5년)과 성격(월분배·AUM·보수·등급)을 줄로 나눈다.
-            // 자연 줄바꿈에 맡기면 끊기는 자리가 글자 폭에 따라 매번 달라진다.
-            if (isMobile && key === 'dist') {
-              return (
-                <React.Fragment key={key}>
-                  <div style={{ flexBasis: '100%', height: 0 }} />
-                  {btn}
-                </React.Fragment>
-              )
-            }
-            return btn
-          })}
-        </div>
+        <SortBar
+          opts={SORT_OPTS}
+          active={effectiveSort}
+          dir={sortDir}
+          onSort={handleSort}
+          isMobile={isMobile}
+          gradeDisabled={!anyGradeable}
+          padding="10px 16px 6px"
+        />
 
         {/* ── 목록 ──
             [전체]는 말 그대로 전부다. 묶음별로 화면을 쪼개면 둘째 묶음의 1위가
