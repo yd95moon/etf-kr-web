@@ -56,7 +56,11 @@ export const AC_PRIMARY_BENCH = {
   watchlist:             null,
 }
 
+// 짧은 구간은 왼쪽에 둔다. 기본값은 1년 그대로다.
+// 1주는 사실상 노이즈라 골라 볼 수만 있게 두고 기본으로 열지 않는다.
 const PERIODS = [
+  { key: '1w', label: '1주',   days: 5    },
+  { key: '1m', label: '1개월', days: 21   },
   { key: '3m', label: '3개월', days: 63   },
   { key: '1y', label: '1년',   days: 252  },
   { key: '3y', label: '3년',   days: 756  },
@@ -86,7 +90,10 @@ function fmtTooltipDate(dateStr) {
 function fmtAxisTick(dateStr, period, index) {
   const y = dateStr.slice(0, 4)
   const m = parseInt(dateStr.slice(5, 7), 10)
+  const d = parseInt(dateStr.slice(8, 10), 10)
   if (period === '3y' || period === '5y') return y
+  // 1주·1개월은 한 달 안에서 끝나므로 '월'만 찍으면 눈금이 전부 같은 글자가 된다.
+  if (period === '1w' || period === '1m') return `${m}/${d}`
   return (index === 0 || m === 1) ? `${y.slice(2)}년 ${m}월` : `${m}월`
 }
 
