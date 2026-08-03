@@ -22,11 +22,11 @@ function getPrimaryGate(etf) {
 const SORT_OPTS = [
   { key: 'w1',    label: '1주' },
   { key: 'm1',    label: '1개월' },
-  { key: 'm3',    label: '3M' },
-  { key: 'm6',    label: '6M' },
-  { key: 'm12',   label: '1Y' },
-  { key: 'm36',   label: '3Y' },
-  { key: 'm60',   label: '5Y' },
+  { key: 'm3',    label: '3개월' },
+  { key: 'm6',    label: '6개월' },
+  { key: 'm12',   label: '1년' },
+  { key: 'm36',   label: '3년' },
+  { key: 'm60',   label: '5년' },
   { key: 'dist',  label: '월분배' },
   { key: 'aum',   label: 'AUM' },
   { key: 'fee',   label: '보수' },
@@ -34,8 +34,8 @@ const SORT_OPTS = [
 ]
 
 const RETURN_LABELS = { w1: '1주수익률', m1: '1개월수익률',
-                        m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률',
-                        m36: '3Y수익률', m60: '5Y수익률' }
+                        m3: '3개월수익률', m6: '6개월수익률', m12: '1년수익률',
+                        m36: '3년수익률', m60: '5년수익률' }
 
 // 수익률 정렬로 인정되는 키. sortEtfs 의 목록과 반드시 같아야 한다.
 const RETURN_KEYS = ['w1', 'm1', 'm3', 'm6', 'm12', 'm36', 'm60']
@@ -390,7 +390,7 @@ export default function Home() {
                 {active ? ` ${dirArrow}` : ''}
               </button>
             )
-            // 좁은 화면에서는 기간(1주~5Y)과 성격(월분배·AUM·보수·등급)을 줄로 나눈다.
+            // 좁은 화면에서는 기간(1주~5년)과 성격(월분배·AUM·보수·등급)을 줄로 나눈다.
             // 자연 줄바꿈에 맡기면 끊기는 자리가 글자 폭에 따라 매번 달라진다.
             if (isMobile && key === 'dist') {
               return (
