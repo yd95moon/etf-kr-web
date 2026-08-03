@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""chart_prices.json → returns.json (3M/6M/1Y/3Y/5Y)
+"""chart_prices.json → returns.json (1주/1개월/3M/6M/1Y/3Y/5Y)
 
 구간 시작에 값이 없으면 그냥 있는 데서부터 계산하던 문제가 있었다.
 그러면 상장 6개월짜리 ETF의 6개월 수익률이 "1Y" 로 표시되어
@@ -17,7 +17,7 @@ dates = cp['dates']
 tickers_data = cp['tickers']
 n = len(dates)
 
-WINDOWS = {'m3': 63, 'm6': 126, 'm12': 252, 'm36': 756, 'm60': 1260}
+WINDOWS = {'w1': 5, 'm1': 21, 'm3': 63, 'm6': 126, 'm12': 252, 'm36': 756, 'm60': 1260}
 MIN_COVERAGE = 0.9   # 구간의 90% 이상을 덮어야 그 기간 수익률로 인정
 
 result = {}

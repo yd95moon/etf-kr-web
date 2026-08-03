@@ -20,6 +20,8 @@ function getPrimaryGate(etf) {
 }
 
 const SORT_OPTS = [
+  { key: 'w1',    label: '1주' },
+  { key: 'm1',    label: '1개월' },
   { key: 'm3',    label: '3M' },
   { key: 'm6',    label: '6M' },
   { key: 'm12',   label: '1Y' },
@@ -31,8 +33,12 @@ const SORT_OPTS = [
   { key: 'grade', label: '등급' },
 ]
 
-const RETURN_LABELS = { m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률',
+const RETURN_LABELS = { w1: '1주수익률', m1: '1개월수익률',
+                        m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률',
                         m36: '3Y수익률', m60: '5Y수익률' }
+
+// 수익률 정렬로 인정되는 키. sortEtfs 의 목록과 반드시 같아야 한다.
+const RETURN_KEYS = ['w1', 'm1', 'm3', 'm6', 'm12', 'm36', 'm60']
 
 const AXIS_LABEL = {
   style: STYLE_LABELS,
@@ -203,7 +209,7 @@ export default function Home() {
 
   const anyGradeable = peerKeys.some(k => PEER_META[k]?.gradeable)
   const effectiveSort = (!anyGradeable && sortMode === 'grade') ? 'aum' : sortMode
-  const returnKey = ['m3', 'm6', 'm12', 'm36', 'm60'].includes(effectiveSort) ? effectiveSort : null
+  const returnKey = RETURN_KEYS.includes(effectiveSort) ? effectiveSort : null
   // 월분배는 수익률과 같은 기간 버튼을 쓴다. 기간이 아닌 정렬(AUM/보수/등급/월분배)일
   // 때는 1년을 기본으로 둔다.
   const periodKey = returnKey || 'm12'
@@ -359,7 +365,7 @@ export default function Home() {
             const disabled = key === 'grade' && !anyGradeable
             const active = effectiveSort === key
             const isGradeBtn = key === 'grade'
-            return (
+            const btn = (
               <button
                 key={key}
                 disabled={disabled}
@@ -384,6 +390,17 @@ export default function Home() {
                 {active ? ` ${dirArrow}` : ''}
               </button>
             )
+            // 좁은 화면에서는 기간(1주~5Y)과 성격(월분배·AUM·보수·등급)을 줄로 나눈다.
+            // 자연 줄바꿈에 맡기면 끊기는 자리가 글자 폭에 따라 매번 달라진다.
+            if (isMobile && key === 'dist') {
+              return (
+                <React.Fragment key={key}>
+                  <div style={{ flexBasis: '100%', height: 0 }} />
+                  {btn}
+                </React.Fragment>
+              )
+            }
+            return btn
           })}
         </div>
 

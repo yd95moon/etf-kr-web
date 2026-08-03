@@ -11,7 +11,12 @@ import BenchmarkChart from '../components/BenchmarkChart.jsx'
 // 코스피(국내) · 나스닥(해외 성장) · 금(주식과 다르게 움직이는 것).
 const DEFAULT_BENCH = ['KS11', 'IXIC', 'GOLD']
 
+// 수익률 정렬로 인정되는 키. utils.js sortEtfs 의 목록과 반드시 같아야 한다.
+const RETURN_KEYS = ['w1', 'm1', 'm3', 'm6', 'm12', 'm36', 'm60']
+
 const SORT_OPTS = [
+  { key: 'w1',   label: '1주' },
+  { key: 'm1',   label: '1개월' },
   { key: 'm3',   label: '3M' },
   { key: 'm6',   label: '6M' },
   { key: 'm12',  label: '1Y' },
@@ -21,7 +26,8 @@ const SORT_OPTS = [
   { key: 'aum',  label: 'AUM' },
   { key: 'fee',  label: '보수' },
 ]
-const RETURN_LABELS = { m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률',
+const RETURN_LABELS = { w1: '1주수익률', m1: '1개월수익률',
+                        m3: '3M수익률', m6: '6M수익률', m12: '1Y수익률',
                         m36: '3Y수익률', m60: '5Y수익률' }
 
 // 두 종목이 얼마나 같이 움직였나. 1에 가까울수록 사실상 같은 상품이다.
@@ -141,7 +147,7 @@ export default function Watchlist() {
   if (!data) return <div style={{ padding: 32, color: COLOR.textMuted }}>데이터 로딩 중…</div>
   if (watchlist.length === 0) return <Empty />
 
-  const returnKey = ['m3', 'm6', 'm12', 'm36', 'm60'].includes(sortMode) ? sortMode : null
+  const returnKey = RETURN_KEYS.includes(sortMode) ? sortMode : null
   const periodKey = returnKey || 'm12'
   const showDist = sortMode === 'dist' || watchEtfs.some(e => e.peer_group === 'income')
   const rows = sortEtfs(watchEtfs, sortMode, sortDir, returnsMap, periodKey)
@@ -261,7 +267,7 @@ export default function Watchlist() {
       <div style={{ display: 'flex', gap: 6, padding: '12px 16px 6px', flexWrap: 'wrap' }}>
         {SORT_OPTS.map(({ key, label }) => {
           const active = sortMode === key
-          return (
+          const btn = (
             <button
               key={key}
               onClick={() => handleSort(key)}
@@ -276,6 +282,16 @@ export default function Watchlist() {
               {label}{active ? ` ${dirArrow}` : ''}
             </button>
           )
+          // 좁은 화면에서는 기간(1주~5Y)과 성격(월분배·AUM·보수)을 줄로 나눈다.
+          if (isMobile && key === 'dist') {
+            return (
+              <React.Fragment key={key}>
+                <div style={{ flexBasis: '100%', height: 0 }} />
+                {btn}
+              </React.Fragment>
+            )
+          }
+          return btn
         })}
       </div>
 

@@ -46,7 +46,7 @@ export function sortEtfs(etfs, mode, dir = 'desc', returnsMap = null, distPeriod
       if (rb === null) return -1
       return dir === 'asc' ? ra - rb : rb - ra
     })
-  } else if (['m3', 'm6', 'm12', 'm36', 'm60'].includes(mode)) {
+  } else if (['w1', 'm1', 'm3', 'm6', 'm12', 'm36', 'm60'].includes(mode)) {
     copy.sort((a, b) => {
       const ra = returnsMap?.[a.ticker]?.[mode] ?? null
       const rb = returnsMap?.[b.ticker]?.[mode] ?? null
