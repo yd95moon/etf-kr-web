@@ -35,13 +35,15 @@ export default function SortBar({
         disabled={disabled}
         onClick={() => onSort(key)}
         style={{
-          // 기간 줄에서만 균등 분할. 성격 줄은 글자 폭 그대로 둔다.
-          flex: stretch ? '1 1 0' : '0 0 auto',
+          // 기간 줄은 글자 폭을 지키면서 남는 공간만 나눠 갖는다(1 1 auto).
+          // 균등 분할(1 1 0)로 하면 화살표가 붙은 활성 버튼이 제 칸을 넘어서
+          // 좁은 폰에서 ↓ 가 잘린다. 성격 줄은 글자 폭 그대로 둔다.
+          flex: stretch ? '1 1 auto' : '0 0 auto',
           minWidth: 0,
           overflow: 'hidden',
           whiteSpace: 'nowrap',
           textAlign: 'center',
-          padding: stretch ? '5px 2px' : '5px 12px',
+          padding: stretch ? '5px 4px' : '5px 12px',
           borderRadius: 6,
           fontFamily: 'inherit',
           border: on
@@ -53,7 +55,7 @@ export default function SortBar({
             : (isGradeBtn ? '#7a6a8a' : COLOR.textMuted),
           cursor: disabled ? 'not-allowed' : 'pointer',
           // 폭이 모자라는 건 좁은 화면의 기간 줄뿐이라 거기서만 글자를 줄인다.
-          fontSize: stretch ? 'clamp(9.5px, 2.9vw, 12px)' : 12,
+          fontSize: stretch ? 'clamp(10px, 2.9vw, 12px)' : 12,
           fontWeight: on ? 600 : 400,
           opacity: disabled ? 0.4 : 1,
         }}
