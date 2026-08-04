@@ -50,6 +50,14 @@ const S = {
     display: 'flex', gap: 6,
     alignItems: 'flex-start', fontSize: 12, padding: '4px 0',
   },
+  tagList: {
+    display: 'flex', flexDirection: 'column', gap: 4,
+    marginBottom: 10, paddingBottom: 8,
+    borderBottom: `1px solid ${COLOR.borderSoft}`,
+  },
+  tagItem: {
+    display: 'flex', alignItems: 'flex-start', gap: 7,
+  },
 }
 
 function StarBtn({ ticker }) {
@@ -101,52 +109,75 @@ function Tag({ text, fg, bg, bd, title }) {
   )
 }
 
-// 종목 한 줄에 붙는 표시들. 등급이 없는 이유나 계좌 가능 여부처럼
-// 실제 선택에 영향을 주는 것만 붙인다.
-function Badges({ etf }) {
+// 종목의 성격 표시. 목록 줄에는 붙이지 않는다 —
+// 폰에서 태그가 늘어날수록 ETF 이름을 잘라먹기 때문에,
+// 전부 상세 패널로 내리고 거기서 설명까지 같이 보여준다. (2026-08-04)
+function tagsFor(etf, isPassive) {
   const out = []
+  if (isPassive) {
+    out.push({
+      key: 'idx', text: '지수추종', fg: '#93c5fd', bg: '#1e3a5f33', bd: '#93c5fd33',
+      desc: '특정 지수를 그대로 따라가는 상품입니다. 등급(추세신호)보다 지수 추적력과 보수가 핵심입니다',
+    })
+  }
   if (etf.is_hedge) {
-    out.push(<Tag key="h" text="환방어" fg="#fbbf24" bg="#3a352033" bd="#fbbf2433"
-      title="환율이 오르든 내리든 영향을 줄이도록 만든 상품입니다" />)
+    out.push({
+      key: 'h', text: '환방어', fg: '#fbbf24', bg: '#3a352033', bd: '#fbbf2433',
+      desc: '환율이 오르든 내리든 영향을 줄이도록 만든 상품입니다',
+    })
   }
   if (etf.is_new) {
-    out.push(<Tag key="n" text="신규" fg="#86efac" bg="#1e3a2f33" bd="#86efac33"
-      title={`상장 후 관측 ${etf.obs_days ?? '-'} 거래일. 1년 미만이라 등급을 매기지 않습니다`} />)
+    out.push({
+      key: 'n', text: '신규', fg: '#86efac', bg: '#1e3a2f33', bd: '#86efac33',
+      desc: `상장 후 관측 ${etf.obs_days ?? '-'} 거래일. 1년 미만이라 등급을 매기지 않습니다`,
+    })
   }
   if (etf.pension_eligible === false) {
-    out.push(<Tag key="p" text="연금불가" fg="#fb923c" bg="#3a2a2033" bd="#fb923c33"
-      title="연금저축·IRP 계좌에서는 담을 수 없습니다 (ISA는 가능)" />)
+    out.push({
+      key: 'p', text: '연금불가', fg: '#fb923c', bg: '#3a2a2033', bd: '#fb923c33',
+      desc: '연금저축·IRP 계좌에서는 담을 수 없습니다 (ISA는 가능)',
+    })
   }
   // 배당주는 "현금으로 주는지, 안에서 다시 굴리는지"가 성격을 가른다.
   // 이름만으로는 구분이 안 되므로 실제 분배 지급 기록으로 판정한다.
   if (etf.style === 'dividend') {
     const d = etf.dist?.m12
     if (d && d.pays > 0) {
-      out.push(<Tag key="dv" text={`배당 연 ${d.annual_pct}%`} fg="#86efac" bg="#1e3a2f33" bd="#86efac33"
-        title={`최근 12개월 ${d.pays}회 지급. 현금으로 받는 배당이라 일반 계좌에서는 15.4% 세금이 붙습니다`} />)
+      out.push({
+        key: 'dv', text: `배당 연 ${d.annual_pct}%`, fg: '#86efac', bg: '#1e3a2f33', bd: '#86efac33',
+        desc: `최근 12개월 ${d.pays}회 지급. 현금으로 받는 배당이라 일반 계좌에서는 15.4% 세금이 붙습니다`,
+      })
     } else if (d) {
-      out.push(<Tag key="dv" text="재투자형" fg="#93c5fd" bg="#1e3a5f33" bd="#93c5fd33"
-        title="분배금을 주지 않고 안에서 다시 굴립니다. 받을 때 내는 세금이 없는 대신 현금은 안 나옵니다" />)
+      out.push({
+        key: 'dv', text: '재투자형', fg: '#93c5fd', bg: '#1e3a5f33', bd: '#93c5fd33',
+        desc: '분배금을 주지 않고 안에서 다시 굴립니다. 받을 때 내는 세금이 없는 대신 현금은 안 나옵니다',
+      })
     }
   }
   if (etf.disparity_pct != null && Math.abs(etf.disparity_pct) >= 1) {
     const v = etf.disparity_pct
-    out.push(<Tag key="d" text={`괴리 ${v > 0 ? '+' : ''}${v.toFixed(1)}%`}
-      fg="#f87171" bg="#3a202033" bd="#f8717133"
-      title="시장 가격이 순자산가치에서 벗어난 정도입니다. 클수록 불리하게 체결될 수 있습니다" />)
+    out.push({
+      key: 'd', text: `괴리 ${v > 0 ? '+' : ''}${v.toFixed(1)}%`,
+      fg: '#f87171', bg: '#3a202033', bd: '#f8717133',
+      desc: '시장 가격이 순자산가치에서 벗어난 정도입니다. 클수록 불리하게 체결될 수 있습니다',
+    })
   }
-  if (!out.length) return null
-  return <>{out}</>
+  return out
 }
 
-function PassiveTag() {
+// 상세 패널의 태그 목록. 칩만 던지지 않고 설명 문장을 같이 놓는다 —
+// 마우스 올리기(title)는 폰에서 아예 볼 방법이 없다.
+function TagDetails({ tags }) {
+  if (!tags.length) return null
   return (
-    <span style={{
-      fontSize: 10, padding: '1px 5px', borderRadius: 3,
-      background: '#1e3a5f33', color: '#93c5fd',
-      border: '1px solid #93c5fd33',
-      fontWeight: 500, flexShrink: 0, whiteSpace: 'nowrap',
-    }}>지수추종</span>
+    <div style={S.tagList}>
+      {tags.map(t => (
+        <div key={t.key} style={S.tagItem}>
+          <Tag text={t.text} fg={t.fg} bg={t.bg} bd={t.bd} />
+          <span style={{ fontSize: 11, color: COLOR.textDim, lineHeight: 1.5 }}>{t.desc}</span>
+        </div>
+      ))}
+    </div>
   )
 }
 
@@ -202,6 +233,7 @@ export default function EtfRow({
   const signals = etf.signals || {}
   const grade = etf.grade_eligible ? etf.composite_grade : null
 
+  const tags = tagsFor(etf, isPassive)
   const issuer = issuerLink(etf, BRAND_ISSUER)
   const hasReturn = returnVal !== undefined && returnVal !== null
   const rightDisplay = hasReturn ? fmtReturn(returnVal) : fmtAum(etf.aum_억원)
@@ -223,15 +255,8 @@ export default function EtfRow({
         </div>
       )}
 
-      {isPassive && etf.grade_eligible && (
-        <div style={{
-          marginBottom: 8, padding: '5px 8px',
-          background: '#1e3a5f22', borderRadius: 5, fontSize: 11,
-          color: '#93c5fd',
-        }}>
-          지수추종 ETF는 등급(추세신호)보다 지수 추적·보수가 핵심입니다.
-        </div>
-      )}
+      {/* 태그는 목록 줄이 아니라 여기서 보여준다. 설명까지 붙여서. */}
+      <TagDetails tags={tags} />
 
       {/* L1: grade + AUM + fee */}
       <div style={S.l1Row}>
@@ -393,8 +418,6 @@ export default function EtfRow({
                 }}>
                   <NameLink ticker={etf.ticker} name={etf.name} />
                 </span>
-                {isPassive && <PassiveTag />}
-                <Badges etf={etf} />
                 {!indexTray && <GradeChip grade={grade} />}
                 {onChartToggle && (
                   <ChartBtn onClick={handleChartClick} inChart={inChart} enabled={chartEnabled} />
@@ -449,10 +472,6 @@ export default function EtfRow({
               display: 'flex', alignItems: 'center', gap: 5, overflow: 'hidden',
             }}>
               <NameLink ticker={etf.ticker} name={etf.name} />
-              <span style={{ display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0 }}>
-                {isPassive && <PassiveTag />}
-                <Badges etf={etf} />
-              </span>
             </div>
             <div style={{ fontSize: 11, color: COLOR.textDim, marginTop: 1 }}>
               <span style={{ fontFamily: 'monospace' }}>{etf.ticker}</span>
@@ -461,7 +480,11 @@ export default function EtfRow({
               )}
             </div>
           </div>
-          <span>{indexTray ? <PassiveTag /> : <GradeChip grade={grade} />}</span>
+          <span>
+            {indexTray
+              ? <Tag text="지수추종" fg="#93c5fd" bg="#1e3a5f33" bd="#93c5fd33" />
+              : <GradeChip grade={grade} />}
+          </span>
           <span style={{ fontSize: 12, color: rightColor, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
             {rightDisplay}
           </span>
