@@ -364,6 +364,7 @@ export default function Home() {
           onSort={handleSort}
           isMobile={isMobile}
           gradeDisabled={!anyGradeable}
+          returnsMap={returnsMap}
           padding="10px 16px 6px"
         />
 

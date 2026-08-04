@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { COLOR } from '../constants.js'
 
 // 기간 정렬 키. utils.js sortEtfs 의 수익률 목록과 반드시 같아야 한다.
@@ -19,20 +19,35 @@ export default function SortBar({
   onSort,
   isMobile = false,
   gradeDisabled = false,
+  returnsMap = null,
   padding = '10px 16px 6px',
 }) {
   const arrow = dir === 'desc' ? '↓' : '↑'
   const periods = opts.filter(o => PERIOD_KEYS.includes(o.key))
   const others = opts.filter(o => !PERIOD_KEYS.includes(o.key))
 
+  // 데이터 갱신이 아직 반영되지 않은 기간은 정렬해도 전부 빈 값이라 눌러도 소용없다.
+  // returnsMap 전체에서 그 기간 값이 하나라도 있는지로 판정한다.
+  const emptyPeriods = useMemo(() => {
+    const empty = new Set()
+    if (!returnsMap) return empty
+    const rows = Object.values(returnsMap)
+    for (const key of PERIOD_KEYS) {
+      if (!rows.some(row => row?.[key] != null)) empty.add(key)
+    }
+    return empty
+  }, [returnsMap])
+
   const renderBtn = ({ key, label }, stretch) => {
     const isGradeBtn = key === 'grade'
-    const disabled = isGradeBtn && gradeDisabled
+    const periodEmpty = emptyPeriods.has(key)
+    const disabled = (isGradeBtn && gradeDisabled) || periodEmpty
     const on = active === key
     return (
       <button
         key={key}
         disabled={disabled}
+        title={periodEmpty ? '데이터 갱신 대기' : undefined}
         onClick={() => onSort(key)}
         style={{
           // 기간 줄은 글자 폭을 지키면서 남는 공간만 나눠 갖는다(1 1 auto).

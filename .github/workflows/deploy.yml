@@ -33,3 +33,38 @@ jobs:
           path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
+
+      # 배포된 사이트의 returns.json 에 정렬이 쓰는 기간 키가 실제로 있는지 확인한다.
+      # 캐시 문제로 옛 스키마가 그대로 서빙되면 화면이 조용히 "—" 로만 뜨므로,
+      # 여기서 잡아서 배포를 실패시킨다.
+      - name: Verify deployed data schema
+        run: |
+          base="${{ steps.deployment.outputs.page_url }}"
+          base="${base%/}"
+          url="$base/data/returns.json"
+          ok=""
+          for i in 1 2 3 4 5; do
+            curl -fsS -m 15 "$url" -o /tmp/returns.json && ok=1 && break
+            echo "attempt $i failed, retrying in 5s..."
+            sleep 5
+          done
+          if [ -z "$ok" ]; then
+            echo "::error::$url 요청 실패"
+            exit 1
+          fi
+          missing=$(python3 -c "import json; d = json.load(open('/tmp/returns.json')); first = next(iter(d.values()), {}); required = ['w1', 'm1', 'm3', 'm6', 'm12']; print(','.join(k for k in required if k not in first))")
+          if [ -n "$missing" ]; then
+            echo "::error::returns.json 에 누락된 키: $missing"
+            exit 1
+          fi
+          echo "returns.json 키 검증 통과"
+
+      - name: Notify on failure
+        if: failure()
+        uses: ./.github/actions/notify
+        with:
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          chat_id: ${{ secrets.TELEGRAM_CHAT_ID }}
+          text: |
+            ❌ [etf-kr-web] Deploy 실패 (배포 검증 포함)
+            ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

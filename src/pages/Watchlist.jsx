@@ -267,6 +267,7 @@ export default function Watchlist() {
         dir={sortDir}
         onSort={handleSort}
         isMobile={isMobile}
+        returnsMap={returnsMap}
         padding="12px 16px 6px"
       />
 

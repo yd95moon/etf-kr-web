@@ -18,6 +18,12 @@ export const WatchlistContext = createContext({ watchlist: [], toggleTicker: () 
 
 const STORAGE_KEY = 'etfkr_watchlist'
 
+// 데이터 파일은 URL이 고정이라 브라우저/CDN 캐시가 새 코드가 요구하는 키를
+// 갱신 전까지 들고 있을 수 있다. no-cache 로 ETag 재검증을 강제해 항상 최신을 받는다.
+function fetchJson(path) {
+  return fetch(path, { cache: 'no-cache' }).then(r => r.json())
+}
+
 // ── SearchOverlay ─────────────────────────────────────────────────────────────
 function SearchOverlay({ etfList, onClose }) {
   const [query, setQuery] = useState('')
@@ -221,31 +227,26 @@ function AppShell() {
   const [benchmarks, setBenchmarks] = useState(null)
 
   useEffect(() => {
-    fetch('./data/etf_v1.json')
-      .then(r => r.json())
+    fetchJson('./data/etf_v1.json')
       .then(d => {
         setData(d)
         setEtfList(buildEtfList(d.etfs))
       })
       .catch(err => console.error('ETF data load failed:', err))
 
-    fetch('./data/chart_prices.json')
-      .then(r => r.json())
+    fetchJson('./data/chart_prices.json')
       .then(d => { setPrices(d); setLoadingPrices(false) })
       .catch(() => setLoadingPrices(false))
 
-    fetch('./data/sub_class_map.json')
-      .then(r => r.json())
+    fetchJson('./data/sub_class_map.json')
       .then(d => setSubClassMap(d))
       .catch(() => {})
 
-    fetch('./data/returns.json')
-      .then(r => r.json())
+    fetchJson('./data/returns.json')
       .then(d => setReturnsMap(d))
       .catch(() => {})
 
-    fetch('./data/benchmarks.json')
-      .then(r => r.json())
+    fetchJson('./data/benchmarks.json')
       .then(d => setBenchmarks(d))
       .catch(() => {})
   }, [])
