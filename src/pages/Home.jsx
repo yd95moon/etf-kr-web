@@ -181,10 +181,13 @@ export default function Home() {
   const newEtfs = inTab.filter(e => e.final_class === '신규')
   const sepEtfs = inTab.filter(e => e.final_class === '별도_트랙')
   const failEtfs = inTab.filter(e => e.final_class === '탈락')
+  // 메인+신규를 한 목록으로 합친다. 따로 떼어두면 w1/m1 수익률로 줄을 세울 때
+  // 신규상장 종목이 기존 종목과 나란히 비교되지 않는다 (2026-08-06).
+  const rankable = [...listed, ...newEtfs]
 
   // 2단 칩. 현재 축(성격/시장/자산유형)의 실제 값만 노출한다.
   const chipCounts = {}
-  for (const e of listed) {
+  for (const e of rankable) {
     const k = e[axis]
     if (!k) continue
     chipCounts[k] = (chipCounts[k] || 0) + 1
@@ -192,9 +195,7 @@ export default function Home() {
   const chipKeys = Object.keys(chipCounts).sort((a, b) => chipCounts[b] - chipCounts[a])
   const labelOf = (k) => (AXIS_LABEL[axis] || {})[k] || k
 
-  const filtered = chip === '__all__' ? listed : listed.filter(e => e[axis] === chip)
-  // 신규상장도 같은 2단 칩(성격/시장) 기준을 그대로 적용해서 메인 목록과 나란히 걸러진다.
-  const newFiltered = chip === '__all__' ? newEtfs : newEtfs.filter(e => e[axis] === chip)
+  const filtered = chip === '__all__' ? rankable : rankable.filter(e => e[axis] === chip)
 
   // 섹션은 항상 평가군 단위. 등급을 매기는 비교 단위가 화면에 그대로 드러나야 한다.
   const peerBuckets = {}
@@ -218,10 +219,9 @@ export default function Home() {
   const aumLabel = RETURN_LABELS[effectiveSort] || 'AUM'
   const chartTickerSet = new Set(chartTickers.map(t => t.ticker))
 
-  // 한 줄 목록. 묶음이 섞여 있어도 고른 기준 하나로 줄을 세운다.
+  // 한 줄 목록. 메인+신규가 섞여 있어도 고른 기준 하나로 줄을 세운다.
   const rows = sortEtfs(filtered, effectiveSort, sortDir, returnsMap, periodKey)
-  // 신규상장 섹션도 같은 정렬 기준(특히 w1/m1 수익률)을 그대로 써서 바로 비교되게 한다.
-  const newRows = sortEtfs(newFiltered, effectiveSort, sortDir, returnsMap, periodKey)
+  const hasNewInRows = rows.some(e => e.final_class === '신규')
   // 지금 목록에 들어 있는 묶음들의 주의사항만 모은다.
   const notes = peerKeys
     .filter(pg => PEER_META[pg]?.note)
@@ -330,7 +330,7 @@ export default function Home() {
             display: 'flex', gap: 5, overflowX: 'auto',
             padding: '9px 16px 3px', scrollbarWidth: 'none',
           }}>
-            {[['__all__', '전체', listed.length], ...chipKeys.map(k => [k, labelOf(k), chipCounts[k]])]
+            {[['__all__', '전체', rankable.length], ...chipKeys.map(k => [k, labelOf(k), chipCounts[k]])]
               .map(([k, l, n]) => (
                 <button
                   key={k}
@@ -386,11 +386,16 @@ export default function Home() {
         {rows.length > 0 && (
           <div style={{ padding: '0 16px', marginBottom: 14 }}>
             {/* 지금 목록에 섞여 있는 묶음들의 주의사항. 등급이 붙었다고
-                그 묶음의 성질(환율 방어, 세금, 만기)이 사라지는 게 아니다. */}
-            {notes.length > 0 && (
+                그 묶음의 성질(환율 방어, 세금, 만기)이 사라지는 게 아니다.
+                신규상장은 같은 목록 안에 섞여 있으니(2026-08-06), 등급 보류
+                안내도 여기서 같이 띄운다. */}
+            {(notes.length > 0 || hasNewInRows) && (
               <div style={S.noteBox}>
+                {hasNewInRows && (
+                  <div>상장한 지 1년이 안 된 종목(신규 배지)은 등급을 매기지 않습니다. 계산된 지표만 보여줍니다.</div>
+                )}
                 {notes.map(([pg, note], i) => (
-                  <div key={pg} style={{ marginTop: i ? 5 : 0 }}>
+                  <div key={pg} style={{ marginTop: (i || hasNewInRows) ? 5 : 0 }}>
                     <strong style={{ color: COLOR.textMuted }}>{PEER_META[pg].short}</strong> · {note}
                   </div>
                 ))}
@@ -413,37 +418,6 @@ export default function Home() {
             }}>
               {!isMobile && <TableHeader aumLabel={aumLabel} showDist={showDist} />}
               {rows.map(etf => (
-                <EtfRow {...rowProps(etf, false, etf.peer_group === 'kr_index')}
-                  peerLabel={peerKeys.length > 1 ? (PEER_META[etf.peer_group]?.short) : null} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* ── 신규 상장 (상장 1년 미만 · 등급 보류) ──
-            2026-08-06: 예전엔 이 종목들을 다른 탭에서 다 빼서 '신규 상장'이라는
-            단독 탭 하나에 몰아넣었다. 그러면 국내주식 탭에서 방금 상장한 국내주식
-            ETF가 안 보이고, w1/m1 수익률을 같은 코호트 종목들과 나란히 비교할 수도
-            없었다. 이제는 자기 코호트 탭 안에 남기고, 등급이 없다는 것만 섹션으로
-            구분해서 보여준다. */}
-        {newRows.length > 0 && (
-          <div style={{ padding: '0 16px', marginBottom: 14 }}>
-            <div style={S.noteBox}>
-              상장한 지 1년이 안 돼 등급을 매기지 않습니다. 계산된 지표만 보여줍니다.
-            </div>
-            <div style={{
-              display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
-              gap: 8, margin: '2px 2px 6px',
-            }}>
-              <div style={{ fontSize: 13, fontWeight: 680, color: COLOR.text }}>신규 상장</div>
-              <div style={{ fontSize: 11, color: COLOR.textDim }}>{newRows.length}종</div>
-            </div>
-            <div style={{
-              background: COLOR.bgCard, border: `1px solid ${COLOR.border}`,
-              borderRadius: 8, overflow: 'hidden',
-            }}>
-              {!isMobile && <TableHeader aumLabel={aumLabel} showDist={showDist} />}
-              {newRows.map(etf => (
                 <EtfRow {...rowProps(etf, false, etf.peer_group === 'kr_index')}
                   peerLabel={peerKeys.length > 1 ? (PEER_META[etf.peer_group]?.short) : null} />
               ))}
