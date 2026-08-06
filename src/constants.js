@@ -62,7 +62,10 @@ export const PEER_META = {
 }
 
 // ── 상단 탭 ───────────────────────────────────────────────────────────────────
-// 순서는 문오너 지정: 국내 -> 해외 -> 레버리지 -> 월배당 -> 채권 -> 대체 -> 신규
+// 순서는 문오너 지정: 국내 -> 해외 -> 레버리지 -> 월배당 -> 채권 -> 대체
+// '신규 상장' 단독 탭은 2026-08-06 폐지. 신규상장 ETF도 asset_type/market/peer_group은
+// 정상 분류돼 있으니(등급만 보류) 각 탭에 그대로 남기고, 화면 안에서 "신규 상장" 섹션으로만
+// 분리한다. 그래야 같은 코호트 안에서 w1/m1 수익률을 바로 비교할 수 있다.
 export const TABS = [
   { key: 'kr',   label: '국내주식',  axis: 'style',  bench: 'domestic_equity',
     match: e => e.asset_type === 'equity' && e.market === 'kr' },
@@ -76,8 +79,6 @@ export const TABS = [
     match: e => e.asset_type === 'bond' || e.asset_type === 'cash' },
   { key: 'alt',  label: '대체·기타', axis: 'style',  bench: 'other',
     match: e => ['mixed', 'commodity', 'realestate', 'currency'].includes(e.asset_type) },
-  { key: 'new',  label: '신규 상장', axis: 'asset_type', bench: 'domestic_equity', isNew: true,
-    match: () => true },
 ]
 
 // 자기 전용 탭이 있는 평가군. 다른 탭에 중복으로 끼지 않게 걸러낸다.
