@@ -1,8 +1,12 @@
 name: Deploy to GitHub Pages
 
+# 2026-08-06: 호스팅을 Cloudflare Pages(etf-kr-web.pages.dev)로 이전.
+# Cloudflare가 GitHub 저장소를 직접 연결해 push마다 자체적으로 빌드·배포하므로
+# 이 워크플로는 더 이상 필요 없음. GitHub Pages 배포 자체가 계속 타임아웃으로
+# 실패하며 매 push마다 실패 알림을 보내던 문제가 있어 자동 트리거를 껐다.
+# 필요하면 Actions 탭에서 수동으로만 실행 가능(workflow_dispatch).
 on:
-  push:
-    branches: [main]
+  workflow_dispatch: {}
 
 permissions:
   contents: read
