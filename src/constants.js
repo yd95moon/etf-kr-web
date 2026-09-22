@@ -158,6 +158,25 @@ export const STYLE_LABELS = {
   sector: '업종', theme: '테마',
 }
 
+// 해외주식 업종 2단계 분류(큰 분야 → 세부 분류). 2026-09-22 오너 승인 개편.
+// 데이터 출처: scripts/classify_universe_kr_v2.py + data/overseas_industry_taxonomy.json.
+// 여기 없는 값이 데이터에 나오면 화면엔 키 그대로 노출된다 — 새 큰 분야를 늘리면
+// 반드시 같이 추가한다.
+export const INDUSTRY_BIG_LABELS = {
+  digital: '디지털 기술', robot_mobility: '로봇·모빌리티', power_energy: '전력·에너지',
+  resource: '자원·소재', defense_space: '방산·우주·항공', healthcare: '헬스케어',
+  finance: '금융', consumer: '소비', industrial: '산업·인프라',
+  nonindustry_index: '대표지수', nonindustry_strategy: '투자 스타일·전략',
+  nonindustry_complex: '기업집중·복합', review: '검토 필요',
+}
+
+// 화면에 보여줄 순서. 업종 → 업종 외 → 검토 필요.
+export const INDUSTRY_BIG_ORDER = [
+  'digital', 'robot_mobility', 'power_energy', 'resource', 'defense_space',
+  'healthcare', 'finance', 'consumer', 'industrial',
+  'nonindustry_index', 'nonindustry_strategy', 'nonindustry_complex', 'review',
+]
+
 export const MARKET_LABELS = {
   kr: '국내', us: '미국', cn: '중국', jp: '일본', tw: '대만', in: '인도',
   eu: '유럽', global: '글로벌', vn: '베트남', etc_mkt: '기타 국가',

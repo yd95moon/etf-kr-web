@@ -319,7 +319,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.019052271617000516,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "팩터·전략"
     },
     "0000J0": {
       "ticker": "0000J0",
@@ -1014,7 +1016,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1426959954878737,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "0004G0": {
       "ticker": "0004G0",
@@ -1153,7 +1157,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.053046909250328844,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "0005A0": {
       "ticker": "0005A0",
@@ -1292,7 +1298,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0005D0": {
       "ticker": "0005D0",
@@ -1848,7 +1856,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.2191113816189897,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "원자력·SMR"
     },
     "0007N0": {
       "ticker": "0007N0",
@@ -2126,7 +2136,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "팩터·전략"
     },
     "0008S0": {
       "ticker": "0008S0",
@@ -2265,7 +2277,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0008T0": {
       "ticker": "0008T0",
@@ -2543,7 +2557,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.11559749569004629,
         "status": "ok"
-      }
+      },
+      "industry_big": "finance",
+      "industry_sub": "은행"
     },
     "0013R0": {
       "ticker": "0013R0",
@@ -2821,7 +2837,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1270348837209303,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "성장"
     },
     "0015F0": {
       "ticker": "0015F0",
@@ -3516,7 +3534,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.21013133208255153,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "양자컴퓨팅"
     },
     "0019K0": {
       "ticker": "0019K0",
@@ -3794,7 +3814,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.2401224262659989,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "양자컴퓨팅"
     },
     "0022T0": {
       "ticker": "0022T0",
@@ -4072,7 +4094,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06439560439560443,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "양자컴퓨팅"
     },
     "0023B0": {
       "ticker": "0023B0",
@@ -4211,7 +4235,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.16696524543174496,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "양자컴퓨팅"
     },
     "0025N0": {
       "ticker": "0025N0",
@@ -4489,7 +4515,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.009573542210618013,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "0026S0": {
       "ticker": "0026S0",
@@ -4628,7 +4656,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06698404744007358,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "0028X0": {
       "ticker": "0028X0",
@@ -4767,7 +4797,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.03698932646301056,
         "status": "ok"
-      }
+      },
+      "industry_big": "finance",
+      "industry_sub": "핀테크"
     },
     "0035T0": {
       "ticker": "0035T0",
@@ -4906,7 +4938,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.031046569854782158,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "0036R0": {
       "ticker": "0036R0",
@@ -5045,7 +5079,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.2170952641497963,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "0038A0": {
       "ticker": "0038A0",
@@ -5184,7 +5220,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.02026812376898146,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "0040S0": {
       "ticker": "0040S0",
@@ -5323,7 +5361,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.22586473928755813,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "0040X0": {
       "ticker": "0040X0",
@@ -5740,7 +5780,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.11726280570381586,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "소프트웨어"
     },
     "0041E0": {
       "ticker": "0041E0",
@@ -5879,7 +5921,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.13980378416257877,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "0043B0": {
       "ticker": "0043B0",
@@ -6157,7 +6201,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1829889188379754,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "0046A0": {
       "ticker": "0046A0",
@@ -6435,7 +6481,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.01729106628242083,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "0047A0": {
       "ticker": "0047A0",
@@ -6574,7 +6622,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.07476635514018692,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "0047P0": {
       "ticker": "0047P0",
@@ -6713,7 +6763,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.09936732415333083,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "0047R0": {
       "ticker": "0047R0",
@@ -6852,7 +6904,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1498439125910509,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "0048J0": {
       "ticker": "0048J0",
@@ -7130,7 +7184,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.20617529880478092,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "0049K0": {
       "ticker": "0049K0",
@@ -7408,7 +7464,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0051A0": {
       "ticker": "0051A0",
@@ -7547,7 +7605,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.2928118393234673,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "0051G0": {
       "ticker": "0051G0",
@@ -7686,7 +7746,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.2534477474716519,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "원자력·SMR"
     },
     "0052D0": {
       "ticker": "0052D0",
@@ -8242,7 +8304,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.25648133050709276,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "0057H0": {
       "ticker": "0057H0",
@@ -8520,7 +8584,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.056610112548294955,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "0061Z0": {
       "ticker": "0061Z0",
@@ -8937,7 +9003,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.14167424012925378,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "0066W0": {
       "ticker": "0066W0",
@@ -9215,7 +9283,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.15884476534296033,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "0067Y0": {
       "ticker": "0067Y0",
@@ -9354,7 +9424,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0068M0": {
       "ticker": "0068M0",
@@ -9493,7 +9565,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.009918068132815927,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "0069M0": {
       "ticker": "0069M0",
@@ -9632,7 +9706,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1338243813622444,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "0072R0": {
       "ticker": "0072R0",
@@ -10605,7 +10681,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.196486268174475,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "의료기술·의료AI"
     },
     "0084D0": {
       "ticker": "0084D0",
@@ -10744,7 +10822,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0084E0": {
       "ticker": "0084E0",
@@ -10883,7 +10963,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "대형·우량"
     },
     "0085N0": {
       "ticker": "0085N0",
@@ -11578,7 +11660,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.1995653748641797,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "0089B0": {
       "ticker": "0089B0",
@@ -11856,7 +11940,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0089D0": {
       "ticker": "0089D0",
@@ -13107,7 +13193,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.15971469844709274,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "0093D0": {
       "ticker": "0093D0",
@@ -13246,7 +13334,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.20858085808580862,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "0094K0": {
       "ticker": "0094K0",
@@ -13524,7 +13614,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0094M0": {
       "ticker": "0094M0",
@@ -14775,7 +14867,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.08430054978619417,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "소프트웨어"
     },
     "0103T0": {
       "ticker": "0103T0",
@@ -15887,7 +15981,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "0111J0": {
       "ticker": "0111J0",
@@ -16443,7 +16539,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "0113G0": {
       "ticker": "0113G0",
@@ -16582,7 +16680,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "healthcare",
+      "industry_sub": "헬스케어 종합"
     },
     "0113P0": {
       "ticker": "0113P0",
@@ -16860,7 +16960,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "0115D0": {
       "ticker": "0115D0",
@@ -17555,7 +17657,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "0118Z0": {
       "ticker": "0118Z0",
@@ -17694,7 +17798,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "0119H0": {
       "ticker": "0119H0",
@@ -18250,7 +18356,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "power_energy",
+      "industry_sub": "복합 에너지"
     },
     "0123S0": {
       "ticker": "0123S0",
@@ -18528,7 +18636,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "팩터·전략"
     },
     "0127P0": {
       "ticker": "0127P0",
@@ -18667,7 +18777,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "팩터·전략"
     },
     "0127R0": {
       "ticker": "0127R0",
@@ -18806,7 +18918,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "디지털 인프라"
     },
     "0127T0": {
       "ticker": "0127T0",
@@ -18945,7 +19059,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "0127V0": {
       "ticker": "0127V0",
@@ -19084,7 +19200,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "0131V0": {
       "ticker": "0131V0",
@@ -19223,7 +19341,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "defense_space",
+      "industry_sub": "우주"
     },
     "0131W0": {
       "ticker": "0131W0",
@@ -19501,7 +19621,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "power_energy",
+      "industry_sub": "원자력·SMR"
     },
     "0132K0": {
       "ticker": "0132K0",
@@ -19779,7 +19901,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0135Y0": {
       "ticker": "0135Y0",
@@ -20057,7 +20181,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "팩터·전략"
     },
     "0137W0": {
       "ticker": "0137W0",
@@ -20335,7 +20461,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0138Y0": {
       "ticker": "0138Y0",
@@ -21169,7 +21297,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "디지털 인프라"
     },
     "0144L0": {
       "ticker": "0144L0",
@@ -21308,7 +21438,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0144M0": {
       "ticker": "0144M0",
@@ -21447,7 +21579,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "defense_space",
+      "industry_sub": "드론·UAM"
     },
     "0148J0": {
       "ticker": "0148J0",
@@ -22003,7 +22137,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "0152E0": {
       "ticker": "0152E0",
@@ -22559,7 +22695,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "0154F0": {
       "ticker": "0154F0",
@@ -22837,7 +22975,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "power_energy",
+      "industry_sub": "원자력·SMR"
     },
     "0155N0": {
       "ticker": "0155N0",
@@ -23115,7 +23255,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "0162M0": {
       "ticker": "0162M0",
@@ -23810,7 +23952,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "0166N0": {
       "ticker": "0166N0",
@@ -24505,7 +24649,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "defense_space",
+      "industry_sub": "우주"
     },
     "0168K0": {
       "ticker": "0168K0",
@@ -25061,7 +25207,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "디지털 인프라"
     },
     "0174B0": {
       "ticker": "0174B0",
@@ -25200,7 +25348,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "0174R0": {
       "ticker": "0174R0",
@@ -25339,7 +25489,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "0176E0": {
       "ticker": "0176E0",
@@ -25478,7 +25630,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "power_energy",
+      "industry_sub": "전력망·전력설비"
     },
     "0177A0": {
       "ticker": "0177A0",
@@ -26312,7 +26466,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "defense_space",
+      "industry_sub": "우주"
     },
     "0181B0": {
       "ticker": "0181B0",
@@ -26451,7 +26607,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "0181L0": {
       "ticker": "0181L0",
@@ -26590,7 +26748,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "defense_space",
+      "industry_sub": "우주"
     },
     "0182R0": {
       "ticker": "0182R0",
@@ -27007,7 +27167,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "defense_space",
+      "industry_sub": "우주"
     },
     "0183V0": {
       "ticker": "0183V0",
@@ -27702,7 +27864,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "0186L0": {
       "ticker": "0186L0",
@@ -27841,7 +28005,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "0186S0": {
       "ticker": "0186S0",
@@ -28675,7 +28841,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "0190Y0": {
       "ticker": "0190Y0",
@@ -28814,7 +28982,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "0191M0": {
       "ticker": "0191M0",
@@ -33401,7 +33571,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "defense_space",
+      "industry_sub": "우주"
     },
     "0208N0": {
       "ticker": "0208N0",
@@ -35208,7 +35380,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.10169564654614494,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "100910": {
       "ticker": "100910",
@@ -35486,7 +35660,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06979766755655481,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "102110": {
       "ticker": "102110",
@@ -36459,7 +36635,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "105190": {
       "ticker": "105190",
@@ -38266,7 +38444,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "117700": {
       "ticker": "117700",
@@ -39795,7 +39975,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1359496400203224,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "136340": {
       "ticker": "136340",
@@ -42714,7 +42896,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1557788944723617,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "143860": {
       "ticker": "143860",
@@ -43687,7 +43871,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.03674540682414695,
         "status": "ok"
-      }
+      },
+      "industry_big": "consumer",
+      "industry_sub": "경기소비"
     },
     "152100": {
       "ticker": "152100",
@@ -45911,7 +46097,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.06408304498269901,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "169950": {
       "ticker": "169950",
@@ -46050,7 +46238,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.06761035574594898,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "174350": {
       "ticker": "174350",
@@ -46328,7 +46518,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0749796251018745,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "대형·우량"
     },
     "181480": {
       "ticker": "181480",
@@ -47162,7 +47354,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1590793489318414,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "바이오·제약"
     },
     "189400": {
       "ticker": "189400",
@@ -47301,7 +47495,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "190620": {
       "ticker": "190620",
@@ -47579,7 +47775,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.07229832572298323,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "192720": {
       "ticker": "192720",
@@ -47857,7 +48055,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.14160867454280623,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "195930": {
       "ticker": "195930",
@@ -47996,7 +48196,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.12557912704218488,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "195970": {
       "ticker": "195970",
@@ -48135,7 +48337,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.09118438761776582,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "195980": {
       "ticker": "195980",
@@ -48274,7 +48478,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1911652703731912,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "196030": {
       "ticker": "196030",
@@ -48691,7 +48897,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.06085932901706892,
         "status": "ok"
-      }
+      },
+      "industry_big": "industrial",
+      "industry_sub": "산업재 종합"
     },
     "200250": {
       "ticker": "200250",
@@ -48830,7 +49038,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.11968945438861334,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "203780": {
       "ticker": "203780",
@@ -48969,7 +49179,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.11786580436540017,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "바이오·제약"
     },
     "204450": {
       "ticker": "204450",
@@ -49942,7 +50154,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06121919584954605,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "214980": {
       "ticker": "214980",
@@ -50637,7 +50851,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0343742435245703,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "석유·가스"
     },
     "219390": {
       "ticker": "219390",
@@ -50776,7 +50992,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.05990783410138256,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "석유·가스"
     },
     "219480": {
       "ticker": "219480",
@@ -50915,7 +51133,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.16408830175560585,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "223190": {
       "ticker": "223190",
@@ -54390,7 +54610,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.24281814636682708,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "239660": {
       "ticker": "239660",
@@ -54668,7 +54890,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1405861897665177,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "241390": {
       "ticker": "241390",
@@ -55363,7 +55587,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.02915695763876447,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "245350": {
       "ticker": "245350",
@@ -55502,7 +55728,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.0663387917062539,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "245360": {
       "ticker": "245360",
@@ -55641,7 +55869,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.10354386753577582,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "245710": {
       "ticker": "245710",
@@ -55780,7 +56010,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.020690834473324204,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "248270": {
       "ticker": "248270",
@@ -55919,7 +56151,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.021394611727416857,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "헬스케어 종합"
     },
     "250730": {
       "ticker": "250730",
@@ -56058,7 +56292,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0188866799204771,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "251340": {
       "ticker": "251340",
@@ -56336,7 +56572,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.05556313993174067,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "251590": {
       "ticker": "251590",
@@ -57865,7 +58103,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.3215017064846416,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "256750": {
       "ticker": "256750",
@@ -58004,7 +58244,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.07074746231928641,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "261060": {
       "ticker": "261060",
@@ -59533,7 +59775,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "266160": {
       "ticker": "266160",
@@ -60645,7 +60889,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.13020305921227948,
         "status": "ok"
-      }
+      },
+      "industry_big": "industrial",
+      "industry_sub": "광범위 인프라"
     },
     "269420": {
       "ticker": "269420",
@@ -60784,7 +61030,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.1307929969104017,
         "status": "ok"
-      }
+      },
+      "industry_big": "industrial",
+      "industry_sub": "광범위 인프라"
     },
     "269530": {
       "ticker": "269530",
@@ -60923,7 +61171,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.1314189034706662,
         "status": "ok"
-      }
+      },
+      "industry_big": "industrial",
+      "industry_sub": "광범위 인프라"
     },
     "269540": {
       "ticker": "269540",
@@ -61062,7 +61312,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1550151975683891,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "270800": {
       "ticker": "270800",
@@ -63008,7 +63260,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1598822952427661,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "광범위 혁신"
     },
     "276000": {
       "ticker": "276000",
@@ -63147,7 +63401,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.030446718243074544,
         "status": "ok"
-      }
+      },
+      "industry_big": "resource",
+      "industry_sub": "종합 자원생산"
     },
     "276650": {
       "ticker": "276650",
@@ -63286,7 +63542,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.31406524976309735,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "276970": {
       "ticker": "276970",
@@ -63425,7 +63683,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "276990": {
       "ticker": "276990",
@@ -63564,7 +63824,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.01411909146715784,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·휴머노이드"
     },
     "277540": {
       "ticker": "277540",
@@ -63703,7 +63965,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.20310786106032896,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "277630": {
       "ticker": "277630",
@@ -65093,7 +65357,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.12991988854057812,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "281990": {
       "ticker": "281990",
@@ -65510,7 +65776,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.06161584407419052,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "284430": {
       "ticker": "284430",
@@ -66066,7 +66334,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.31026811848729663,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "289040": {
       "ticker": "289040",
@@ -67039,7 +67309,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.07876344086021503,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "292050": {
       "ticker": "292050",
@@ -70375,7 +70647,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.236152141802068,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "305050": {
       "ticker": "305050",
@@ -71487,7 +71761,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0016468374000134789,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "팩터·전략"
     },
     "310080": {
       "ticker": "310080",
@@ -71626,7 +71902,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.04825462012320325,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "310960": {
       "ticker": "310960",
@@ -72043,7 +72321,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.31617930558655827,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "315930": {
       "ticker": "315930",
@@ -76074,7 +76354,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.1256923732424372,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "354350": {
       "ticker": "354350",
@@ -76213,7 +76495,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "354500": {
       "ticker": "354500",
@@ -77186,7 +77470,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06912144702842382,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "360750": {
       "ticker": "360750",
@@ -77325,7 +77611,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.0702771089254377,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "361580": {
       "ticker": "361580",
@@ -79132,7 +79420,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.13599509927570175,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "367740": {
       "ticker": "367740",
@@ -79827,7 +80117,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1387979767926213,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "371150": {
       "ticker": "371150",
@@ -79966,7 +80258,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "371160": {
       "ticker": "371160",
@@ -80105,7 +80399,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.17501879228263595,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "371450": {
       "ticker": "371450",
@@ -80244,7 +80540,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.30442890442890436,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "클라우드 서비스"
     },
     "371460": {
       "ticker": "371460",
@@ -80383,7 +80681,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.30351201478743073,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "자동차·전기차"
     },
     "371470": {
       "ticker": "371470",
@@ -80522,7 +80822,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.050724637681159424,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "바이오·제약"
     },
     "371870": {
       "ticker": "371870",
@@ -80661,7 +80963,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.17402431222008952,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "372330": {
       "ticker": "372330",
@@ -80800,7 +81104,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.1732779246946229,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "373490": {
       "ticker": "373490",
@@ -81773,7 +82079,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.07032565974171812,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "379790": {
       "ticker": "379790",
@@ -81912,7 +82220,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.11504889413926622,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "379800": {
       "ticker": "379800",
@@ -82051,7 +82361,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06836647663509443,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "379810": {
       "ticker": "379810",
@@ -82190,7 +82502,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.13672166487024295,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "380340": {
       "ticker": "380340",
@@ -82468,7 +82782,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1006387018815813,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "381180": {
       "ticker": "381180",
@@ -82607,7 +82923,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.41762700860249957,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "381560": {
       "ticker": "381560",
@@ -84275,7 +84593,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.17361894024802704,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "광범위 혁신"
     },
     "387280": {
       "ticker": "387280",
@@ -84831,7 +85151,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.3565295081153521,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "391670": {
       "ticker": "391670",
@@ -85109,7 +85431,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.011224826675470423,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "자동차·전기차"
     },
     "394670": {
       "ticker": "394670",
@@ -85248,7 +85572,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0823888404533566,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "2차전지"
     },
     "395150": {
       "ticker": "395150",
@@ -86638,7 +86964,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.2784478238070267,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "재생에너지"
     },
     "396520": {
       "ticker": "396520",
@@ -86777,7 +87105,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.272300469483568,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "399110": {
       "ticker": "399110",
@@ -86916,7 +87246,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06364339087863957,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "ESG·기후"
     },
     "399580": {
       "ticker": "399580",
@@ -87055,7 +87387,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "400570": {
       "ticker": "400570",
@@ -87750,7 +88084,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.01333699986250525,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "403790": {
       "ticker": "403790",
@@ -88862,7 +89198,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.005028494803888672,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "인터넷 플랫폼"
     },
     "409810": {
       "ticker": "409810",
@@ -89557,7 +89895,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.15891095397383248,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "411540": {
       "ticker": "411540",
@@ -89974,7 +90314,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.05838509316770191,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "소프트웨어"
     },
     "413930": {
       "ticker": "413930",
@@ -90252,7 +90594,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.10038759689922483,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "자율주행"
     },
     "414780": {
       "ticker": "414780",
@@ -90391,7 +90735,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1682163989856298,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "415340": {
       "ticker": "415340",
@@ -90530,7 +90876,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1608910891089108,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "415760": {
       "ticker": "415760",
@@ -90669,7 +91017,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1694233348234242,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "415920": {
       "ticker": "415920",
@@ -90808,7 +91158,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.24854819976771192,
         "status": "ok"
-      }
+      },
+      "industry_big": "resource",
+      "industry_sub": "희토류·전략광물"
     },
     "416090": {
       "ticker": "416090",
@@ -90947,7 +91299,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.15401885945217786,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "417450": {
       "ticker": "417450",
@@ -91086,7 +91440,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1134172940265954,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "수소·연료전지"
     },
     "417630": {
       "ticker": "417630",
@@ -91503,7 +91859,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.6022005924672027,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "사이버보안"
     },
     "419420": {
       "ticker": "419420",
@@ -91642,7 +92000,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.06179955171309637,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "재생에너지"
     },
     "419430": {
       "ticker": "419430",
@@ -91781,7 +92141,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.2982090795501874,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "2차전지"
     },
     "419650": {
       "ticker": "419650",
@@ -91920,7 +92282,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.019250253292806496,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "수소·연료전지"
     },
     "419890": {
       "ticker": "419890",
@@ -92615,7 +92979,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.4313491590122869,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "423920": {
       "ticker": "423920",
@@ -92893,7 +93259,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.09750683060109289,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "426030": {
       "ticker": "426030",
@@ -93032,7 +93400,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1801134961756723,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "426150": {
       "ticker": "426150",
@@ -93310,7 +93680,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1510773870324431,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "428560": {
       "ticker": "428560",
@@ -93449,7 +93821,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0530837680270021,
         "status": "ok"
-      }
+      },
+      "industry_big": "finance",
+      "industry_sub": "자산운용·거래서비스"
     },
     "429000": {
       "ticker": "429000",
@@ -93588,7 +93962,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0393457450817819,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "429010": {
       "ticker": "429010",
@@ -93727,7 +94103,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "429760": {
       "ticker": "429760",
@@ -93866,7 +94244,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06819801545967885,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "429980": {
       "ticker": "429980",
@@ -94283,7 +94663,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06256098883226713,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "433220": {
       "ticker": "433220",
@@ -94422,7 +94804,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0020335536349771477,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "433330": {
       "ticker": "433330",
@@ -94561,7 +94945,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06694969013809593,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "433500": {
       "ticker": "433500",
@@ -95673,7 +96059,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.020773256434903242,
         "status": "ok"
-      }
+      },
+      "industry_big": "consumer",
+      "industry_sub": "브랜드·소비테마"
     },
     "435420": {
       "ticker": "435420",
@@ -98592,7 +98980,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.16910956394283616,
         "status": "ok"
-      }
+      },
+      "industry_big": "defense_space",
+      "industry_sub": "방산·우주 복합"
     },
     "441540": {
       "ticker": "441540",
@@ -98870,7 +99260,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "441680": {
       "ticker": "441680",
@@ -99009,7 +99401,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "441800": {
       "ticker": "441800",
@@ -99565,7 +99959,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.23130042090494563,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "원자력·SMR"
     },
     "442550": {
       "ticker": "442550",
@@ -100121,7 +100517,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.6107377424774707,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "444200": {
       "ticker": "444200",
@@ -100399,7 +100797,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06774707757704568,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "445150": {
       "ticker": "445150",
@@ -101094,7 +101494,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.3586641714565788,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "446700": {
       "ticker": "446700",
@@ -101372,7 +101774,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.010787814328040657,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "446770": {
       "ticker": "446770",
@@ -101511,7 +101915,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.3529471734660934,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "447430": {
       "ticker": "447430",
@@ -102345,7 +102751,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.16705622646409557,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "448300": {
       "ticker": "448300",
@@ -102484,7 +102892,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.2408280922431867,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "448330": {
       "ticker": "448330",
@@ -103457,7 +103867,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.16948809604100634,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "449190": {
       "ticker": "449190",
@@ -103596,7 +104008,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.24147081122062164,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "449450": {
       "ticker": "449450",
@@ -104291,7 +104705,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06452761110546112,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "449780": {
       "ticker": "449780",
@@ -104430,7 +104846,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1635433362100851,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "450190": {
       "ticker": "450190",
@@ -105125,7 +105543,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.05772402418911493,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "451530": {
       "ticker": "451530",
@@ -105820,7 +106240,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.10756838395703983,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "453010": {
       "ticker": "453010",
@@ -106237,7 +106659,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.23752286386203303,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "453330": {
       "ticker": "453330",
@@ -106376,7 +106800,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.17680973734785388,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "453630": {
       "ticker": "453630",
@@ -106515,7 +106941,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.07809449433814919,
         "status": "ok"
-      }
+      },
+      "industry_big": "consumer",
+      "industry_sub": "필수소비"
     },
     "453640": {
       "ticker": "453640",
@@ -106654,7 +107082,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.055272561392838204,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "헬스케어 종합"
     },
     "453650": {
       "ticker": "453650",
@@ -106793,7 +107223,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.04384192208375426,
         "status": "ok"
-      }
+      },
+      "industry_big": "finance",
+      "industry_sub": "금융 종합"
     },
     "453660": {
       "ticker": "453660",
@@ -106932,7 +107364,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.06593095642331637,
         "status": "ok"
-      }
+      },
+      "industry_big": "consumer",
+      "industry_sub": "경기소비"
     },
     "453810": {
       "ticker": "453810",
@@ -107071,7 +107505,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.11605937921727394,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "453820": {
       "ticker": "453820",
@@ -107488,7 +107924,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.12463861227112105,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "453950": {
       "ticker": "453950",
@@ -107627,7 +108065,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.17455461579989207,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "454320": {
       "ticker": "454320",
@@ -108878,7 +109318,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "456600": {
       "ticker": "456600",
@@ -109017,7 +109459,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.3433104534713627,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "AI 종합·밸류체인"
     },
     "456610": {
       "ticker": "456610",
@@ -109573,7 +110017,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.10354745925215725,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "457690": {
       "ticker": "457690",
@@ -110824,7 +111270,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.011282908483075671,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "458750": {
       "ticker": "458750",
@@ -110963,7 +111411,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "458760": {
       "ticker": "458760",
@@ -111102,7 +111552,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "459560": {
       "ticker": "459560",
@@ -111241,7 +111693,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.14290960600178382,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "459580": {
       "ticker": "459580",
@@ -111519,7 +111973,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.05116664692644801,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "459790": {
       "ticker": "459790",
@@ -111658,7 +112114,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.07919498170412953,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "성장"
     },
     "460270": {
       "ticker": "460270",
@@ -111936,7 +112394,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.012232415902140636,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "460960": {
       "ticker": "460960",
@@ -112075,7 +112535,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0445130013221684,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "461340": {
       "ticker": "461340",
@@ -112214,7 +112676,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.3314708547266687,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "AI 종합·밸류체인"
     },
     "461450": {
       "ticker": "461450",
@@ -113187,7 +113651,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.10602062844806914,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "461910": {
       "ticker": "461910",
@@ -113882,7 +114348,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "462900": {
       "ticker": "462900",
@@ -114577,7 +115045,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.06254529641977102,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "463640": {
       "ticker": "463640",
@@ -114716,7 +115186,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.2026732981038234,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "유틸리티"
     },
     "463680": {
       "ticker": "463680",
@@ -114855,7 +115327,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.27672674353520654,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "463690": {
       "ticker": "463690",
@@ -114994,7 +115468,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "464240": {
       "ticker": "464240",
@@ -115272,7 +115748,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.08632362897765744,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·AI 복합"
     },
     "464470": {
       "ticker": "464470",
@@ -115828,7 +116306,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.019768991559306892,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "464930": {
       "ticker": "464930",
@@ -115967,7 +116447,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.06335660718903546,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "대형·우량"
     },
     "465330": {
       "ticker": "465330",
@@ -116384,7 +116866,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.13922881551604704,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "465610": {
       "ticker": "465610",
@@ -116662,7 +117146,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.16804659670742272,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "465670": {
       "ticker": "465670",
@@ -116801,7 +117287,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.09438094586270629,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "466810": {
       "ticker": "466810",
@@ -117496,7 +117984,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.20666666666666678,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "AI 종합·밸류체인"
     },
     "468370": {
       "ticker": "468370",
@@ -118052,7 +118542,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.6222631273009107,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "469060": {
       "ticker": "469060",
@@ -118191,7 +118683,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.485020872554637,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "469070": {
       "ticker": "469070",
@@ -118608,7 +119102,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1327014218009479,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "469170": {
       "ticker": "469170",
@@ -119164,7 +119660,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.15557275541795668,
         "status": "ok"
-      }
+      },
+      "industry_big": "robot_mobility",
+      "industry_sub": "로봇·AI 복합"
     },
     "471230": {
       "ticker": "471230",
@@ -120137,7 +120635,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1996955859969558,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "472170": {
       "ticker": "472170",
@@ -121527,7 +122027,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.09307261560693636,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "473490": {
       "ticker": "473490",
@@ -121666,7 +122168,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.4300733715103793,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "473590": {
       "ticker": "473590",
@@ -121805,7 +122309,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.0027472527472527375,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "473640": {
       "ticker": "473640",
@@ -121944,7 +122450,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.008745476477683978,
         "status": "ok"
-      }
+      },
+      "industry_big": "resource",
+      "industry_sub": "금채굴기업"
     },
     "474220": {
       "ticker": "474220",
@@ -122083,7 +122591,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "474590": {
       "ticker": "474590",
@@ -122361,7 +122871,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.04428976222742398,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "석유·가스"
     },
     "474920": {
       "ticker": "474920",
@@ -122500,7 +123012,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1276196434157022,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "475050": {
       "ticker": "475050",
@@ -122778,7 +123292,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.08807254841684597,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "전력망·전력설비"
     },
     "475080": {
       "ticker": "475080",
@@ -123751,7 +124267,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.029242707285529468,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "475380": {
       "ticker": "475380",
@@ -124307,7 +124825,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1365419827360712,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_index",
+      "industry_sub": "국가·지역 대표지수"
     },
     "476070": {
       "ticker": "476070",
@@ -124446,7 +124966,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.023783889595771823,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "특정 치료 분야"
     },
     "476260": {
       "ticker": "476260",
@@ -125002,7 +125524,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.029517638588912876,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "특정 치료 분야"
     },
     "476750": {
       "ticker": "476750",
@@ -125975,7 +126499,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.00295064377682408,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "477730": {
       "ticker": "477730",
@@ -126114,7 +126640,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.11823273179838212,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "그룹주"
     },
     "478150": {
       "ticker": "478150",
@@ -126253,7 +126781,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.19889988998899888,
         "status": "ok"
-      }
+      },
+      "industry_big": "defense_space",
+      "industry_sub": "방산·우주 복합"
     },
     "479080": {
       "ticker": "479080",
@@ -126670,7 +127200,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.6848804719031356,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "479730": {
       "ticker": "479730",
@@ -126809,7 +127341,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.03390172535566538,
         "status": "ok"
-      }
+      },
+      "industry_big": "consumer",
+      "industry_sub": "경기소비"
     },
     "479850": {
       "ticker": "479850",
@@ -127087,7 +127621,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "480030": {
       "ticker": "480030",
@@ -127226,7 +127762,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "480040": {
       "ticker": "480040",
@@ -127365,7 +127903,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "480260": {
       "ticker": "480260",
@@ -127643,7 +128183,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.64724774068265,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "AI 종합·밸류체인"
     },
     "480460": {
       "ticker": "480460",
@@ -128199,7 +128741,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.30446708463949834,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "소프트웨어"
     },
     "481190": {
       "ticker": "481190",
@@ -128338,7 +128882,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1008269720101782,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "481340": {
       "ticker": "481340",
@@ -128894,7 +129440,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "483280": {
       "ticker": "483280",
@@ -129033,7 +129581,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "483290": {
       "ticker": "483290",
@@ -129172,7 +129722,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "483320": {
       "ticker": "483320",
@@ -129311,7 +129863,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.4059923034634414,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "483330": {
       "ticker": "483330",
@@ -129450,7 +130004,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.31601545727780156,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "483340": {
       "ticker": "483340",
@@ -129589,7 +130145,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.25131324301907654,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "483570": {
       "ticker": "483570",
@@ -129728,7 +130286,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.10099622122981788,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "대형·우량"
     },
     "484790": {
       "ticker": "484790",
@@ -130284,7 +130844,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.11490815890645023,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "485690": {
       "ticker": "485690",
@@ -130423,7 +130985,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.29299579975025547,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "AI 종합·밸류체인"
     },
     "485810": {
       "ticker": "485810",
@@ -130562,7 +131126,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.12530472940029247,
         "status": "ok"
-      }
+      },
+      "industry_big": "healthcare",
+      "industry_sub": "바이오·제약"
     },
     "486240": {
       "ticker": "486240",
@@ -130840,7 +131406,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "486450": {
       "ticker": "486450",
@@ -130979,7 +131547,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.12818139750115687,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "전력망·전력설비"
     },
     "486830": {
       "ticker": "486830",
@@ -131396,7 +131966,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.06614972238177297,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "전력망·전력설비"
     },
     "487240": {
       "ticker": "487240",
@@ -131952,7 +132524,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "487950": {
       "ticker": "487950",
@@ -132091,7 +132665,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.2210000924299842,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "488080": {
       "ticker": "488080",
@@ -132369,7 +132945,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.2094872887373953,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "488500": {
       "ticker": "488500",
@@ -132508,7 +133086,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.005430311008721489,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "팩터·전략"
     },
     "488720": {
       "ticker": "488720",
@@ -133342,7 +133922,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.013387423935091292,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "489290": {
       "ticker": "489290",
@@ -133481,7 +134063,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.0172647257955314,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "여러 업종 복합"
     },
     "489860": {
       "ticker": "489860",
@@ -133620,7 +134204,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.008924377642085535,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "전력망·전력설비"
     },
     "490090": {
       "ticker": "490090",
@@ -133759,7 +134345,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.12638888888888888,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "490480": {
       "ticker": "490480",
@@ -134176,7 +134764,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "490600": {
       "ticker": "490600",
@@ -134315,7 +134905,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "491010": {
       "ticker": "491010",
@@ -134454,7 +135046,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.015049827130364068,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "전력망·전력설비"
     },
     "491090": {
       "ticker": "491090",
@@ -134593,7 +135187,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.17054950620410225,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "491220": {
       "ticker": "491220",
@@ -135288,7 +135884,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "491700": {
       "ticker": "491700",
@@ -135705,7 +136303,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.6099178120035913,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "492500": {
       "ticker": "492500",
@@ -135983,7 +136583,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.010454395785314485,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "배당"
     },
     "493810": {
       "ticker": "493810",
@@ -136122,7 +136724,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "494180": {
       "ticker": "494180",
@@ -136261,7 +136865,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "494210": {
       "ticker": "494210",
@@ -136400,7 +137006,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "494220": {
       "ticker": "494220",
@@ -136678,7 +137286,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "494310": {
       "ticker": "494310",
@@ -137095,7 +137705,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.5605381165919283,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "494410": {
       "ticker": "494410",
@@ -137234,7 +137846,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.11740513695972687,
         "status": "ok"
-      }
+      },
+      "industry_big": "nonindustry_strategy",
+      "industry_sub": "팩터·전략"
     },
     "494420": {
       "ticker": "494420",
@@ -137373,7 +137987,9 @@
         "baseline_date": null,
         "return_126d": null,
         "status": "out_of_scope"
-      }
+      },
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "494670": {
       "ticker": "494670",
@@ -137651,7 +138267,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.20937234112180114,
         "status": "ok"
-      }
+      },
+      "industry_big": "defense_space",
+      "industry_sub": "방산"
     },
     "494890": {
       "ticker": "494890",
@@ -139041,7 +139659,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.18815478713740696,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "광범위 기술주"
     },
     "496020": {
       "ticker": "496020",
@@ -139875,7 +140495,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.21503579952267304,
         "status": "ok"
-      }
+      },
+      "industry_big": "defense_space",
+      "industry_sub": "방산"
     },
     "497510": {
       "ticker": "497510",
@@ -140014,7 +140636,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "497520": {
       "ticker": "497520",
@@ -140153,7 +140777,9 @@
       "composite_percentile": null,
       "used_signals": [
         "momentum_126d"
-      ]
+      ],
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인"
     },
     "497570": {
       "ticker": "497570",
@@ -140292,7 +140918,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.3047955280964989,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "반도체"
     },
     "497780": {
       "ticker": "497780",
@@ -140431,7 +141059,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": -0.1405259152785998,
         "status": "ok"
-      }
+      },
+      "industry_big": "power_energy",
+      "industry_sub": "석유·가스"
     },
     "497880": {
       "ticker": "497880",
@@ -140987,7 +141617,9 @@
         "baseline_date": "2026-03-20",
         "return_126d": 0.1954497611529431,
         "status": "ok"
-      }
+      },
+      "industry_big": "digital",
+      "industry_sub": "양자컴퓨팅"
     },
     "498400": {
       "ticker": "498400",

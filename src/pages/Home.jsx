@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react'
 import { DataContext } from '../App.jsx'
 import {
   COLOR, PEER_META, TABS, OWN_TAB_PEERS, STYLE_LABELS, MARKET_LABELS, ASSET_TYPE_LABELS,
-  ROW_COLS,
+  INDUSTRY_BIG_LABELS, INDUSTRY_BIG_ORDER, ROW_COLS,
 } from '../constants.js'
 import { sortEtfs, getFailReason, useIsMobile } from '../utils.js'
 import EtfRow from '../components/EtfRow.jsx'
@@ -123,6 +123,8 @@ export default function Home() {
   const [sortMode, setSortMode] = useState('grade')
   const [sortDir, setSortDir] = useState('desc')
   const [chip, setChip] = useState('__all__')
+  // 해외주식 업종별 보기 전용 1단계 선택(큰 분야). 세부 분류는 기존 chip 을 재사용한다.
+  const [bigField, setBigField] = useState('__all__')
   const [axisOverride, setAxisOverride] = useState(null)
   const [sepOpen, setSepOpen] = useState(false)
   const [failOpen, setFailOpen] = useState(false)
@@ -134,6 +136,7 @@ export default function Home() {
 
   useEffect(() => {
     setChip('__all__')
+    setBigField('__all__')
     setAxisOverride(null)
     setSepOpen(false)
     setFailOpen(false)
@@ -185,17 +188,51 @@ export default function Home() {
   // 신규상장 종목이 기존 종목과 나란히 비교되지 않는다 (2026-08-06).
   const rankable = [...listed, ...newEtfs]
 
-  // 2단 칩. 현재 축(성격/시장/자산유형)의 실제 값만 노출한다.
+  // 해외주식 업종별 보기는 큰 분야 → 세부 분류 2단계다. 다른 축(국가·국내업종)은
+  // 기존처럼 단일 단계 칩을 쓴다.
+  const isOvsIndustry = tab.key === 'ovs' && axis === 'style'
+
+  // 1단계: 큰 분야(해외 업종) 또는 기존 단일 축 칩.
+  const bigCounts = {}
+  if (isOvsIndustry) {
+    for (const e of rankable) {
+      const k = e.industry_big
+      if (!k) continue
+      bigCounts[k] = (bigCounts[k] || 0) + 1
+    }
+  }
+  const bigKeys = INDUSTRY_BIG_ORDER.filter(k => bigCounts[k])
+  const bigLabelOf = (k) => INDUSTRY_BIG_LABELS[k] || k
+
   const chipCounts = {}
-  for (const e of rankable) {
-    const k = e[axis]
-    if (!k) continue
-    chipCounts[k] = (chipCounts[k] || 0) + 1
+  if (!isOvsIndustry) {
+    for (const e of rankable) {
+      const k = e[axis]
+      if (!k) continue
+      chipCounts[k] = (chipCounts[k] || 0) + 1
+    }
   }
   const chipKeys = Object.keys(chipCounts).sort((a, b) => chipCounts[b] - chipCounts[a])
   const labelOf = (k) => (AXIS_LABEL[axis] || {})[k] || k
 
-  const filtered = chip === '__all__' ? rankable : rankable.filter(e => e[axis] === chip)
+  // 2단계: 선택한 큰 분야 안의 세부 분류. industry_sub 는 이미 화면에 쓸 한글 표시값이다.
+  const bigFiltered = isOvsIndustry && bigField !== '__all__'
+    ? rankable.filter(e => e.industry_big === bigField) : null
+  const subCounts = {}
+  if (bigFiltered) {
+    for (const e of bigFiltered) {
+      const k = e.industry_sub
+      if (!k) continue
+      subCounts[k] = (subCounts[k] || 0) + 1
+    }
+  }
+  const subKeys = Object.keys(subCounts).sort((a, b) => subCounts[b] - subCounts[a])
+
+  const filtered = isOvsIndustry
+    ? (bigFiltered
+        ? (chip === '__all__' ? bigFiltered : bigFiltered.filter(e => e.industry_sub === chip))
+        : rankable)
+    : (chip === '__all__' ? rankable : rankable.filter(e => e[axis] === chip))
 
   // 섹션은 항상 평가군 단위. 등급을 매기는 비교 단위가 화면에 그대로 드러나야 한다.
   const peerBuckets = {}
@@ -317,6 +354,7 @@ export default function Home() {
                 onClick={() => {
                   setAxisOverride(axis === 'market' ? 'style' : 'market')
                   setChip('__all__')
+                  setBigField('__all__')
                 }}
                 style={{
                   padding: '7px 12px', minHeight: 36, borderRadius: 6, fontFamily: 'inherit',
@@ -328,30 +366,79 @@ export default function Home() {
             </div>
             {axis === 'style' && (
               <div style={{ color: COLOR.textMuted, fontSize: 11, lineHeight: 1.6, marginTop: 7 }}>
-                업종·테마 기준입니다. 여러 업종을 담는 대표지수·배당·전략형은 별도 분류하며,
-                업종을 특정하기 어려운 상품은 복합·기타에 표시합니다.
+                큰 분야를 먼저 고르면 그 안의 세부 분류가 나옵니다. 대표지수·배당·전략형과
+                여러 업종을 담는 상품은 업종 대신 별도 분야로 분류합니다.
               </div>
             )}
           </div>
         )}
 
-        {/* ── 2단 칩 ── */}
-        {chipKeys.length > 1 && (
+        {/* ── 1단 칩: 해외 업종은 큰 분야, 그 외 축은 기존처럼 단일 목록 ── */}
+        {isOvsIndustry ? (
+          bigKeys.length > 1 && (
+            <div style={{
+              display: 'flex', gap: 5, overflowX: 'auto',
+              padding: '9px 16px 3px', scrollbarWidth: 'none',
+            }}>
+              {[['__all__', '해외 전체', rankable.length], ...bigKeys.map(k => [k, bigLabelOf(k), bigCounts[k]])]
+                .map(([k, l, n]) => (
+                  <button
+                    key={k}
+                    onClick={() => { setBigField(k); setChip('__all__') }}
+                    style={{
+                      whiteSpace: 'nowrap', padding: '5px 10px', borderRadius: 6,
+                      border: `1px solid ${bigField === k ? COLOR.border : COLOR.borderSoft}`,
+                      background: bigField === k ? COLOR.bgCardAlt : COLOR.bgCard,
+                      color: bigField === k ? COLOR.text : COLOR.textMuted,
+                      fontSize: 11.5, cursor: 'pointer', fontFamily: 'inherit',
+                      fontWeight: bigField === k ? 640 : 400,
+                    }}
+                  >{l} {n}</button>
+                ))}
+            </div>
+          )
+        ) : (
+          chipKeys.length > 1 && (
+            <div style={{
+              display: 'flex', gap: 5, overflowX: 'auto',
+              padding: '9px 16px 3px', scrollbarWidth: 'none',
+            }}>
+              {[['__all__', '전체', rankable.length], ...chipKeys.map(k => [k, labelOf(k), chipCounts[k]])]
+                .map(([k, l, n]) => (
+                  <button
+                    key={k}
+                    onClick={() => setChip(k)}
+                    style={{
+                      whiteSpace: 'nowrap', padding: '5px 10px', borderRadius: 6,
+                      border: `1px solid ${chip === k ? COLOR.border : COLOR.borderSoft}`,
+                      background: chip === k ? COLOR.bgCardAlt : COLOR.bgCard,
+                      color: chip === k ? COLOR.text : COLOR.textMuted,
+                      fontSize: 11.5, cursor: 'pointer', fontFamily: 'inherit',
+                      fontWeight: chip === k ? 640 : 400,
+                    }}
+                  >{l} {n}</button>
+                ))}
+            </div>
+          )
+        )}
+
+        {/* ── 2단 칩: 해외 업종에서 큰 분야를 고르면 그 안의 세부 분류만 표시 ── */}
+        {isOvsIndustry && bigField !== '__all__' && subKeys.length > 1 && (
           <div style={{
             display: 'flex', gap: 5, overflowX: 'auto',
-            padding: '9px 16px 3px', scrollbarWidth: 'none',
+            padding: '3px 16px 3px', scrollbarWidth: 'none',
           }}>
-            {[['__all__', '전체', rankable.length], ...chipKeys.map(k => [k, labelOf(k), chipCounts[k]])]
+            {[['__all__', '분야 전체', bigFiltered.length], ...subKeys.map(k => [k, k, subCounts[k]])]
               .map(([k, l, n]) => (
                 <button
                   key={k}
                   onClick={() => setChip(k)}
                   style={{
-                    whiteSpace: 'nowrap', padding: '5px 10px', borderRadius: 6,
+                    whiteSpace: 'nowrap', padding: '4px 9px', borderRadius: 6,
                     border: `1px solid ${chip === k ? COLOR.border : COLOR.borderSoft}`,
-                    background: chip === k ? COLOR.bgCardAlt : COLOR.bgCard,
-                    color: chip === k ? COLOR.text : COLOR.textMuted,
-                    fontSize: 11.5, cursor: 'pointer', fontFamily: 'inherit',
+                    background: chip === k ? COLOR.bgCardAlt : 'transparent',
+                    color: chip === k ? COLOR.text : COLOR.textDim,
+                    fontSize: 11, cursor: 'pointer', fontFamily: 'inherit',
                     fontWeight: chip === k ? 640 : 400,
                   }}
                 >{l} {n}</button>
@@ -418,7 +505,10 @@ export default function Home() {
               gap: 8, margin: '2px 2px 6px',
             }}>
               <div style={{ fontSize: 13, fontWeight: 680, color: COLOR.text }}>
-                {chip === '__all__' ? '전체' : labelOf(chip)}
+                {isOvsIndustry
+                  ? (bigField === '__all__' ? '해외 전체'
+                      : (chip === '__all__' ? bigLabelOf(bigField) : chip))
+                  : (chip === '__all__' ? '전체' : labelOf(chip))}
               </div>
               <div style={{ fontSize: 11, color: COLOR.textDim }}>{rows.length}종</div>
             </div>

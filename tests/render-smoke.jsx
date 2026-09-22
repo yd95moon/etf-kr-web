@@ -39,8 +39,10 @@ console.log('PASS: home grade sort displays 6m; watchlist retains default 1y; v1
 const overseas = renderToStaticMarkup(<DataContext.Provider value={{...context, activeTab:'ovs'}}><Home /></DataContext.Provider>)
 assert(overseas.includes('업종별 분류'))
 assert(overseas.includes('국가별로 보기'))
-assert(overseas.includes('반도체'))
-assert(overseas.includes('바이오·헬스케어'))
+// 2026-09-22 업종 2단계 개편: 기본 화면은 큰 분야 칩만 보이고, 세부 분류는
+// 큰 분야를 고른 뒤 클릭으로만 나타난다(SSR 정적 렌더로는 재현 불가).
+assert(overseas.includes('디지털 기술'))
+assert(overseas.includes('헬스케어'))
 assert(overseas.includes('대표지수'))
-assert(overseas.includes('복합·기타'))
-console.log('PASS: overseas defaults to industry, country toggle and diversified categories rendered')
+assert(overseas.includes('기업집중·복합'))
+console.log('PASS: overseas defaults to big-field industry chips, country toggle and diversified categories rendered')
