@@ -320,8 +320,8 @@
         "return_126d": -0.019052271617000516,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "팩터·전략"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 팩터·전략)"
     },
     "0000J0": {
       "ticker": "0000J0",
@@ -1158,8 +1158,8 @@
         "return_126d": -0.053046909250328844,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "0005A0": {
       "ticker": "0005A0",
@@ -2137,8 +2137,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "팩터·전략"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 팩터·전략)"
     },
     "0008S0": {
       "ticker": "0008S0",
@@ -4516,8 +4516,8 @@
         "return_126d": 0.009573542210618013,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "0026S0": {
       "ticker": "0026S0",
@@ -4657,8 +4657,8 @@
         "return_126d": 0.06698404744007358,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "0028X0": {
       "ticker": "0028X0",
@@ -5362,8 +5362,8 @@
         "return_126d": 0.22586473928755813,
         "status": "ok"
       },
-      "industry_big": "robot_mobility",
-      "industry_sub": "로봇·휴머노이드"
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "0040X0": {
       "ticker": "0040X0",
@@ -5922,8 +5922,8 @@
         "return_126d": 0.13980378416257877,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "0043B0": {
       "ticker": "0043B0",
@@ -6482,8 +6482,8 @@
         "return_126d": 0.01729106628242083,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "0047A0": {
       "ticker": "0047A0",
@@ -8585,8 +8585,8 @@
         "return_126d": 0.056610112548294955,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "0061Z0": {
       "ticker": "0061Z0",
@@ -9566,8 +9566,8 @@
         "return_126d": 0.009918068132815927,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "0069M0": {
       "ticker": "0069M0",
@@ -9707,8 +9707,8 @@
         "return_126d": 0.1338243813622444,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "0072R0": {
       "ticker": "0072R0",
@@ -10964,8 +10964,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "대형·우량"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 대형·우량)"
     },
     "0085N0": {
       "ticker": "0085N0",
@@ -15982,8 +15982,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "0111J0": {
       "ticker": "0111J0",
@@ -16961,8 +16961,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "0115D0": {
       "ticker": "0115D0",
@@ -18637,8 +18637,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "팩터·전략"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 팩터·전략)"
     },
     "0127P0": {
       "ticker": "0127P0",
@@ -18778,8 +18778,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "팩터·전략"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 팩터·전략)"
     },
     "0127R0": {
       "ticker": "0127R0",
@@ -19060,8 +19060,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "0127V0": {
       "ticker": "0127V0",
@@ -19201,8 +19201,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "0131V0": {
       "ticker": "0131V0",
@@ -20182,8 +20182,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "팩터·전략"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 팩터·전략)"
     },
     "0137W0": {
       "ticker": "0137W0",
@@ -22138,8 +22138,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "0152E0": {
       "ticker": "0152E0",
@@ -22696,8 +22696,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "0154F0": {
       "ticker": "0154F0",
@@ -23256,8 +23256,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "0162M0": {
       "ticker": "0162M0",
@@ -23953,8 +23953,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "0166N0": {
       "ticker": "0166N0",
@@ -25349,8 +25349,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "0174R0": {
       "ticker": "0174R0",
@@ -26608,8 +26608,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "0181L0": {
       "ticker": "0181L0",
@@ -28006,8 +28006,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "robot_mobility",
-      "industry_sub": "로봇·휴머노이드"
+      "industry_big": "nonindustry_complex",
+      "industry_sub": "기업집중·밸류체인"
     },
     "0186S0": {
       "ticker": "0186S0",
@@ -35381,8 +35381,8 @@
         "return_126d": -0.10169564654614494,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "100910": {
       "ticker": "100910",
@@ -35661,8 +35661,8 @@
         "return_126d": 0.06979766755655481,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "102110": {
       "ticker": "102110",
@@ -36636,8 +36636,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "105190": {
       "ticker": "105190",
@@ -38445,8 +38445,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "117700": {
       "ticker": "117700",
@@ -39976,8 +39976,8 @@
         "return_126d": 0.1359496400203224,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "136340": {
       "ticker": "136340",
@@ -42897,8 +42897,8 @@
         "return_126d": 0.1557788944723617,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "143860": {
       "ticker": "143860",
@@ -46098,8 +46098,8 @@
         "return_126d": -0.06408304498269901,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "169950": {
       "ticker": "169950",
@@ -46239,8 +46239,8 @@
         "return_126d": -0.06761035574594898,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "174350": {
       "ticker": "174350",
@@ -46519,8 +46519,8 @@
         "return_126d": -0.0749796251018745,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "대형·우량"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 대형·우량)"
     },
     "181480": {
       "ticker": "181480",
@@ -47496,8 +47496,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "190620": {
       "ticker": "190620",
@@ -47776,8 +47776,8 @@
         "return_126d": -0.07229832572298323,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "192720": {
       "ticker": "192720",
@@ -48056,8 +48056,8 @@
         "return_126d": 0.14160867454280623,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "195930": {
       "ticker": "195930",
@@ -48197,8 +48197,8 @@
         "return_126d": 0.12557912704218488,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "195970": {
       "ticker": "195970",
@@ -48338,8 +48338,8 @@
         "return_126d": 0.09118438761776582,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "195980": {
       "ticker": "195980",
@@ -48479,8 +48479,8 @@
         "return_126d": 0.1911652703731912,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "196030": {
       "ticker": "196030",
@@ -49039,8 +49039,8 @@
         "return_126d": -0.11968945438861334,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "203780": {
       "ticker": "203780",
@@ -50155,8 +50155,8 @@
         "return_126d": 0.06121919584954605,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "214980": {
       "ticker": "214980",
@@ -51134,8 +51134,8 @@
         "return_126d": 0.16408830175560585,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "223190": {
       "ticker": "223190",
@@ -54611,8 +54611,8 @@
         "return_126d": 0.24281814636682708,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "239660": {
       "ticker": "239660",
@@ -54891,8 +54891,8 @@
         "return_126d": 0.1405861897665177,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "241390": {
       "ticker": "241390",
@@ -55588,8 +55588,8 @@
         "return_126d": 0.02915695763876447,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "245350": {
       "ticker": "245350",
@@ -55729,8 +55729,8 @@
         "return_126d": 0.0663387917062539,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "245360": {
       "ticker": "245360",
@@ -55870,8 +55870,8 @@
         "return_126d": -0.10354386753577582,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "245710": {
       "ticker": "245710",
@@ -56011,8 +56011,8 @@
         "return_126d": -0.020690834473324204,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "248270": {
       "ticker": "248270",
@@ -56293,8 +56293,8 @@
         "return_126d": -0.0188866799204771,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "251340": {
       "ticker": "251340",
@@ -56573,8 +56573,8 @@
         "return_126d": 0.05556313993174067,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "251590": {
       "ticker": "251590",
@@ -58104,8 +58104,8 @@
         "return_126d": -0.3215017064846416,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "256750": {
       "ticker": "256750",
@@ -58245,8 +58245,8 @@
         "return_126d": -0.07074746231928641,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "261060": {
       "ticker": "261060",
@@ -59776,8 +59776,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "266160": {
       "ticker": "266160",
@@ -61313,8 +61313,8 @@
         "return_126d": 0.1550151975683891,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "270800": {
       "ticker": "270800",
@@ -63966,8 +63966,8 @@
         "return_126d": 0.20310786106032896,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "277630": {
       "ticker": "277630",
@@ -65358,8 +65358,8 @@
         "return_126d": 0.12991988854057812,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "281990": {
       "ticker": "281990",
@@ -65777,8 +65777,8 @@
         "return_126d": -0.06161584407419052,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "284430": {
       "ticker": "284430",
@@ -67310,8 +67310,8 @@
         "return_126d": -0.07876344086021503,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "292050": {
       "ticker": "292050",
@@ -70648,8 +70648,8 @@
         "return_126d": 0.236152141802068,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "305050": {
       "ticker": "305050",
@@ -71762,8 +71762,8 @@
         "return_126d": -0.0016468374000134789,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "팩터·전략"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 팩터·전략)"
     },
     "310080": {
       "ticker": "310080",
@@ -71903,8 +71903,8 @@
         "return_126d": -0.04825462012320325,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "310960": {
       "ticker": "310960",
@@ -76355,8 +76355,8 @@
         "return_126d": -0.1256923732424372,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "354350": {
       "ticker": "354350",
@@ -77471,8 +77471,8 @@
         "return_126d": 0.06912144702842382,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "360750": {
       "ticker": "360750",
@@ -77612,8 +77612,8 @@
         "return_126d": 0.0702771089254377,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "361580": {
       "ticker": "361580",
@@ -79421,8 +79421,8 @@
         "return_126d": 0.13599509927570175,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "367740": {
       "ticker": "367740",
@@ -80118,8 +80118,8 @@
         "return_126d": 0.1387979767926213,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "371150": {
       "ticker": "371150",
@@ -80682,8 +80682,8 @@
         "return_126d": -0.30351201478743073,
         "status": "ok"
       },
-      "industry_big": "robot_mobility",
-      "industry_sub": "자동차·전기차"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 자동차·전기차)"
     },
     "371470": {
       "ticker": "371470",
@@ -82080,8 +82080,8 @@
         "return_126d": 0.07032565974171812,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "379790": {
       "ticker": "379790",
@@ -82221,8 +82221,8 @@
         "return_126d": 0.11504889413926622,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "379800": {
       "ticker": "379800",
@@ -82362,8 +82362,8 @@
         "return_126d": 0.06836647663509443,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "379810": {
       "ticker": "379810",
@@ -82503,8 +82503,8 @@
         "return_126d": 0.13672166487024295,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "380340": {
       "ticker": "380340",
@@ -82924,8 +82924,8 @@
         "return_126d": 0.41762700860249957,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "381560": {
       "ticker": "381560",
@@ -85152,8 +85152,8 @@
         "return_126d": 0.3565295081153521,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "391670": {
       "ticker": "391670",
@@ -85432,8 +85432,8 @@
         "return_126d": 0.011224826675470423,
         "status": "ok"
       },
-      "industry_big": "robot_mobility",
-      "industry_sub": "자동차·전기차"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 자동차·전기차)"
     },
     "394670": {
       "ticker": "394670",
@@ -85573,8 +85573,8 @@
         "return_126d": -0.0823888404533566,
         "status": "ok"
       },
-      "industry_big": "robot_mobility",
-      "industry_sub": "2차전지"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 2차전지)"
     },
     "395150": {
       "ticker": "395150",
@@ -87106,8 +87106,8 @@
         "return_126d": 0.272300469483568,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "399110": {
       "ticker": "399110",
@@ -87247,8 +87247,8 @@
         "return_126d": 0.06364339087863957,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "ESG·기후"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: ESG·기후)"
     },
     "399580": {
       "ticker": "399580",
@@ -88085,8 +88085,8 @@
         "return_126d": 0.01333699986250525,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "403790": {
       "ticker": "403790",
@@ -90736,8 +90736,8 @@
         "return_126d": 0.1682163989856298,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "415340": {
       "ticker": "415340",
@@ -90877,8 +90877,8 @@
         "return_126d": 0.1608910891089108,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "415760": {
       "ticker": "415760",
@@ -91300,8 +91300,8 @@
         "return_126d": 0.15401885945217786,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "417450": {
       "ticker": "417450",
@@ -92002,7 +92002,7 @@
         "status": "ok"
       },
       "industry_big": "power_energy",
-      "industry_sub": "재생에너지"
+      "industry_sub": "복합 에너지"
     },
     "419430": {
       "ticker": "419430",
@@ -92142,8 +92142,8 @@
         "return_126d": -0.2982090795501874,
         "status": "ok"
       },
-      "industry_big": "robot_mobility",
-      "industry_sub": "2차전지"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 2차전지)"
     },
     "419650": {
       "ticker": "419650",
@@ -92980,8 +92980,8 @@
         "return_126d": 0.4313491590122869,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "423920": {
       "ticker": "423920",
@@ -93260,8 +93260,8 @@
         "return_126d": 0.09750683060109289,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "426030": {
       "ticker": "426030",
@@ -93401,8 +93401,8 @@
         "return_126d": 0.1801134961756723,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "426150": {
       "ticker": "426150",
@@ -93963,8 +93963,8 @@
         "return_126d": -0.0393457450817819,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "429010": {
       "ticker": "429010",
@@ -94104,8 +94104,8 @@
       "used_signals": [
         "momentum_126d"
       ],
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "429760": {
       "ticker": "429760",
@@ -94245,8 +94245,8 @@
         "return_126d": 0.06819801545967885,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "429980": {
       "ticker": "429980",
@@ -94664,8 +94664,8 @@
         "return_126d": 0.06256098883226713,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "433220": {
       "ticker": "433220",
@@ -94946,8 +94946,8 @@
         "return_126d": 0.06694969013809593,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "433500": {
       "ticker": "433500",
@@ -100518,8 +100518,8 @@
         "return_126d": 0.6107377424774707,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "444200": {
       "ticker": "444200",
@@ -100798,8 +100798,8 @@
         "return_126d": 0.06774707757704568,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "445150": {
       "ticker": "445150",
@@ -101495,8 +101495,8 @@
         "return_126d": 0.3586641714565788,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "446700": {
       "ticker": "446700",
@@ -101775,8 +101775,8 @@
         "return_126d": 0.010787814328040657,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "446770": {
       "ticker": "446770",
@@ -101916,8 +101916,8 @@
         "return_126d": 0.3529471734660934,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "447430": {
       "ticker": "447430",
@@ -102752,8 +102752,8 @@
         "return_126d": 0.16705622646409557,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "448300": {
       "ticker": "448300",
@@ -102893,8 +102893,8 @@
         "return_126d": 0.2408280922431867,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "448330": {
       "ticker": "448330",
@@ -103868,8 +103868,8 @@
         "return_126d": 0.16948809604100634,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "449190": {
       "ticker": "449190",
@@ -104009,8 +104009,8 @@
         "return_126d": 0.24147081122062164,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "449450": {
       "ticker": "449450",
@@ -104706,8 +104706,8 @@
         "return_126d": 0.06452761110546112,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "449780": {
       "ticker": "449780",
@@ -104847,8 +104847,8 @@
         "return_126d": 0.1635433362100851,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "450190": {
       "ticker": "450190",
@@ -106241,8 +106241,8 @@
         "return_126d": 0.10756838395703983,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "453010": {
       "ticker": "453010",
@@ -106660,8 +106660,8 @@
         "return_126d": 0.23752286386203303,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "453330": {
       "ticker": "453330",
@@ -106801,8 +106801,8 @@
         "return_126d": 0.17680973734785388,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "453630": {
       "ticker": "453630",
@@ -107506,8 +107506,8 @@
         "return_126d": -0.11605937921727394,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "453820": {
       "ticker": "453820",
@@ -107925,8 +107925,8 @@
         "return_126d": -0.12463861227112105,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "453950": {
       "ticker": "453950",
@@ -108066,8 +108066,8 @@
         "return_126d": 0.17455461579989207,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "454320": {
       "ticker": "454320",
@@ -111271,8 +111271,8 @@
         "return_126d": 0.011282908483075671,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "458750": {
       "ticker": "458750",
@@ -111974,8 +111974,8 @@
         "return_126d": 0.05116664692644801,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "459790": {
       "ticker": "459790",
@@ -112395,8 +112395,8 @@
         "return_126d": -0.012232415902140636,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "460960": {
       "ticker": "460960",
@@ -112536,8 +112536,8 @@
         "return_126d": -0.0445130013221684,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "461340": {
       "ticker": "461340",
@@ -115046,8 +115046,8 @@
         "return_126d": -0.06254529641977102,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "463640": {
       "ticker": "463640",
@@ -116307,8 +116307,8 @@
         "return_126d": 0.019768991559306892,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "464930": {
       "ticker": "464930",
@@ -116448,8 +116448,8 @@
         "return_126d": 0.06335660718903546,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "대형·우량"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 대형·우량)"
     },
     "465330": {
       "ticker": "465330",
@@ -117147,8 +117147,8 @@
         "return_126d": 0.16804659670742272,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "465670": {
       "ticker": "465670",
@@ -117288,8 +117288,8 @@
         "return_126d": 0.09438094586270629,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "466810": {
       "ticker": "466810",
@@ -118543,8 +118543,8 @@
         "return_126d": 0.6222631273009107,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "469060": {
       "ticker": "469060",
@@ -118684,8 +118684,8 @@
         "return_126d": 0.485020872554637,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "469070": {
       "ticker": "469070",
@@ -119103,8 +119103,8 @@
         "return_126d": 0.1327014218009479,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "469170": {
       "ticker": "469170",
@@ -122169,8 +122169,8 @@
         "return_126d": 0.4300733715103793,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "473590": {
       "ticker": "473590",
@@ -123294,7 +123294,7 @@
         "status": "ok"
       },
       "industry_big": "power_energy",
-      "industry_sub": "전력망·전력설비"
+      "industry_sub": "복합 에너지"
     },
     "475080": {
       "ticker": "475080",
@@ -124826,8 +124826,8 @@
         "return_126d": 0.1365419827360712,
         "status": "ok"
       },
-      "industry_big": "nonindustry_index",
-      "industry_sub": "국가·지역 대표지수"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 국가·지역 대표지수)"
     },
     "476070": {
       "ticker": "476070",
@@ -126641,8 +126641,8 @@
         "return_126d": -0.11823273179838212,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "그룹주"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 그룹주)"
     },
     "478150": {
       "ticker": "478150",
@@ -127201,8 +127201,8 @@
         "return_126d": 0.6848804719031356,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "479730": {
       "ticker": "479730",
@@ -130287,8 +130287,8 @@
         "return_126d": 0.10099622122981788,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "대형·우량"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 대형·우량)"
     },
     "484790": {
       "ticker": "484790",
@@ -132666,8 +132666,8 @@
         "return_126d": 0.2210000924299842,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "488080": {
       "ticker": "488080",
@@ -133087,8 +133087,8 @@
         "return_126d": 0.005430311008721489,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "팩터·전략"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 팩터·전략)"
     },
     "488720": {
       "ticker": "488720",
@@ -133923,8 +133923,8 @@
         "return_126d": 0.013387423935091292,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "489290": {
       "ticker": "489290",
@@ -136304,8 +136304,8 @@
         "return_126d": 0.6099178120035913,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "492500": {
       "ticker": "492500",
@@ -136584,8 +136584,8 @@
         "return_126d": 0.010454395785314485,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "배당"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 배당)"
     },
     "493810": {
       "ticker": "493810",
@@ -137706,8 +137706,8 @@
         "return_126d": 0.5605381165919283,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "494410": {
       "ticker": "494410",
@@ -137847,8 +137847,8 @@
         "return_126d": 0.11740513695972687,
         "status": "ok"
       },
-      "industry_big": "nonindustry_strategy",
-      "industry_sub": "팩터·전략"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 팩터·전략)"
     },
     "494420": {
       "ticker": "494420",
@@ -140919,8 +140919,8 @@
         "return_126d": 0.3047955280964989,
         "status": "ok"
       },
-      "industry_big": "digital",
-      "industry_sub": "반도체"
+      "industry_big": "review",
+      "industry_sub": "투자목적 미확인 (참고: 반도체)"
     },
     "497780": {
       "ticker": "497780",
