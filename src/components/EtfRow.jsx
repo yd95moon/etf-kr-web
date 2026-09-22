@@ -424,7 +424,7 @@ export default function EtfRow({
                 }}>
                   <NameLink ticker={etf.ticker} name={etf.name} />
                 </span>
-                <GradeChip grade={grade} score={etf.momentum_6m?.score} />
+                <GradeChip grade={grade} />
                 {onChartToggle && (
                   <ChartBtn onClick={handleChartClick} inChart={inChart} enabled={chartEnabled} />
                 )}
@@ -487,7 +487,7 @@ export default function EtfRow({
             </div>
           </div>
           <span>
-            <GradeChip grade={grade} score={etf.momentum_6m?.score} />
+            <GradeChip grade={grade} />
           </span>
           <span style={{ fontSize: 12, color: rightColor, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
             {rightDisplay}
