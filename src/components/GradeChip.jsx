@@ -1,7 +1,7 @@
 import React from 'react'
 import { GRADE_COLOR, COLOR } from '../constants.js'
 
-export default function GradeChip({ grade, size = 'md' }) {
+export default function GradeChip({ grade, score, size = 'md' }) {
   if (!grade) {
     return (
       <span style={{
@@ -26,6 +26,6 @@ export default function GradeChip({ grade, size = 'md' }) {
       background: c + '33',
       color: c,
       letterSpacing: '0.02em',
-    }}>{grade}</span>
+    }} title={score != null ? '6개월 목표 점수 / 100' : undefined}>{grade}{score != null ? ' · ' + score.toFixed(1) : ''}</span>
   )
 }

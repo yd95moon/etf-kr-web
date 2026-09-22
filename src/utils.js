@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ASSET_CLASS_META, PEER_META, TABS, GATE_REASON_KO } from './constants.js'
 
 export function buildEtfList(etfsMap) {
-  return Object.values(etfsMap).map(etf => ({ ...etf }))
+  return Object.values(etfsMap).map(etf => etf.momentum_6m?.version === 'momentum6-v1' ? ({ ...etf }) : ({ ...etf, composite_grade: null, grade_eligible: false }))
 }
 
 export function useIsMobile() {
@@ -24,7 +24,7 @@ export function sortEtfs(etfs, mode, dir = 'desc', returnsMap = null, distPeriod
       const gb = gradeOrder[b.composite_grade] ?? 5
       const sign = dir === 'asc' ? -1 : 1
       if (ga !== gb) return sign * (ga - gb)
-      return (b.aum_억원 ?? 0) - (a.aum_억원 ?? 0)
+      return sign * ((b.momentum_6m?.score ?? -1) - (a.momentum_6m?.score ?? -1)) || (b.aum_억원 ?? 0) - (a.aum_억원 ?? 0)
     })
   } else if (mode === 'aum') {
     copy.sort((a, b) => dir === 'asc'

@@ -146,7 +146,7 @@ function SearchRow({ etf, onGoto }) {
       </button>
       <span style={{ fontFamily: 'monospace', fontSize: 12, color: COLOR.textMuted }}>{etf.ticker}</span>
       <span style={{ fontSize: 13, color: COLOR.text, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{etf.name}</span>
-      <span><GradeChip grade={etf.grade_eligible ? etf.composite_grade : null} size="sm" /></span>
+      <span><GradeChip grade={etf.grade_eligible ? etf.composite_grade : null} size="sm" score={etf.momentum_6m?.score} /></span>
     </div>
   )
 }

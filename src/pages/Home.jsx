@@ -119,8 +119,8 @@ export default function Home() {
   } = useContext(DataContext)
   const isMobile = useIsMobile()
 
-  // 기본 정렬은 3M 수익률. 등급은 forward 검증 전이라 기본 노출로 두지 않는다.
-  const [sortMode, setSortMode] = useState('m3')
+  // 고정된 6개월 점수를 기본 정렬로 표시한다.
+  const [sortMode, setSortMode] = useState('grade')
   const [sortDir, setSortDir] = useState('desc')
   const [chip, setChip] = useState('__all__')
   const [axisOverride, setAxisOverride] = useState(null)
@@ -354,9 +354,9 @@ export default function Home() {
           fontSize: 11, color: COLOR.textDim,
           borderBottom: `1px solid ${COLOR.borderSoft}`,
         }}>
-          <span>forward 검증 중 · 첫 채점 2026-09-26</span>
-          {data?.meta?.generated_at && <span>데이터 기준: {data.meta.generated_at.slice(0, 10)}</span>}
-          <span>등급(A~E)은 같은 평가군 안에서만 매긴 상대 순위입니다. 수익 예측이 아닙니다.</span>
+          <span>6개월 목표 점수 · 일간 종가 갱신</span>
+          {data?.meta?.generated_at && <span>데이터 기준: {data.meta.score_asof || data.meta.generated_at.slice(0, 10)}</span>}
+          <span>주식형 공통 점수 · A≥80 / B≥65 / C≥50 / D≥35 · 월말 기준 잠정 검증, 미래수익 보장 없음.</span>
         </div>
 
         {/* ── 정렬 ── */}
@@ -375,7 +375,7 @@ export default function Home() {
             [전체]는 말 그대로 전부다. 묶음별로 화면을 쪼개면 둘째 묶음의 1위가
             100줄 아래로 내려가서, 사용자 입장에서는 그냥 없는 종목이 된다.
             그래서 묶음으로 나누지 않고 한 줄 목록으로 세운다.
-            등급은 여전히 같은 묶음 안에서만 매긴 값이라, 어느 묶음인지는
+            분류 정보는 비교 참고용이며, 어느 묶음인지는
             종목마다 작은 글씨로 붙여 둔다. */}
         {rows.length === 0 && (
           <div style={{ padding: '28px 16px', textAlign: 'center', color: COLOR.textDim, fontSize: 13 }}>

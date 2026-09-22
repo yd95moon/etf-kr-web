@@ -20,11 +20,11 @@ export const GRADE_COLOR = {
 }
 
 // ── 평가군 ────────────────────────────────────────────────────────────────────
-// 등급은 이 단위 안에서만 매긴다. 성격이 다른 상품을 한 줄에 세우지 않기 위함.
+// 분류는 탐색용. 주식형 점수에는 공통 고정 경계를 사용한다.
 export const PEER_META = {
   kr_index: {
-    label: '국내주식 · 대표지수', short: '대표지수', order: 5, gradeable: false,
-    note: '같은 지수를 따라가는 상품이라 우열을 매기지 않습니다. 보수·규모·괴리율로 비교하세요.',
+    label: '국내주식 · 대표지수', short: '대표지수', order: 5, gradeable: true,
+    note: '대표지수도 같은 6개월 점수로 표시합니다. 같은 지수 상품은 보수·규모·괴리율도 함께 비교하세요.',
   },
   kr_select: {
     label: '국내주식 · 업종·전략', short: '업종·전략', order: 0, gradeable: true,
@@ -40,8 +40,8 @@ export const PEER_META = {
     note: '환율이 오르든 내리든 영향을 줄이도록 만든 상품입니다. 환율로 인한 이익도 함께 줄어듭니다.',
   },
   bond: {
-    label: '채권', short: '채권', order: 4, gradeable: true,
-    note: '채권은 변동성 지표를 등급 계산에서 뺐습니다. 만기 길이를 되풀이 재는 중복 지표이기 때문입니다. 참고로 30년 국고채는 값이 연 12~18% 폭으로 흔들립니다. 만기가 길수록 주식만큼 움직입니다.',
+    label: '채권', short: '채권', order: 4, gradeable: false,
+    note: '채권은 주식형 전용 6개월 점수 대상이 아닙니다. 만기·보수·가격 변동을 따로 살펴보세요.',
   },
   cash: {
     label: '파킹형 (현금성)', short: '파킹형', order: 6, gradeable: false,
@@ -49,7 +49,7 @@ export const PEER_META = {
   },
   income: {
     label: '월배당·인컴형', short: '월배당·인컴', order: 7, gradeable: true,
-    note: '수익률에는 분배금이 이미 들어 있습니다. 월분배는 그 수익 중 현금으로 나온 몫이며, 일반 계좌에서는 여기에 15.4% 세금이 붙습니다. ISA·연금 계좌면 부담을 줄일 수 있습니다.',
+    note: '분배금의 가격 반영 여부는 검증 중입니다. 일반 주식형만 채점하며 채권·혼합·커버드콜은 제외합니다.',
   },
   etc: {
     label: '기타', short: '기타', order: 8, gradeable: false,
@@ -221,9 +221,9 @@ export const GATE_REASON_KO = (gate, reason) => {
 // 구버전 호환. 검색 결과 묶음 등에서 아직 asset_class 를 쓰는 곳이 있다.
 export const ASSET_CLASS_META = {
   domestic_equity:       { label: '국내주식',          order: 0, gradeable: true,  tone: 'normal' },
-  domestic_equity_index: { label: '국내주식-대표지수', order: 1, gradeable: false, tone: 'gray' },
+  domestic_equity_index: { label: '국내주식-대표지수', order: 1, gradeable: true, tone: 'gray' },
   overseas_equity:       { label: '해외주식',          order: 2, gradeable: true,  tone: 'normal' },
-  bond:                  { label: '채권·현금',         order: 3, gradeable: true,  tone: 'normal' },
+  bond:                  { label: '채권·현금',         order: 3, gradeable: false,  tone: 'normal' },
   other:                 { label: '기타',              order: 4, gradeable: false, tone: 'gray' },
   commodity:             { label: '원자재',            order: 5, gradeable: false, tone: 'gray' },
   realestate:            { label: '리츠·인프라',       order: 6, gradeable: false, tone: 'gray' },

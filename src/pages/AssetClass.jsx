@@ -72,7 +72,7 @@ export default function AssetClass() {
         </h1>
         {meta.gradeable ? (
           <p style={{ fontSize: 12, color: COLOR.textMuted }}>
-            등급은 같은 자산군 안에서의 상대 위치(백분위 5분위)입니다. 미래수익 보장 아님.
+            6개월 목표 점수는 주식형 공통 고정 경계입니다. 일간 종가 갱신·미래수익 보장 없음.
           </p>
         ) : isDanger ? (
           <p style={{ fontSize: 12, color: COLOR.danger }}>

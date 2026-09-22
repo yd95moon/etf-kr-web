@@ -117,7 +117,7 @@ function tagsFor(etf, isPassive) {
   if (isPassive) {
     out.push({
       key: 'idx', text: '지수추종', fg: '#93c5fd', bg: '#1e3a5f33', bd: '#93c5fd33',
-      desc: '특정 지수를 그대로 따라가는 상품입니다. 등급(추세신호)보다 지수 추적력과 보수가 핵심입니다',
+      desc: '특정 지수를 따라가는 상품입니다. 6개월 점수 외에 지수 추적력과 보수도 확인하세요',
     })
   }
   if (etf.is_hedge) {
@@ -129,7 +129,7 @@ function tagsFor(etf, isPassive) {
   if (etf.is_new) {
     out.push({
       key: 'n', text: '신규', fg: '#86efac', bg: '#1e3a2f33', bd: '#86efac33',
-      desc: `상장 후 관측 ${etf.obs_days ?? '-'} 거래일. 1년 미만이라 등급을 매기지 않습니다`,
+      desc: `상장 후 관측 ${etf.obs_days ?? '-'} 거래일. 6개월 점수는 127개 실측 종가가 확보되면 표시합니다`,
     })
   }
   if (etf.pension_eligible === false) {
@@ -260,7 +260,7 @@ export default function EtfRow({
 
       {/* L1: grade + AUM + fee */}
       <div style={S.l1Row}>
-        <GradeChip grade={grade} />
+        <GradeChip grade={grade} score={etf.momentum_6m?.score} />
         <span style={{ fontSize: 13, color: COLOR.textMuted }}>
           <strong style={{ color: COLOR.text }}>{fmtAum(etf.aum_억원)}</strong> AUM
         </span>
@@ -310,12 +310,18 @@ export default function EtfRow({
         </a>
       </div>
 
-      {/* 신호 5개 */}
+      <div style={{ fontSize: 12, color: COLOR.textMuted, padding: '8px 0' }}>
+        {etf.momentum_6m?.score != null
+          ? `6개월 목표 점수 ${etf.momentum_6m.score.toFixed(1)} / 100 · 종가 기준 ${etf.momentum_6m.asof}`
+          : (etf.grade_note || '6개월 점수 자료 갱신 대기')}
+        <div>최근 126거래일 가격 흐름으로 계산 · 주식형 공통 경계 · 분배금 조정 검증 중</div>
+      </div>
+      {/* 참고 지표 · 점수에 미합산 */}
       {etf.grade_eligible && (
         <>
           <button style={S.sectionBtn} onClick={e => { e.stopPropagation(); setShowSignals(s => !s) }}>
             {showSignals ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
-            신호 5개
+            참고 지표 · 점수에 미합산
           </button>
           {showSignals && (
             <div style={S.signalGrid} onClick={e => e.stopPropagation()}>
@@ -418,7 +424,7 @@ export default function EtfRow({
                 }}>
                   <NameLink ticker={etf.ticker} name={etf.name} />
                 </span>
-                {!indexTray && <GradeChip grade={grade} />}
+                <GradeChip grade={grade} score={etf.momentum_6m?.score} />
                 {onChartToggle && (
                   <ChartBtn onClick={handleChartClick} inChart={inChart} enabled={chartEnabled} />
                 )}
@@ -428,7 +434,7 @@ export default function EtfRow({
                 {peerLabel && (
                   <>
                     <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
-                    <span title="등급은 이 묶음 안에서만 매긴 순위입니다">{peerLabel}</span>
+                    <span title="분류는 참고 정보이며 주식형 점수는 공통 기준입니다">{peerLabel}</span>
                   </>
                 )}
                 <span style={{ margin: '0 4px', color: COLOR.borderSoft }}>·</span>
@@ -476,14 +482,12 @@ export default function EtfRow({
             <div style={{ fontSize: 11, color: COLOR.textDim, marginTop: 1 }}>
               <span style={{ fontFamily: 'monospace' }}>{etf.ticker}</span>
               {peerLabel && (
-                <span title="등급은 이 묶음 안에서만 매긴 순위입니다"> · {peerLabel}</span>
+                <span title="분류는 참고 정보이며 주식형 점수는 공통 기준입니다"> · {peerLabel}</span>
               )}
             </div>
           </div>
           <span>
-            {indexTray
-              ? <Tag text="지수추종" fg="#93c5fd" bg="#1e3a5f33" bd="#93c5fd33" />
-              : <GradeChip grade={grade} />}
+            <GradeChip grade={grade} score={etf.momentum_6m?.score} />
           </span>
           <span style={{ fontSize: 12, color: rightColor, textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>
             {rightDisplay}
