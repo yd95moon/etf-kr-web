@@ -236,7 +236,7 @@ export default function EtfRow({
   const tags = tagsFor(etf, isPassive)
   const issuer = issuerLink(etf, BRAND_ISSUER)
   const hasReturn = returnVal !== undefined && returnVal !== null
-  const rightDisplay = hasReturn ? fmtReturn(returnVal) : fmtAum(etf.aum_억원)
+  const rightDisplay = returnVal !== undefined ? (hasReturn ? fmtReturn(returnVal) : '—') : fmtAum(etf.aum_억원)
   const rightColor = hasReturn ? (returnVal >= 0 ? '#86efac' : COLOR.danger) : COLOR.textMuted
 
   const handleChartClick = onChartToggle
@@ -312,7 +312,7 @@ export default function EtfRow({
 
       <div style={{ fontSize: 12, color: COLOR.textMuted, padding: '8px 0' }}>
         {etf.momentum_6m?.score != null
-          ? `6개월 목표 점수 ${etf.momentum_6m.score.toFixed(1)} / 100 · 종가 기준 ${etf.momentum_6m.asof}`
+          ? `모멘텀 등급 v1 · 6개월 목표 점수 ${etf.momentum_6m.score.toFixed(1)} / 100 · 종가 기준 ${etf.momentum_6m.asof}`
           : (etf.grade_note || '6개월 점수 자료 갱신 대기')}
         <div>최근 126거래일 가격 흐름으로 계산 · 주식형 공통 경계 · 분배금 조정 검증 중</div>
       </div>

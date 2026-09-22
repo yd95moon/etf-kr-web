@@ -65,6 +65,7 @@ const PERIODS = [
   { key: '1y', label: '1년',   days: 252  },
   { key: '3y', label: '3년',   days: 756  },
   { key: '5y', label: '5년',   days: 1260 },
+  { key: '10y', label: '10년', years: 10 },
 ]
 
 export const CHART_PALETTE = [
@@ -91,7 +92,7 @@ function fmtAxisTick(dateStr, period, index) {
   const y = dateStr.slice(0, 4)
   const m = parseInt(dateStr.slice(5, 7), 10)
   const d = parseInt(dateStr.slice(8, 10), 10)
-  if (period === '3y' || period === '5y') return y
+  if (period === '3y' || period === '5y' || period === '10y') return y
   // 1주·1개월은 한 달 안에서 끝나므로 '월'만 찍으면 눈금이 전부 같은 글자가 된다.
   if (period === '1w' || period === '1m') return `${m}/${d}`
   return (index === 0 || m === 1) ? `${y.slice(2)}년 ${m}월` : `${m}월`
@@ -186,7 +187,12 @@ export default function BenchmarkChart({
     if (!prices || !hasAnything) return empty
 
     const nDays    = PERIODS.find(p => p.key === period)?.days ?? 252
-    const startIdx = Math.max(0, prices.dates.length - nDays)
+    let startIdx = Math.max(0, prices.dates.length - nDays)
+    if (period === '10y') {
+      const last = prices.dates.at(-1)
+      const cutoff = `${Number(last.slice(0, 4)) - 10}${last.slice(4)}`
+      startIdx = Math.max(0, prices.dates.findIndex(d => d >= cutoff))
+    }
     const slicedDates = prices.dates.slice(startIdx)
 
     // ETF lines
@@ -232,8 +238,10 @@ export default function BenchmarkChart({
       if (!rawData) continue
       const aligned = alignBench(rawData, prices.dates)
       const sliced  = aligned.slice(startIdx)
-      const base    = sliced.find(v => v != null)
+      const firstIdx = sliced.findIndex(v => v != null)
+      const base = sliced[firstIdx]
       if (!base) continue
+      if (firstIdx > 0) lateStart.push({ label: bln.label, date: slicedDates[firstIdx] })
       benchReturns[bln.key] = sliced.map(c =>
         c != null ? +((c / base - 1) * 100).toFixed(2) : null
       )
@@ -320,7 +328,7 @@ export default function BenchmarkChart({
             {chartTickers.map((etf, i) => {
               const c = CHART_PALETTE[i % CHART_PALETTE.length]
               const etfLast = lastReturnMap[etf.ticker]
-              const spread  = (refBenchLast != null && etfLast != null)
+              const spread  = (refBenchLast != null && etfLast != null && !lateStart.some(x => x.label === etf.name || x.label === EXTERNAL_BENCH_META[refBenchKey]?.label))
                 ? etfLast - refBenchLast : null
               return (
                 <span
@@ -402,7 +410,8 @@ export default function BenchmarkChart({
             </div>
           )}
           <div style={{ fontSize: 10, color: COLOR.textDim, marginTop: 2, textAlign: 'right' }}>
-            누적수익률(과거 실적), 미래수익 보장 아님.
+            {chartData[0]?.date} ~ {chartData.at(-1)?.date} · 가격 기준 누적수익률 · 분배금 별도 합산 없음.
+            {period === '10y' && ' 최대 10년 중 확보된 기간만 표시합니다.'} 미래수익 보장 없음.
           </div>
         </>
       )}

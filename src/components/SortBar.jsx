@@ -76,7 +76,7 @@ export default function SortBar({
         }}
       >
         {isGradeBtn
-          ? <span>등급 <span style={{ fontSize: 10, opacity: 0.75 }}>검증중</span></span>
+          ? <span>등급 <span style={{ fontSize: 10, opacity: 0.75 }}>v1</span></span>
           : label}
         {on && <span style={{ fontSize: '0.85em', marginLeft: stretch ? 1 : 4 }}>{arrow}</span>}
       </button>

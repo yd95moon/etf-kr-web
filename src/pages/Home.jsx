@@ -210,13 +210,12 @@ export default function Home() {
 
   const anyGradeable = peerKeys.some(k => PEER_META[k]?.gradeable)
   const effectiveSort = (!anyGradeable && sortMode === 'grade') ? 'aum' : sortMode
-  const returnKey = RETURN_KEYS.includes(effectiveSort) ? effectiveSort : null
-  // 월분배는 수익률과 같은 기간 버튼을 쓴다. 기간이 아닌 정렬(AUM/보수/등급/월분배)일
-  // 때는 1년을 기본으로 둔다.
+  const returnKey = RETURN_KEYS.includes(effectiveSort) ? effectiveSort : (effectiveSort === 'grade' ? 'm6' : null)
+  // 등급순은 6개월 수익률을 함께 표시한다. AUM/보수/월분배 정렬은 분배 기간을 1년으로 둔다.
   const periodKey = returnKey || 'm12'
   // 분배가 성격을 좌우하는 곳에서만 칸을 하나 더 낸다. 전 종목에 붙이면 표가 좁아진다.
   const showDist = tab.key === 'income' || effectiveSort === 'dist'
-  const aumLabel = RETURN_LABELS[effectiveSort] || 'AUM'
+  const aumLabel = RETURN_LABELS[returnKey] || 'AUM'
   const chartTickerSet = new Set(chartTickers.map(t => t.ticker))
 
   // 한 줄 목록. 메인+신규가 섞여 있어도 고른 기준 하나로 줄을 세운다.
@@ -243,7 +242,7 @@ export default function Home() {
     inChart: chartTickerSet.has(etf.ticker),
     isPassive: !hidePassive && etf.style === 'broad_index',
     chartEnabled: !!prices?.tickers?.[etf.ticker],
-    returnVal: returnKey ? returnsMap?.[etf.ticker]?.[returnKey] : undefined,
+    returnVal: returnKey ? (returnsMap?.[etf.ticker]?.[returnKey] ?? null) : undefined,
     showDist,
     distVal: etf.dist?.[periodKey]?.monthly_pct,
     distInfo: etf.dist?.[periodKey],
@@ -354,7 +353,7 @@ export default function Home() {
           fontSize: 11, color: COLOR.textDim,
           borderBottom: `1px solid ${COLOR.borderSoft}`,
         }}>
-          <span>6개월 목표 점수 · 일간 종가 갱신</span>
+          <span>모멘텀 등급 v1 · 6개월 목표 · 일간 종가 갱신</span>
           {data?.meta?.generated_at && <span>데이터 기준: {data.meta.score_asof || data.meta.generated_at.slice(0, 10)}</span>}
           <span>주식형 공통 점수 · A≥80 / B≥65 / C≥50 / D≥35 · 월말 기준 잠정 검증, 미래수익 보장 없음.</span>
         </div>

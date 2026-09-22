@@ -145,7 +145,7 @@ export default function Watchlist() {
   if (!data) return <div style={{ padding: 32, color: COLOR.textMuted }}>데이터 로딩 중…</div>
   if (watchlist.length === 0) return <Empty />
 
-  const returnKey = RETURN_KEYS.includes(sortMode) ? sortMode : null
+  const returnKey = RETURN_KEYS.includes(sortMode) ? sortMode : (sortMode === 'grade' ? 'm6' : null)
   const periodKey = returnKey || 'm12'
   const showDist = sortMode === 'dist' || watchEtfs.some(e => e.peer_group === 'income')
   const rows = sortEtfs(watchEtfs, sortMode, sortDir, returnsMap, periodKey)
@@ -288,7 +288,7 @@ export default function Watchlist() {
               <span></span>
               <span>종목명</span>
               <span>등급</span>
-              <span style={{ textAlign: 'right' }}>{RETURN_LABELS[sortMode] || 'AUM'}</span>
+              <span style={{ textAlign: 'right' }}>{RETURN_LABELS[returnKey] || 'AUM'}</span>
               {showDist && <span style={{ textAlign: 'right' }}>월분배</span>}
               <span style={{ textAlign: 'right' }}>보수</span>
               <span></span>
@@ -301,7 +301,7 @@ export default function Watchlist() {
               isMobile={isMobile}
               isPassive={etf.style === 'broad_index'}
               indexTray={etf.peer_group === 'kr_index'}
-              returnVal={returnKey ? returnsMap?.[etf.ticker]?.[returnKey] : undefined}
+              returnVal={returnKey ? (returnsMap?.[etf.ticker]?.[returnKey] ?? null) : undefined}
               showDist={showDist}
               distVal={etf.dist?.[periodKey]?.monthly_pct}
               distInfo={etf.dist?.[periodKey]}
