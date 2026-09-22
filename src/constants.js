@@ -69,7 +69,7 @@ export const PEER_META = {
 export const TABS = [
   { key: 'kr',   label: '국내주식',  axis: 'style',  bench: 'domestic_equity',
     match: e => e.asset_type === 'equity' && e.market === 'kr' },
-  { key: 'ovs',  label: '해외주식',  axis: 'market', bench: 'overseas_equity', axisSwitch: true,
+  { key: 'ovs',  label: '해외주식',  axis: 'style', bench: 'overseas_equity', axisSwitch: true,
     match: e => e.asset_type === 'equity' && e.market !== 'kr' },
   { key: 'lev',  label: '레버리지·인버스', axis: 'market', bench: 'derivative', special: true,
     match: e => e.peer_group === 'derivative' },

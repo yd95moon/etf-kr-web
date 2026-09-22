@@ -304,22 +304,34 @@ export default function Home() {
 
       <div style={{ padding: '0 0 32px' }}>
 
-        {/* ── 보기 축 전환 (해외주식은 시장과 성격 두 축이 겹친다) ── */}
+        {/* 해외주식: 같은 종목을 국가 또는 업종 기준으로 탐색한다. */}
         {tab.axisSwitch && (
-          <div style={{ display: 'flex', gap: 5, padding: '10px 16px 0' }}>
-            {[['market', '시장별'], ['style', '성격별']].map(([k, l]) => (
+          <div style={{ padding: '10px 16px 0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+              <span style={{ color: COLOR.text, fontSize: 12 }}>
+                {axis === 'market' ? '국가별 분류' : '업종별 분류'}
+              </span>
               <button
-                key={k}
-                onClick={() => { setAxisOverride(k); setChip('__all__') }}
-                style={{
-                  padding: '4px 10px', borderRadius: 5, fontFamily: 'inherit',
-                  border: `1px solid ${axis === k ? COLOR.border : COLOR.borderSoft}`,
-                  background: axis === k ? COLOR.bgCard : 'transparent',
-                  color: axis === k ? COLOR.text : COLOR.textDim,
-                  fontSize: 11, cursor: 'pointer',
+                type="button"
+                aria-label={axis === 'market' ? '업종별로 보기' : '국가별로 보기'}
+                onClick={() => {
+                  setAxisOverride(axis === 'market' ? 'style' : 'market')
+                  setChip('__all__')
                 }}
-              >{l}</button>
-            ))}
+                style={{
+                  padding: '7px 12px', minHeight: 36, borderRadius: 6, fontFamily: 'inherit',
+                  border: `1px solid ${COLOR.border}`,
+                  background: COLOR.bgCard, color: COLOR.text,
+                  fontSize: 12, cursor: 'pointer',
+                }}
+              >{axis === 'market' ? '업종별로 보기' : '국가별로 보기'} ↔</button>
+            </div>
+            {axis === 'style' && (
+              <div style={{ color: COLOR.textMuted, fontSize: 11, lineHeight: 1.6, marginTop: 7 }}>
+                업종·테마 기준입니다. 여러 업종을 담는 대표지수·배당·전략형은 별도 분류하며,
+                업종을 특정하기 어려운 상품은 복합·기타에 표시합니다.
+              </div>
+            )}
           </div>
         )}
 
@@ -333,7 +345,7 @@ export default function Home() {
               .map(([k, l, n]) => (
                 <button
                   key={k}
-                  onClick={() => { setChip(k); setExpanded({}) }}
+                  onClick={() => setChip(k)}
                   style={{
                     whiteSpace: 'nowrap', padding: '5px 10px', borderRadius: 6,
                     border: `1px solid ${chip === k ? COLOR.border : COLOR.borderSoft}`,
