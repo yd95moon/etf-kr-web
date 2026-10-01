@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-10-01T09:15:15.570135",
+    "generated_at": "2026-10-01T16:29:55.648652",
     "cohort": "live",
     "spec_label": "6개월 목표 점수·일간 종가 갱신·월말 평가 기준 잠정 검증·미래수익 보장 없음·분배금 조정 검증 미완료",
     "grade_eligible_peers": [
@@ -3264,7 +3264,7 @@
         "T4": {
           "raw": 0.133693,
           "null_reason": null,
-          "percentile": 53.41,
+          "percentile": 54.55,
           "grade": "C"
         },
         "T5": {
@@ -84480,7 +84480,7 @@
         "T4": {
           "raw": 0.133383,
           "null_reason": null,
-          "percentile": 52.27,
+          "percentile": 53.41,
           "grade": "C"
         },
         "T5": {
@@ -109425,7 +109425,7 @@
         "T2": {
           "raw": 56.030872,
           "null_reason": null,
-          "percentile": 65.05,
+          "percentile": 66.02,
           "grade": "B"
         },
         "T3": {
@@ -142322,7 +142322,7 @@
       "industry_big": null,
       "industry_sub": null,
       "peer_group": "bond",
-      "disparity_pct": -0.034,
+      "disparity_pct": -0.045,
       "isa_eligible": true,
       "pension_eligible": true,
       "obs_days": 449,
@@ -142369,7 +142369,7 @@
           "covered": false
         }
       },
-      "price": 93510.0,
+      "price": 93500.0,
       "nav": 93542.0,
       "aum_억원": 1409.0,
       "is_leverage": false,
@@ -142417,25 +142417,25 @@
           "grade": "D"
         },
         "T2": {
-          "raw": 56.125385,
+          "raw": 55.945007,
           "null_reason": null,
-          "percentile": 66.02,
+          "percentile": 65.05,
           "grade": "B"
         },
         "T3": {
-          "raw": -0.015182,
+          "raw": -0.015287,
           "null_reason": null,
           "percentile": 48.91,
           "grade": "C"
         },
         "T4": {
-          "raw": 0.134022,
+          "raw": 0.132714,
           "null_reason": null,
-          "percentile": 54.55,
+          "percentile": 52.27,
           "grade": "C"
         },
         "T5": {
-          "raw": 369.66749,
+          "raw": 369.662512,
           "null_reason": null,
           "percentile": 43.69,
           "grade": "C"
